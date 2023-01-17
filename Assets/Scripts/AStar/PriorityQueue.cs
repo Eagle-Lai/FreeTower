@@ -6,7 +6,7 @@ namespace FTProject
 {
     public class PriorityQueue
     {
-        private ArrayList nodes = new ArrayList();
+        private List<Node> nodes = new List<Node>();
         public int Length
         {
             get { return nodes.Count; }
@@ -20,7 +20,9 @@ namespace FTProject
         {
             if(this.nodes.Count > 0)
             {
-                return (Node)this.nodes[0];
+                Node node = this.nodes[0];
+                nodes.RemoveAt(0);
+                return node;
             }
             return null;
         }

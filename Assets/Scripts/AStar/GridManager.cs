@@ -6,32 +6,48 @@ namespace FTProject
 {
     public class GridManager : MonoBehaviour
     {
-        public static GridManager Instance;
+        public static GridManager _instance;
+        
+        public static GridManager Instance
+        {
+            get
+            {
+                if(_instance == null)
+                {
+                    _instance = new GridManager();
+                }
+                return _instance;
+            }
+        }
        
         /// <summary>
         /// 行数
         /// </summary>
-        public int numOfRows;
+        public int numOfRows = 10;
         /// <summary>
         /// 列数
         /// </summary>
-        public int numOfColums;
-        public float gridCellSize;
+        public int numOfColums = 10;
+        public float gridCellSize = 1;
         public bool showGrid = true;
         public bool showObstacleBlocks = true;
 
         private Vector3 origin = new Vector3();
         private GameObject[] obstacleList;
-        public Node[,] nodes { get; set; }
+        public static Node[,] nodes { get; set; }
         public Vector3 Origin
         {
             get { return this.origin; }
         }
-        private void Awake()
+
+        public void Init()
         {
-            Instance = this;
-            obstacleList = GameObject.FindGameObjectsWithTag("obstacle");
             CalculateObstacle();
+        }
+
+        public void SetObstacleList(GameObject[] gameObjects)
+        {
+            obstacleList = gameObjects;
         }
 
         private void CalculateObstacle()
@@ -55,7 +71,7 @@ namespace FTProject
                     int indexCell = GetGridIndex(data.transform.position);
                     int col = GetColumn(indexCell);
                     int row = GetRow(indexCell);
-                    nodes[col, row].MarkAsObstacle();
+                    nodes[row, col].MarkAsObstacle();
                 }
             }
         }
@@ -76,7 +92,8 @@ namespace FTProject
         {
             float width = numOfColums * gridCellSize;
             float height = numOfRows * gridCellSize;
-            return (pos.x >= Origin.x && pos.x <= Origin.x + width && pos.x <= Origin.z + height && pos.z >= Origin.z);
+            return (pos.x >= Origin.x && pos.x <= Origin.x + width && 
+                        pos.x <= Origin.z + height && pos.z >= Origin.z);
         }
 
         public Vector3 GetGridCellCenter(int index)
@@ -106,7 +123,7 @@ namespace FTProject
             return index % numOfColums;
         }
 
-        public void GetNeighbours(Node node, ArrayList neighbours)
+        public void GetNeighbours(Node node, List<Node> neighbours)
         {
             Vector3 neighbourPos = node.position;
             int neighbourIndex = GetGridIndex(neighbourPos);
@@ -131,14 +148,17 @@ namespace FTProject
             AssignNeighour(leftNodeRow, leftNodeColumn, neighbours);
         }
 
-        private void AssignNeighour(int row, int column, ArrayList neighbors)
+        private void AssignNeighour(int row, int column, List<Node> neighbors)
         {
-            if(row != -1 && column != -1  && row < numOfColums && column < numOfColums)
+            if (row != -1 && column != -1 && row < numOfColums && column < numOfColums)
             {
-                Node nodeToAdd = nodes[row, column];
-                if (!nodeToAdd.isObstacle)
+                Node nodeToAdd = nodes[column, row];
+                if (nodeToAdd != null)
                 {
-                    neighbors.Add(nodeToAdd);
+                    if (!nodeToAdd.isObstacle)
+                    {
+                        neighbors.Add(nodeToAdd);
+                    }
                 }
             }
         }
@@ -178,7 +198,7 @@ namespace FTProject
             for (int i = 0; i < numCols; i++)
             {
                 Vector3 startPos = origin + i * cellSize * new Vector3(1, 0, 0);
-                Vector3 endPos = origin + height * new Vector3(0, 0, 1);
+                Vector3 endPos = startPos + height * new Vector3(0, 0, 1);
                 Debug.DrawLine(startPos, endPos, color);
             }
         }
