@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace FTProject {
-    public class BaseEnemy
+    public class BaseEnemy : BaseDisplayObject
     {
         public BaseEnemy()
         {
-            Init();
+            OnInit();
         }
 
         public BaseEnemy(GameObject go)
         {
             this._go = go;
-            Init();
+            OnInit();
         }
 
         protected GameObject _go;
@@ -37,24 +38,30 @@ namespace FTProject {
             set { _Hp = value; }
         }
 
-        
-        public virtual void Init()
+
+        public override void OnInit()
         {
-           
+            base.OnInit();
         }
 
-        public virtual void OnStart()
+        public override void OnStart()
         {
-
+            base.OnStart();
         }
 
-        public virtual void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
         }
-
-        public virtual void OnUpdate()
+        public void MoveToGoal()
         {
-            
+            List<Node> nodes = AStarPath.Instance.GetPath();
+            Vector3[] poss = new Vector3[nodes.Count];
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                poss[i] = nodes[i].position;                                           
+            }
+            _go.transform.DOLocalPath(poss, _speed);
         }
     }
 } 

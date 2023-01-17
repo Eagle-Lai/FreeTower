@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +10,9 @@ namespace FTProject
         private int _timerId;
         private float x;
         private float z;
-        public override void Init()
+        public override void OnInit()
         {
-            base.Init();
+            base.OnInit();
             _speed = 10f;
             _timerId = TimerManager.Instance.AddTimer(Time.deltaTime, -1, OnUpdate);
         }
@@ -26,6 +25,8 @@ namespace FTProject
             {
                nodes = AStarPath.Instance.GetPath();
             }
+            _speed = 5;
+            MoveToGoal();
         }
 
         public override void OnDestroy()
@@ -34,20 +35,10 @@ namespace FTProject
             TimerManager.Instance.RemoveTimerById(_timerId);
         }
 
-        public override void OnUpdate()
+        public void OnUpdate()
         {
-            base.OnUpdate();
-            Vector3 pos = nodes[index].position;
-            x += Time.deltaTime;
-            z += Time.deltaTime;
-            if(x < pos.x && z < pos.z)
-            {
-                _go.transform.localPosition = new Vector3(x, 0, z);
-            }
-            else
-            {
-                index++;
-            }
+
         }
+
     }
 }

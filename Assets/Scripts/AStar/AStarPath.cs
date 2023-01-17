@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace FTProject
 {
-    public class AStarPath
+    public class AStarPath : MonoBehaviour
     {
-        private static AStarPath _instance;
-        public static AStarPath Instance
-        {
-            get
-            {
-                if(_instance == null)
-                {
-                    _instance = new AStarPath();
-                }
-                return _instance;
-            }
-        }
+        //private static AStarPath _instance;
+        public static AStarPath Instance;
+        //{
+        //    get
+        //    {
+        //        if(_instance == null)
+        //        {
+        //            _instance = new AStarPath();
+        //        }
+        //        return _instance;
+        //    }
+        //}
         private Transform startPos, endPos;
         public Node startNode { get; set; }
         public Node goalNode { get; set; }
@@ -33,6 +33,11 @@ namespace FTProject
 
         public List<GameObject> nodeList = new List<GameObject>();
         public Transform parent;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         public void Start()
         {
@@ -73,6 +78,7 @@ namespace FTProject
                     gos[index] = nodeList[random];
                     gos[index].gameObject.tag = "obstacle";
                     gos[index].GetComponent<MeshRenderer>().material.color = Color.red;
+                    gos[index].GetComponent<MeshRenderer>().enabled = true;
                     index++;
                 }
             }
@@ -102,7 +108,9 @@ namespace FTProject
 
         public List<Node> GetPath()
         {
+            
             startPos = objStartCube.transform;
+            
             endPos = objEndCube.transform;
 
             startNode = new Node(GridManager.Instance.GetGridCellCenter(GridManager.Instance.GetGridIndex(startPos.position)));
