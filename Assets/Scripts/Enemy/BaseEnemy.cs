@@ -53,15 +53,15 @@ namespace FTProject {
         {
             base.OnDestroy();
         }
-        public void MoveToGoal()
-        {
-            List<NodeBase> nodes = GridManager.Instance.GetPath();
-            Vector3[] poss = new Vector3[nodes.Count];
-            for (int i = 0; i < nodes.Count; i++)
-            {
-                poss[i] = nodes[i].position;                                           
-            }
-            _go.transform.DOLocalPath(poss, _speed);
-        }
+        //public void MoveToGoal()
+        //{
+        //    List<Node> nodes = GridManager.Instance.GetPath();
+        //    Vector3[] poss = new Vector3[nodes.Count];
+        //    for (int i = 0; i < nodes.Count; i++)
+        //    {
+        //        poss[i] = nodes[i].position;                                           
+        //    }
+        //    _go.transform.DOLocalPath(poss, _speed);
+        //}
     }
 } 

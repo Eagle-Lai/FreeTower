@@ -12,7 +12,7 @@ namespace FTProject
             get { return new NormalEnemy(); }
         }
 
-        List<NodeBase> nodes;
+        List<Node> nodes;
         private int index = 0;
         private int _timerId;
         private float x;

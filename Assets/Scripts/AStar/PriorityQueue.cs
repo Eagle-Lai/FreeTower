@@ -6,34 +6,34 @@ namespace FTProject
 {
     public class PriorityQueue
     {
-        private List<NodeBase> nodes = new List<NodeBase>();
+        private List<Node> nodes = new List<Node>();
         public int Length
         {
             get { return nodes.Count; }
         }
-        public bool Contains(NodeBase node)
+        public bool Contains(Node node)
         {
             return nodes.Contains(node);
         }
 
-        public NodeBase First()
+        public Node First()
         {
             if(this.nodes.Count > 0)
             {
-                NodeBase node = this.nodes[0];
+                Node node = this.nodes[0];
                 nodes.RemoveAt(0);
                 return node;
             }
             return null;
         }
 
-        public void Push(NodeBase node)
+        public void Push(Node node)
         {
             this.nodes.Add(node);
             this.nodes.Sort();
         }
 
-        public void Remove(NodeBase node)
+        public void Remove(Node node)
         {
             this.nodes.Remove(node);
             this.nodes.Sort();
