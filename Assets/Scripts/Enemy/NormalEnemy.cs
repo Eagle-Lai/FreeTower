@@ -21,12 +21,12 @@ namespace FTProject
         {                           
             base.OnStart();
             
-            if(_go != null)
-            {
-               nodes = AStarPath.Instance.GetPath();
-            }
-            _speed = 5;
-            MoveToGoal();
+            //if(_go != null)
+            //{
+            //   nodes = AStarPath.Instance.GetPath();
+            //}
+            //_speed = 5;
+            //MoveToGoal();
         }
 
         public override void OnDestroy()

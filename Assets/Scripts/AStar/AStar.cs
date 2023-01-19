@@ -32,7 +32,7 @@ namespace FTProject
                 GridManager.Instance.GetNeighbours(node, neighbours);
                 for (int i = 0; i < neighbours.Count; i++)
                 {
-                    Node neighbourNode = (Node)neighbours[i];
+                    Node neighbourNode = neighbours[i];
                     if (!closeList.Contains(neighbourNode))
                     {
                         float cost = HeuristicEstimateCost(node, neighbourNode);

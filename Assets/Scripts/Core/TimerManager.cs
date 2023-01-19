@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 namespace FTProject
 {
-    public class TimerItem
+    class TimerItem
     {
         public int id;
         public float interval;
@@ -19,52 +19,30 @@ namespace FTProject
         public Action<UnityEngine.Object, object[]> callbackObjAndArgs;
         public bool isNotLimtied;
         public bool isStop;
-
-        private float _interval;
-
+        public bool isFree;
 
 
-        public TimerItem(int id, float interval, int loopTimes, Action action)
+        public TimerItem()
+        {
+
+        }
+        public TimerItem(int id, float interval, int loopTimes, Action callback = null, Action<UnityEngine.Object> actionObject = null, Action<UnityEngine.Object, object[]> action = null, UnityEngine.Object obj = null, object[] args = null)
         {
             this.id = id;
             this.interval = interval;
             this.loopTimes = loopTimes;
-            this.callback = action;
-            isStop = false;
-            _interval = this.interval;
-            isNotLimtied = loopTimes == -1;
-        }
-
-        public TimerItem(int id, float interval, int loopTimes, Action<UnityEngine.Object> action, UnityEngine.Object obj)
-        {
-            this.interval = interval;
-            this.loopTimes = loopTimes;
-            this.callbackObjectEvent = action;
-            this.callbackObject = obj;
-            isStop = false;
-            _interval = this.interval;
-            isNotLimtied = loopTimes == -1;
-        }
-        public TimerItem(int id, float interval, int loopTimes, Action<UnityEngine.Object, object[]> action, UnityEngine.Object obj, object[] args)
-        {
-            this.interval = interval;
-            this.loopTimes = loopTimes;
+            this.callback = callback;
+            this.callbackObjectEvent = actionObject;
             this.callbackObjAndArgs = action;
             this.callbackObject = obj;
             this.args = args;
             isStop = false;
-            _interval = this.interval;
             isNotLimtied = loopTimes == -1;
-        }
-
-        public void Reset()
-        {
-            this.interval = _interval;
-            loopTimes--;
+            isFree = true;
         }
     }
 
-    public class TimerManager
+    public class TimerManager : BaseManager
     {
         public static TimerManager _timerManager;
         public static TimerManager Instance
@@ -85,56 +63,22 @@ namespace FTProject
             _timerDicti = new Dictionary<int, TimerItem>();
             actionIndex = 0;
         }
+
         /// <summary>
-        /// 添加一个计时器，返回计时器的 ID
+        /// 
         /// </summary>
         /// <param name="interval">时间间隔</param>
-        /// <param name="loopTimes">执行次数，-1表示无限执行</param>
-        /// <param name="callback">执行函数</param>
+        /// <param name="loopTimes">执行次数</param>
+        /// <param name="callback">回调函数</param>
+        /// <param name="actionObject"></param>
+        /// <param name="action"></param>
+        /// <param name="obj"></param>
+        /// <param name="args"></param>
         /// <returns></returns>
-        public int AddTimer(float interval, int loopTimes, Action callback)
+        public int AddTimer(float interval, int loopTimes, Action callback, Action<UnityEngine.Object> actionObject = null, Action<UnityEngine.Object, object[]> action = null, UnityEngine.Object obj = null, object[] args = null)
         {
-            TimerItem item = new TimerItem(actionIndex, interval, loopTimes, callback);
-            actionIndex++;
-            if (!_timerDicti.ContainsKey(actionIndex))
-            {
-                _timerDicti.Add(actionIndex, item);
-            }
-            return actionIndex;
-        }
-        /// <summary>
-        /// 添加一个计时器，返回计时器的 ID
-        /// </summary>
-        /// <param name="interval">时间间隔</param>
-        /// <param name="loopTimes">执行次数，-1表示无限执行</param>
-        /// <param name="callback">执行函数</param>
-        /// <returns></returns>
-        public int AddTimer(float interval, int loopTimes, Action<UnityEngine.Object> action, UnityEngine.Object obj)
-        {
-            TimerItem item = new TimerItem(actionIndex, interval, loopTimes, action, obj);
-            actionIndex++;
-            if (!_timerDicti.ContainsKey(actionIndex))
-            {
-                _timerDicti.Add(actionIndex, item);
-            }
-            return actionIndex;
-        }
-        /// <summary>
-        /// 添加一个计时器，返回计时器的 ID
-        /// </summary>
-        /// <param name="interval">时间间隔</param>
-        /// <param name="loopTimes">执行次数，-1表示无限执行</param>
-        /// <param name="callback">执行函数</param>
-        /// <returns></returns>
-        public int AddTimer(float interval, int loopTimes, Action<UnityEngine.Object, object[]> action, UnityEngine.Object obj, object[] args)
-        {
-            TimerItem item = new TimerItem(actionIndex, interval, loopTimes, action, obj, args);
-            actionIndex++;
-            if (!_timerDicti.ContainsKey(actionIndex))
-            {
-                _timerDicti.Add(actionIndex, item);
-            }
-            return actionIndex;
+            TimerItem item = GetTimerItem(interval, loopTimes, callback, actionObject, action, obj, args);
+            return item.id;
         }
 
         public void Update(float intervalTime)
@@ -162,7 +106,6 @@ namespace FTProject
                             {
                                 item.Value.callbackObjAndArgs(item.Value.callbackObject, item.Value.args);
                             }
-                            item.Value.Reset();
                         }
                     }
                     else
@@ -186,8 +129,32 @@ namespace FTProject
         {
             if (_timerDicti.ContainsKey(id))
             {
-                _timerDicti.Remove(id);
+                _timerDicti[id].isFree = true;
             }
+        }
+
+        private TimerItem GetTimerItem(float interval, int loopTimes, Action callback, Action<UnityEngine.Object> actionObject, Action<UnityEngine.Object, object[]> action = null,  UnityEngine.Object obj = null, object[] args = null)
+        {
+            for (int i = 0; i < _timerDicti.Count; i++)
+            {
+                TimerItem item = _timerDicti[i];
+                if (item.isFree)
+                {
+                    item.isFree = false;
+                    item.interval = interval;
+                    item.loopTimes = loopTimes;
+                    item.callback = callback;
+                    item.callbackObjectEvent = actionObject;
+                    item.callbackObjAndArgs = action;
+                    item.args = args;
+                    return item;
+                }
+            }
+            actionIndex++;
+            TimerItem item1 = new TimerItem(actionIndex, interval, loopTimes, callback,actionObject, action, obj, args);
+            item1.isFree = false;
+            _timerDicti.Add(actionIndex, item1);
+            return item1;
         }
     }
 }

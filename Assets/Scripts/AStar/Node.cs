@@ -12,6 +12,7 @@ namespace FTProject
         public bool isObstacle;
         public Node parent;
         public Vector3 position;
+        public GameObject gameObject;
 
         public Node()
         {
@@ -28,6 +29,16 @@ namespace FTProject
             this.isObstacle = false;
             this.parent = null;
             this.position = pos;
+        }
+
+        public Node(GameObject go)
+        {
+            this.estimatedCost = 0;
+            this.nodeTotalCost = 1;
+            this.isObstacle = false;
+            this.parent = null;
+            this.position = go.transform.localPosition;
+            this.gameObject = go;
         }
 
         public void MarkAsObstacle()

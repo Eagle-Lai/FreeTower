@@ -3,50 +3,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourcesManager
-{
-    public static ResourcesManager _instance;
-
-    public static ResourcesManager Instance
+namespace FTProject {
+    public class ResourcesManager
     {
-        get
+        public static ResourcesManager _instance;
+
+        public static ResourcesManager Instance
         {
-            if(_instance == null)
+            get
             {
-                _instance = new ResourcesManager();
+                if (_instance == null)
+                {
+                    _instance = new ResourcesManager();
+                }
+                return _instance;
             }
-            return _instance;
         }
-    }
 
-    public GameObject LoadAndInitGameObject(string name)
-    {
-        return LoadAndInitGameObject(name, null, null);
-    }
-
-    public GameObject LoadAndInitGameObject(string name, Transform transform)
-    {
-        return LoadAndInitGameObject(name, transform, null);
-    }
-
-
-    public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback)
-    {
-        GameObject obj = Resources.Load<GameObject>(name);
-        if (obj != null)
+        public GameObject LoadAndInitGameObject(string name)
         {
-            GameObject go = GameObject.Instantiate(obj);
-
-            go.transform.SetParent(parent);
-            go.transform.localPosition = Vector3.zero;
-            go.transform.localScale = Vector3.one;
-
-            if (callback != null)
-            {
-                callback(go);
-            }
-            return go;
+            return LoadAndInitGameObject(name, null, null, Vector3.zero, Vector3.one);
         }
-        return null;
+
+        public GameObject LoadAndInitGameObject(string name, Transform parent)
+        {
+            return LoadAndInitGameObject(name, parent, null, Vector3.zero, Vector3.one);
+        }
+
+        public GameObject LoadAndInitGameObject(string name, Transform parent, Vector3 position)
+        {
+            return LoadAndInitGameObject(name, parent, null, position, Vector3.one);
+        }
+
+        public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback)
+        {
+            return LoadAndInitGameObject(name, parent, callback, Vector3.zero, Vector3.one);
+        }
+
+        public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback, Vector3 position, Vector3 scale)
+        {
+            GameObject obj = Resources.Load<GameObject>(name);
+            if (obj != null)
+            {
+                GameObject go = GameObject.Instantiate(obj);
+
+                go.transform.SetParent(parent);
+                go.transform.localPosition = position;
+                go.transform.localScale = scale;
+
+                if (callback != null)
+                {
+                    callback(go);
+                }
+                return go;
+            }
+            return null;
+        }
+
+
+        public GameObject LoadUI(string name)
+        {
+
+            return null;
+        }
     }
 }

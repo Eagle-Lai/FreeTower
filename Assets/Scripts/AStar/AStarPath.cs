@@ -6,18 +6,8 @@ namespace FTProject
 {
     public class AStarPath : MonoBehaviour
     {
-        //private static AStarPath _instance;
         public static AStarPath Instance;
-        //{
-        //    get
-        //    {
-        //        if(_instance == null)
-        //        {
-        //            _instance = new AStarPath();
-        //        }
-        //        return _instance;
-        //    }
-        //}
+
         private Transform startPos, endPos;
         public Node startNode { get; set; }
         public Node goalNode { get; set; }
@@ -43,11 +33,10 @@ namespace FTProject
         {
             cols = GridManager.Instance.numOfColums;
             rows = GridManager.Instance.numOfRows;
-            InitNode();
-            objStartCube = nodeList[0];
-            objEndCube = nodeList[nodeList.Count - 1];
-            objStartCube.GetComponent<MeshRenderer>().material.color = Color.green;
-            objEndCube.GetComponent<MeshRenderer>().material.color = Color.blue;
+            //objStartCube = nodeList[0];
+            //objEndCube = nodeList[nodeList.Count - 1];
+            //objStartCube.GetComponent<MeshRenderer>().material.color = Color.green;
+            //objEndCube.GetComponent<MeshRenderer>().material.color = Color.blue;
             GridManager.Instance.Init();
             pathArray = new List<Node>();
         }
@@ -56,7 +45,7 @@ namespace FTProject
         {
             GameObject parent = ResourcesManager.Instance.LoadAndInitGameObject("MapParent");
             GameObject obj1 = ResourcesManager.Instance.LoadAndInitGameObject("Cube");
-            GameObject obj = null;
+            GameObject obj;
             for (int i = 0; i < cols; i++)
             {
                 for (int j = 0; j < rows; j++)
@@ -119,5 +108,6 @@ namespace FTProject
             pathArray = AStar.FindPath(startNode, goalNode);
             return pathArray;
         }
+
     }
 }

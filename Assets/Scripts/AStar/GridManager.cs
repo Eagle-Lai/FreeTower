@@ -6,20 +6,20 @@ namespace FTProject
 {
     public class GridManager : MonoBehaviour
     {
-        public static GridManager _instance;
-        
-        public static GridManager Instance
-        {
-            get
-            {
-                if(_instance == null)
-                {
-                    _instance = new GridManager();
-                }
-                return _instance;
-            }
-        }
-       
+        //public static GridManager _instance;
+
+        public static GridManager Instance;
+        //{
+        //    get
+        //    {
+        //        if (_instance == null)
+        //        {
+        //            _instance = new GridManager();
+        //        }
+        //        return _instance;
+        //    }
+        //}
+
         /// <summary>
         /// ÐÐÊý
         /// </summary>
@@ -35,9 +35,23 @@ namespace FTProject
         private Vector3 origin = new Vector3();
         private GameObject[] obstacleList;
         public static Node[,] nodes { get; set; }
+
+        public GameObject objStartCube;
+
+        public GameObject objEndCube;
+
+        public GameObject parent;
+
+        List<Node> pathArray;
+
         public Vector3 Origin
         {
             get { return this.origin; }
+        }
+
+        private void Awake()
+        {
+            Instance = this;
         }
 
         public void Init()
@@ -50,28 +64,53 @@ namespace FTProject
             obstacleList = gameObjects;
         }
 
-        private void CalculateObstacle()
+        public void CalculateObstacle()
         {
             nodes = new Node[numOfColums, numOfRows];
+                                                                                
+            GameObject obj;
             int index = 0;
             for (int i = 0; i < numOfColums; i++)
             {
                 for (int j = 0; j < numOfRows; j++)
                 {
                     Vector3 cellPos = GetGridCellCenter(index);
-                    Node node = new Node(cellPos);
+                    GameObject obj1 = ResourcesManager.Instance.LoadAndInitGameObject("Cube", parent.transform);
+                    obj1.transform.localPosition = cellPos;
+                    Node node = new Node(obj1);
                     nodes[i, j] = node;
                     index++;
                 }
             }
-            if(obstacleList != null && obstacleList.Length > 0)
+            //if (obstacleList != null && obstacleList.Length > 0)
+            //{
+            //    foreach (GameObject data in obstacleList)
+            //    {
+            //        int indexCell = GetGridIndex(data.transform.position);
+            //        int col = GetColumn(indexCell);
+            //        int row = GetRow(indexCell);
+            //        nodes[row, col].MarkAsObstacle();
+            //        nodes[row, col].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            //    }
+            //}
+            int count = 10;
+            for (int i = 0; i < numOfColums; i++)
             {
-                foreach (GameObject data in obstacleList)
+                for (int j = 0; j < numOfRows; j++)
                 {
-                    int indexCell = GetGridIndex(data.transform.position);
-                    int col = GetColumn(indexCell);
-                    int row = GetRow(indexCell);
+                    int row = Random.Range(0, 9);
+                    int col = Random.Range(0, 9);
                     nodes[row, col].MarkAsObstacle();
+                    nodes[row, col].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                    nodes[row, col].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                    if (count <= 0)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        count--;
+                    }
                 }
             }
         }
@@ -92,7 +131,7 @@ namespace FTProject
         {
             float width = numOfColums * gridCellSize;
             float height = numOfRows * gridCellSize;
-            return (pos.x >= Origin.x && pos.x <= Origin.x + width && 
+            return (pos.x >= Origin.x && pos.x <= Origin.x + width &&
                         pos.x <= Origin.z + height && pos.z >= Origin.z);
         }
 
@@ -173,7 +212,7 @@ namespace FTProject
             if (showObstacleBlocks)
             {
                 Vector3 cellSize = new Vector3(gridCellSize, 1.0f, gridCellSize);
-                if(obstacleList != null && obstacleList.Length > 0)
+                if (obstacleList != null && obstacleList.Length > 0)
                 {
                     foreach (GameObject item in obstacleList)
                     {
@@ -181,8 +220,24 @@ namespace FTProject
                     }
                 }
             }
+            if (pathArray == null)
+            {
+                return;
+            }
+            if (pathArray.Count > 0)
+            {
+                int index = 1;
+                foreach (Node node in pathArray)
+                {
+                    if (index < pathArray.Count)
+                    {
+                        Node nextNode = (Node)pathArray[index];
+                        Debug.DrawLine(node.position, nextNode.position, Color.green);
+                        index++;
+                    }
+                }
+            }
         }
-
         public void DebugDrawGrid(Vector3 origin, int numRows, int numCols, float cellSize, Color color)
         {
             float width = (numCols * cellSize);
@@ -200,6 +255,26 @@ namespace FTProject
                 Vector3 startPos = origin + i * cellSize * new Vector3(1, 0, 0);
                 Vector3 endPos = startPos + height * new Vector3(0, 0, 1);
                 Debug.DrawLine(startPos, endPos, color);
+            }
+        }
+        public List<Node> GetPath()
+        {
+
+            Transform startPos = objStartCube.transform;
+
+            Transform endPos = objEndCube.transform;
+
+            Node startNode = new Node(GetGridCellCenter(GetGridIndex(startPos.localPosition)));
+            Node goalNode = new Node(GetGridCellCenter(GetGridIndex(endPos.localPosition)));
+
+            pathArray = AStar.FindPath(startNode, goalNode);
+            return pathArray;
+        }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                GetPath();
             }
         }
     }

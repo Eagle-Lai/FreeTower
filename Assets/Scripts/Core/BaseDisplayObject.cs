@@ -2,20 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseDisplayObject
+namespace FTProject
 {
-    public virtual void OnInit()
+    public class BaseDisplayObject
     {
+        protected GameObject _gameObject;
 
-    }
+        public object[] datas;
+        public bool IsActive
+        {
+            get { return _gameObject.activeSelf; }
+            set { _gameObject.SetActive(value); }
+        }
+        public GameObject GameObject
+        {
+            get { return _gameObject; }
+        }
+        /// <summary>
+        /// 初始化方法
+        /// </summary>
+        public virtual void OnInit()
+        {
 
-    public virtual void OnStart()
-    {
+        }
+        /// <summary>
+        /// 开始方法
+        /// </summary>
+        public virtual void OnStart()
+        {
 
-    }
+        }
+        /// <summary>
+        /// 销毁方法
+        /// </summary>
+        public virtual void OnDestroy()
+        {
 
-    public virtual void OnDestroy()
-    {
+        }
 
+        public void SetGameObject(GameObject gameObject)
+        {
+            this._gameObject = gameObject;
+        }
+
+        public void SetData(object[] datas)
+        {
+            this.datas = datas;
+        }
+
+        public void SetParent(Transform parent)
+        {
+            _gameObject.transform.SetParent(parent);
+        }
     }
 }

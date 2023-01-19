@@ -14,13 +14,13 @@ namespace FTProject
         private void Awake()
         {
             TimerManager.Instance.Update(Time.fixedDeltaTime);
-            AStarPath.Instance.Start();
+            //AStarPath.Instance.Start();
             //Tables t = new Tables(Reader);
             //Item item = t.TbItem.Get(100010);
             //Debug.Log(item.Desc);
             Tables table = new Tables(Reader);
             Equip equip = table.TbEquip.Get(1);
-            Debug.Log(equip.Color);
+            //Debug.Log(equip.Color);
         }
 
         private JSONNode Reader(string fileName)
@@ -35,19 +35,20 @@ namespace FTProject
                 BaseEnemy baseEnemy = new NormalEnemy();
                 baseEnemy.gameObject = go;
                 baseEnemy.OnStart();
-                Debug.Log("+==================================");
             });
             
         }
 
-        private void Update()
-        {
-            TimerManager.Instance.Update(Time.fixedDeltaTime);
-        }
+        
 
         private void OnDrawGizmos()
         {
            
         }
+        private void Update()
+        {
+            TimerManager.Instance.Update(Time.fixedDeltaTime);
+        }
+
     }
 }

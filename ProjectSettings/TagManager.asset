@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - obstacle
-  - UI
+  - UICanvas
   layers:
   - Default
   - TransparentFX
