@@ -5,7 +5,14 @@ namespace FTProject
 {
     public class NormalEnemy : BaseEnemy
     {
-        List<Node> nodes;
+        
+
+        public static NormalEnemy Instacne
+        {
+            get { return new NormalEnemy(); }
+        }
+
+        List<NodeBase> nodes;
         private int index = 0;
         private int _timerId;
         private float x;

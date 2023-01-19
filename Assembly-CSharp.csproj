@@ -62,7 +62,6 @@
     <Compile Include="Assets\Scripts\Launch.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-    <Compile Include="Assets\Scripts\AStar\Node.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONUnity.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
@@ -85,7 +84,6 @@
     <Compile Include="Assets\Gen\Equip.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
-    <Compile Include="Assets\Scripts\AStar\AStarPath.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Gen\test\AccessFlag.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -118,6 +116,7 @@
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
     <Compile Include="Assets\Gen\EquipPosition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\AStar\NodeBase.cs" />
     <Compile Include="Assets\LubanLib\ITypeId.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
@@ -141,73 +140,39 @@
     <Compile Include="Assets\Scripts\Core\TimerManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Luban.ClientServer\NLog.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-    <None Include="Assets\Luban.ClientServer\Ude.NetStandard.dll" />
-    <None Include="Assets\Luban.ClientServer\Luban.Client.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\Luban.ClientServer\DocumentFormat.OpenXml.dll" />
-    <None Include="Assets\Luban.ClientServer\ExcelDataReader.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\Luban.ClientServer\Scriban.dll" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
-    <None Include="Assets\Luban.ClientServer\System.Drawing.Common.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-    <None Include="Assets\Luban.ClientServer\Luban.Job.Cfg.dll" />
-    <None Include="Assets\Luban.ClientServer\Bright.Net.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Demigiant\readme_DOTweenPro.txt" />
     <None Include="Assets\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.dll" />
-    <None Include="Assets\Luban.ClientServer\Luban.ClientServer.dll" />
-    <None Include="Assets\Luban.ClientServer\MessagePack.dll" />
     <None Include="Assets\LubanLib\SimpleJSON\Changelog.txt" />
-    <None Include="Assets\Luban.ClientServer\Luban.Job.Proto.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\Luban.ClientServer\runtimes\win\lib\netcoreapp2.0\System.Drawing.Common.dll" />
-    <None Include="Assets\Luban.ClientServer\Neo.Lua.dll" />
-    <None Include="Assets\Luban.ClientServer\CommandLine.dll" />
-    <None Include="Assets\Luban.ClientServer\EtcdNetCore.dll" />
-    <None Include="Assets\Luban.ClientServer\Luban.Server.Common.dll" />
-    <None Include="Assets\Luban.ClientServer\YamlDotNet.dll" />
-    <None Include="Assets\Luban.ClientServer\Microsoft.Win32.SystemEvents.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Demigiant\DOTween\DOTween.dll" />
-    <None Include="Assets\Luban.ClientServer\Google.Protobuf.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-    <None Include="Assets\Luban.ClientServer\MessagePack.Annotations.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\Luban.ClientServer\Luban.Common.dll" />
     <None Include="Assets\Demigiant\DOTweenPro\DOTweenPro.dll" />
     <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
-    <None Include="Assets\Luban.ClientServer\Newtonsoft.Json.Bson.dll" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\Luban.ClientServer\ExcelNumberFormat.dll" />
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
     <None Include="Assets\Demigiant\DOTweenPro\DOTweenPro.XML" />
-    <None Include="Assets\Luban.ClientServer\runtimes\unix\lib\netcoreapp2.0\System.Drawing.Common.dll" />
-    <None Include="Assets\Luban.ClientServer\Newtonsoft.Json.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\Luban.ClientServer\Bright.Core.dll" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
-    <None Include="Assets\Luban.ClientServer\Luban.Job.Db.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\Luban.ClientServer\Luban.Job.Common.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-    <None Include="Assets\Luban.ClientServer\de\Neo.Lua.resources.dll" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-    <None Include="Assets\Luban.ClientServer\runtimes\win\lib\netcoreapp2.0\Microsoft.Win32.SystemEvents.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-    <None Include="Assets\Luban.ClientServer\ClosedXML.dll" />
-    <None Include="Assets\Luban.ClientServer\Luban.Server.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
-    <None Include="Assets\Luban.ClientServer\System.IO.Packaging.dll" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -460,44 +425,14 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity 2022.2.1f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>Assets\Luban.ClientServer\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="Ude.NetStandard">
-      <HintPath>Assets\Luban.ClientServer\Ude.NetStandard.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Client">
-      <HintPath>Assets\Luban.ClientServer\Luban.Client.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml">
-      <HintPath>Assets\Luban.ClientServer\DocumentFormat.OpenXml.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelDataReader">
-      <HintPath>Assets\Luban.ClientServer\ExcelDataReader.dll</HintPath>
-    </Reference>
-    <Reference Include="Scriban">
-      <HintPath>Assets\Luban.ClientServer\Scriban.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing.Common">
-      <HintPath>Assets\Luban.ClientServer\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Cfg">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Cfg.dll</HintPath>
-    </Reference>
-    <Reference Include="Bright.Net">
-      <HintPath>Assets\Luban.ClientServer\Bright.Net.dll</HintPath>
-    </Reference>
     <Reference Include="DemiLib">
       <HintPath>Assets\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.ClientServer">
-      <HintPath>Assets\Luban.ClientServer\Luban.ClientServer.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
@@ -505,41 +440,8 @@
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="MessagePack">
-      <HintPath>Assets\Luban.ClientServer\MessagePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Proto">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Proto.dll</HintPath>
-    </Reference>
-    <Reference Include="Neo.Lua">
-      <HintPath>Assets\Luban.ClientServer\Neo.Lua.dll</HintPath>
-    </Reference>
-    <Reference Include="CommandLine">
-      <HintPath>Assets\Luban.ClientServer\CommandLine.dll</HintPath>
-    </Reference>
-    <Reference Include="EtcdNetCore">
-      <HintPath>Assets\Luban.ClientServer\EtcdNetCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Server.Common">
-      <HintPath>Assets\Luban.ClientServer\Luban.Server.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="YamlDotNet">
-      <HintPath>Assets\Luban.ClientServer\YamlDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.SystemEvents">
-      <HintPath>Assets\Luban.ClientServer\Microsoft.Win32.SystemEvents.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>Assets\Luban.ClientServer\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="MessagePack.Annotations">
-      <HintPath>Assets\Luban.ClientServer\MessagePack.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Common">
-      <HintPath>Assets\Luban.ClientServer\Luban.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Unsafe">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.Unsafe.dll</HintPath>
@@ -547,38 +449,11 @@
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Bson">
-      <HintPath>Assets\Luban.ClientServer\Newtonsoft.Json.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelNumberFormat">
-      <HintPath>Assets\Luban.ClientServer\ExcelNumberFormat.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Bright.Core">
-      <HintPath>Assets\Luban.ClientServer\Bright.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Db">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Db.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Common">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Neo.Lua.resources">
-      <HintPath>Assets\Luban.ClientServer\de\Neo.Lua.resources.dll</HintPath>
-    </Reference>
-    <Reference Include="ClosedXML">
-      <HintPath>Assets\Luban.ClientServer\ClosedXML.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Server">
-      <HintPath>Assets\Luban.ClientServer\Luban.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Packaging">
-      <HintPath>Assets\Luban.ClientServer\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity 2022.2.1f1c1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

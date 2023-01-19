@@ -11,8 +11,11 @@ namespace FTProject
     public class Launch : MonoBehaviour
     {
 
+        public static Launch Instance;
+        public BaseEnemy baseEnemy;
         private void Awake()
         {
+            Instance = this;
             TimerManager.Instance.Update(Time.fixedDeltaTime);
             //AStarPath.Instance.Start();
             //Tables t = new Tables(Reader);
@@ -32,7 +35,7 @@ namespace FTProject
         {
             ResourcesManager.Instance.LoadAndInitGameObject("Capsule", this.transform, (go) =>
             {
-                BaseEnemy baseEnemy = new NormalEnemy();
+                baseEnemy = new NormalEnemy();
                 baseEnemy.gameObject = go;
                 baseEnemy.OnStart();
             });

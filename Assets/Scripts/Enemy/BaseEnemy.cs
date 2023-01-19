@@ -55,7 +55,7 @@ namespace FTProject {
         }
         public void MoveToGoal()
         {
-            List<Node> nodes = AStarPath.Instance.GetPath();
+            List<NodeBase> nodes = GridManager.Instance.GetPath();
             Vector3[] poss = new Vector3[nodes.Count];
             for (int i = 0; i < nodes.Count; i++)
             {

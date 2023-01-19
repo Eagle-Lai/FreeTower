@@ -33,8 +33,8 @@ namespace FTProject
         public bool showObstacleBlocks = true;
 
         private Vector3 origin = new Vector3();
-        private GameObject[] obstacleList;
-        public static Node[,] nodes { get; set; }
+        private GameObject[] obstacleList = new GameObject[10];
+        public static NodeBase[,] nodes { get; set; }
 
         public GameObject objStartCube;
 
@@ -42,7 +42,7 @@ namespace FTProject
 
         public GameObject parent;
 
-        List<Node> pathArray;
+        List<NodeBase> pathArray;
 
         public Vector3 Origin
         {
@@ -54,19 +54,19 @@ namespace FTProject
             Instance = this;
         }
 
+        private void Start()
+        {
+            Init();
+        }
+
         public void Init()
         {
             CalculateObstacle();
         }
 
-        public void SetObstacleList(GameObject[] gameObjects)
-        {
-            obstacleList = gameObjects;
-        }
-
         public void CalculateObstacle()
         {
-            nodes = new Node[numOfColums, numOfRows];
+            nodes = new NodeBase[numOfColums, numOfRows];
                                                                                 
             GameObject obj;
             int index = 0;
@@ -76,8 +76,11 @@ namespace FTProject
                 {
                     Vector3 cellPos = GetGridCellCenter(index);
                     GameObject obj1 = ResourcesManager.Instance.LoadAndInitGameObject("Cube", parent.transform);
+                    obj1.gameObject.name = string.Format("{0},{1}", i, j);
                     obj1.transform.localPosition = cellPos;
-                    Node node = new Node(obj1);
+                    NodeBase node = obj1.AddComponent<NodeBase>();
+                    node.position = cellPos;
+                    node.node = node;
                     nodes[i, j] = node;
                     index++;
                 }
@@ -98,18 +101,15 @@ namespace FTProject
             {
                 for (int j = 0; j < numOfRows; j++)
                 {
-                    int row = Random.Range(0, 9);
-                    int col = Random.Range(0, 9);
-                    nodes[row, col].MarkAsObstacle();
-                    nodes[row, col].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                    nodes[row, col].gameObject.GetComponent<MeshRenderer>().enabled = true;
-                    if (count <= 0)
-                    {
-                        return;
-                    }
-                    else
+                    if (count > 0)
                     {
                         count--;
+                        int row = Random.Range(0, 9);
+                        int col = Random.Range(0, 9);
+                        nodes[row, col].MarkAsObstacle();
+                        nodes[row, col].gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+                        nodes[row, col].gameObject.GetComponent<MeshRenderer>().enabled = true;
+                        obstacleList[count] = nodes[row, col].gameObject;
                     }
                 }
             }
@@ -162,7 +162,7 @@ namespace FTProject
             return index % numOfColums;
         }
 
-        public void GetNeighbours(Node node, List<Node> neighbours)
+        public void GetNeighbours(NodeBase node, List<NodeBase> neighbours)
         {
             Vector3 neighbourPos = node.position;
             int neighbourIndex = GetGridIndex(neighbourPos);
@@ -187,11 +187,11 @@ namespace FTProject
             AssignNeighour(leftNodeRow, leftNodeColumn, neighbours);
         }
 
-        private void AssignNeighour(int row, int column, List<Node> neighbors)
+        private void AssignNeighour(int row, int column, List<NodeBase> neighbors)
         {
             if (row != -1 && column != -1 && row < numOfColums && column < numOfColums)
             {
-                Node nodeToAdd = nodes[column, row];
+                NodeBase nodeToAdd = nodes[column, row];
                 if (nodeToAdd != null)
                 {
                     if (!nodeToAdd.isObstacle)
@@ -216,7 +216,10 @@ namespace FTProject
                 {
                     foreach (GameObject item in obstacleList)
                     {
-                        Gizmos.DrawCube(GetGridCellCenter(GetGridIndex(item.transform.position)), cellSize);
+                        if (item != null)
+                        {
+                            Gizmos.DrawCube(GetGridCellCenter(GetGridIndex(item.transform.position)), cellSize);
+                        }
                     }
                 }
             }
@@ -227,11 +230,11 @@ namespace FTProject
             if (pathArray.Count > 0)
             {
                 int index = 1;
-                foreach (Node node in pathArray)
+                foreach (NodeBase node in pathArray)
                 {
                     if (index < pathArray.Count)
                     {
-                        Node nextNode = (Node)pathArray[index];
+                        NodeBase nextNode = (NodeBase)pathArray[index];
                         Debug.DrawLine(node.position, nextNode.position, Color.green);
                         index++;
                     }
@@ -257,15 +260,15 @@ namespace FTProject
                 Debug.DrawLine(startPos, endPos, color);
             }
         }
-        public List<Node> GetPath()
+        public List<NodeBase> GetPath()
         {
 
             Transform startPos = objStartCube.transform;
 
             Transform endPos = objEndCube.transform;
 
-            Node startNode = new Node(GetGridCellCenter(GetGridIndex(startPos.localPosition)));
-            Node goalNode = new Node(GetGridCellCenter(GetGridIndex(endPos.localPosition)));
+            NodeBase startNode = nodes[0, 0].node;//new NodeBase(GetGridCellCenter(GetGridIndex(startPos.localPosition)));
+            NodeBase goalNode = nodes[9, 9].node;//new NodeBase(GetGridCellCenter(GetGridIndex(endPos.localPosition)));
 
             pathArray = AStar.FindPath(startNode, goalNode);
             return pathArray;
@@ -274,7 +277,7 @@ namespace FTProject
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
-                GetPath();
+                Launch.Instance.baseEnemy.MoveToGoal();
             }
         }
     }

@@ -338,38 +338,11 @@
     <Reference Include="DemiEditor">
       <HintPath>Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>Assets\Luban.ClientServer\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="Ude.NetStandard">
-      <HintPath>Assets\Luban.ClientServer\Ude.NetStandard.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Client">
-      <HintPath>Assets\Luban.ClientServer\Luban.Client.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
-    </Reference>
-    <Reference Include="DocumentFormat.OpenXml">
-      <HintPath>Assets\Luban.ClientServer\DocumentFormat.OpenXml.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelDataReader">
-      <HintPath>Assets\Luban.ClientServer\ExcelDataReader.dll</HintPath>
-    </Reference>
-    <Reference Include="Scriban">
-      <HintPath>Assets\Luban.ClientServer\Scriban.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing.Common">
-      <HintPath>Assets\Luban.ClientServer\System.Drawing.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Cfg">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Cfg.dll</HintPath>
-    </Reference>
-    <Reference Include="Bright.Net">
-      <HintPath>Assets\Luban.ClientServer\Bright.Net.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.7\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
@@ -377,20 +350,11 @@
     <Reference Include="DemiLib">
       <HintPath>Assets\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
     </Reference>
-    <Reference Include="Luban.ClientServer">
-      <HintPath>Assets\Luban.ClientServer\Luban.ClientServer.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="MessagePack">
-      <HintPath>Assets\Luban.ClientServer\MessagePack.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Proto">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Proto.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
       <HintPath>Assets\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
@@ -398,41 +362,14 @@
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.7\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Neo.Lua">
-      <HintPath>Assets\Luban.ClientServer\Neo.Lua.dll</HintPath>
-    </Reference>
-    <Reference Include="CommandLine">
-      <HintPath>Assets\Luban.ClientServer\CommandLine.dll</HintPath>
-    </Reference>
-    <Reference Include="EtcdNetCore">
-      <HintPath>Assets\Luban.ClientServer\EtcdNetCore.dll</HintPath>
-    </Reference>
     <Reference Include="DOTweenProEditor">
       <HintPath>Assets\Demigiant\DOTweenPro\Editor\DOTweenProEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Server.Common">
-      <HintPath>Assets\Luban.ClientServer\Luban.Server.Common.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.7\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
-    <Reference Include="YamlDotNet">
-      <HintPath>Assets\Luban.ClientServer\YamlDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Win32.SystemEvents">
-      <HintPath>Assets\Luban.ClientServer\Microsoft.Win32.SystemEvents.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>Assets\Luban.ClientServer\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="MessagePack.Annotations">
-      <HintPath>Assets\Luban.ClientServer\MessagePack.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Common">
-      <HintPath>Assets\Luban.ClientServer\Luban.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Unsafe">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.Unsafe.dll</HintPath>
@@ -440,41 +377,14 @@
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Bson">
-      <HintPath>Assets\Luban.ClientServer\Newtonsoft.Json.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="ExcelNumberFormat">
-      <HintPath>Assets\Luban.ClientServer\ExcelNumberFormat.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Bright.Core">
-      <HintPath>Assets\Luban.ClientServer\Bright.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="Luban.Job.Db">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Db.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Job.Common">
-      <HintPath>Assets\Luban.ClientServer\Luban.Job.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Neo.Lua.resources">
-      <HintPath>Assets\Luban.ClientServer\de\Neo.Lua.resources.dll</HintPath>
-    </Reference>
-    <Reference Include="ClosedXML">
-      <HintPath>Assets\Luban.ClientServer\ClosedXML.dll</HintPath>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Luban.Server">
-      <HintPath>Assets\Luban.ClientServer\Luban.Server.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Packaging">
-      <HintPath>Assets\Luban.ClientServer\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>

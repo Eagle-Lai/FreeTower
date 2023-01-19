@@ -7,20 +7,20 @@ namespace FTProject
     public class AStar
     {
         public static PriorityQueue closeList, openList;
-        private static float HeuristicEstimateCost(Node curNode, Node goalNode)
+        private static float HeuristicEstimateCost(NodeBase curNode, NodeBase goalNode)
         {
             Vector3 vecCost = curNode.position - goalNode.position;
             return vecCost.magnitude;
         }
 
-        public static List<Node> FindPath(Node start, Node goal)
+        public static List<NodeBase> FindPath(NodeBase start, NodeBase goal)
         {
             openList = new PriorityQueue();
             openList.Push(start);
             start.nodeTotalCost = 0;
             start.estimatedCost = HeuristicEstimateCost(start, goal);
             closeList = new PriorityQueue();
-            Node node = null;
+            NodeBase node = null;
             while (openList.Length != 0)
             {
                 node = openList.First();
@@ -28,11 +28,11 @@ namespace FTProject
                 {
                     return CalculatePath(node);
                 }
-                List<Node> neighbours = new List<Node>();
+                List<NodeBase> neighbours = new List<NodeBase>();
                 GridManager.Instance.GetNeighbours(node, neighbours);
                 for (int i = 0; i < neighbours.Count; i++)
                 {
-                    Node neighbourNode = neighbours[i];
+                    NodeBase neighbourNode = neighbours[i];
                     if (!closeList.Contains(neighbourNode))
                     {
                         float cost = HeuristicEstimateCost(node, neighbourNode);
@@ -58,9 +58,9 @@ namespace FTProject
             return CalculatePath(node);
         }
 
-        public static List<Node> CalculatePath(Node node)
+        public static List<NodeBase> CalculatePath(NodeBase node)
         {
-            List<Node> list = new List<Node>();
+            List<NodeBase> list = new List<NodeBase>();
             while(node != null)
             {
                 list.Add(node);

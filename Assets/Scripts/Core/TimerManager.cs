@@ -135,19 +135,22 @@ namespace FTProject
 
         private TimerItem GetTimerItem(float interval, int loopTimes, Action callback, Action<UnityEngine.Object> actionObject, Action<UnityEngine.Object, object[]> action = null,  UnityEngine.Object obj = null, object[] args = null)
         {
-            for (int i = 0; i < _timerDicti.Count; i++)
+            if (_timerDicti.Count > 0)
             {
-                TimerItem item = _timerDicti[i];
-                if (item.isFree)
+                for (int i = 1; i < _timerDicti.Count; i++)
                 {
-                    item.isFree = false;
-                    item.interval = interval;
-                    item.loopTimes = loopTimes;
-                    item.callback = callback;
-                    item.callbackObjectEvent = actionObject;
-                    item.callbackObjAndArgs = action;
-                    item.args = args;
-                    return item;
+                    TimerItem item = _timerDicti[i];
+                    if (item.isFree)
+                    {
+                        item.isFree = false;
+                        item.interval = interval;
+                        item.loopTimes = loopTimes;
+                        item.callback = callback;
+                        item.callbackObjectEvent = actionObject;
+                        item.callbackObjAndArgs = action;
+                        item.args = args;
+                        return item;
+                    }
                 }
             }
             actionIndex++;
