@@ -50,7 +50,7 @@ namespace FTProject
 
         /// <summary>
         // This CompareTo methods affect on Sort method
-        // It applies when calling the Sort method from ArrayList
+        // It applies when calling the Sort method from List<Node>
         // Compare using the estimated total cost between two nodes
         /// </summary>
         public int CompareTo(object obj)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum UILayout
@@ -29,7 +30,7 @@ namespace FTProject
         }
 
        
-        private Dictionary<UILayout, RectTransform> _panelDictionary = new Dictionary<UILayout, RectTransform>();
+        private Dictionary<UILayout, RectTransform> layoutDicitonary = new Dictionary<UILayout, RectTransform>();
 
         private RectTransform _uiCanvas;
 
@@ -50,7 +51,7 @@ namespace FTProject
         public RectTransform GetPanelLayoutParent(UILayout type)
         {
             RectTransform rect;
-            if (_panelDictionary.TryGetValue(type, out rect))
+            if (layoutDicitonary.TryGetValue(type, out rect))
             {
                 return rect;
             }
@@ -67,8 +68,8 @@ namespace FTProject
             {
                 rect = UICanvas.transform.Find("TipsPanel").GetComponent<RectTransform>();
             }
-            _panelDictionary.Add(type, rect);
-            return _panelDictionary[type];
+            layoutDicitonary.Add(type, rect);
+            return layoutDicitonary[type];
         }
 
 
@@ -80,12 +81,25 @@ namespace FTProject
 
         private void OnDestroyView()
         {
-
+            for (int i = 0; i < panelDictionary.Count;)
+            {
+                KeyValuePair<string, BaseView> view = panelDictionary.ElementAt(i);
+                if (view.Value.isShow == false)
+                {
+                    view.Value.activeTime -= 1;
+                    if (view.Value.activeTime <= 0)
+                    {
+                        panelDictionary.Remove(view.Value.UIItemData.name);
+                        continue;
+                    }
+                }
+                i++;
+            }
         }
 
         public T OpenView<T>(string ViewName, object[] data = null) where T : BaseView, new()
         {
-            if (UIData.uiDict.TryGetValue(ViewName, out UIItemData item))
+            if (AssetData.AssetDictionary.TryGetValue(ViewName, out AssetItemData item))
             {
                 T t = null;
                 if (panelDictionary.ContainsKey(ViewName))
@@ -93,23 +107,28 @@ namespace FTProject
 
                     BaseView baseView = panelDictionary[ViewName];
                     baseView.OnShow();
+                    t.isShow = false;
                     return baseView as T;
                 }
                 else
                 {
-                    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject(item.path);
-                    if (go != null)
+                    RectTransform parent = GetPanelLayoutParent(item.UILayout);
+                    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject(item.path, parent, (go) => 
                     {
-                        t = new T();
-                        t.OnInit();
-                        t.SetGameObject(go);
-                        RectTransform parent = GetPanelLayoutParent(item.UILayout);
-                        t.SetParent(parent.transform);
-                        t.SetData(data);
-                        t.OnShow();
-                        panelDictionary[ViewName] = t;
-                        return t;
-                    }
+                        if (go != null)
+                        {
+                            t = new T();
+                            t.OnInit();
+                            t.SetGameObject(go);
+                            t.SetUIItem(item);
+                            t.SetParent(parent.transform);
+                            t.SetData(data);
+                            t.OnShow();
+                            t.isShow = true;
+                            panelDictionary[ViewName] = t;
+                        }                        
+                    });
+                    return t;
                 }
             }
             return null;
@@ -120,6 +139,7 @@ namespace FTProject
             if (panelDictionary.TryGetValue(viewName, out BaseView baseView))
             {
                 baseView.OnHide();
+                baseView.isShow = false;
             }
         }
     }

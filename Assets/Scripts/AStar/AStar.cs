@@ -16,9 +16,9 @@ namespace FTProject
         /// <summary>
         /// Calculate the final path in the path finding
         /// </summary>
-        private static ArrayList CalculatePath(Node node)
+        private static List<Node> CalculatePath(Node node)
         {
-            ArrayList list = new ArrayList();
+            List<Node> list = new List<Node>();
             while (node != null)
             {
                 list.Add(node);
@@ -40,7 +40,7 @@ namespace FTProject
         /// <summary>
         /// Find the path between start node and goal node using AStar Algorithm
         /// </summary>
-        public static ArrayList FindPath(Node start, Node goal)
+        public static List<Node> FindPath(Node start, Node goal)
         {
             //Start Finding the path
             openList = new PriorityQueue();
@@ -60,7 +60,7 @@ namespace FTProject
                     return CalculatePath(node);
                 }
 
-                ArrayList neighbours = new ArrayList();
+                List<Node> neighbours = new List<Node>();
                 GridManager.Instance.GetNeighbours(node, neighbours);
 
                 #region CheckNeighbours

@@ -21,9 +21,10 @@ namespace FTProject
             //Tables t = new Tables(Reader);
             //Item item = t.TbItem.Get(100010);
             //Debug.Log(item.Desc);
-            Tables table = new Tables(Reader);
-            Equip equip = table.TbEquip.Get(1);
+            //Tables table = new Tables(Reader);
+            //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
+            //UIManager.Instance.OpenView<MainView>("MainView");
         }
 
         private JSONNode Reader(string fileName)
@@ -33,7 +34,7 @@ namespace FTProject
 
         private void Start()
         {
-            ResourcesManager.Instance.LoadAndInitGameObject("Capsule", this.transform, (go) =>
+            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", this.transform, (go) =>
             {
                 baseEnemy = new NormalEnemy();
                 baseEnemy.gameObject = go;

@@ -42,20 +42,24 @@ namespace FTProject {
 
         public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback, Vector3 position, Vector3 scale)
         {
-            GameObject obj = Resources.Load<GameObject>(name);
-            if (obj != null)
+            AssetItemData data = AssetData.AssetDictionary[name];
+            if (AssetData.AssetDictionary.TryGetValue(name, out AssetItemData item))
             {
-                GameObject go = GameObject.Instantiate(obj);
-
-                go.transform.SetParent(parent);
-                go.transform.localPosition = position;
-                go.transform.localScale = scale;
-
-                if (callback != null)
+                GameObject obj = Resources.Load<GameObject>(item.path);
+                if (obj != null)
                 {
-                    callback(go);
+                    GameObject go = GameObject.Instantiate(obj);
+
+                    go.transform.SetParent(parent);
+                    go.transform.localPosition = position;
+                    go.transform.localScale = scale;
+
+                    if (callback != null)
+                    {
+                        callback(go);
+                    }
+                    return go;
                 }
-                return go;
             }
             return null;
         }

@@ -40,7 +40,7 @@ namespace FTProject
 
         }
 
-        public void SetGameObject(GameObject gameObject)
+        public virtual void SetGameObject(GameObject gameObject)
         {
             this._gameObject = gameObject;
         }
