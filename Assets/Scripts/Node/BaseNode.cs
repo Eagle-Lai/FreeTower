@@ -8,5 +8,10 @@ namespace FTProject
     {
         [SerializeField]
         public Node node;
+
+        protected virtual void OnTriggerEnter(Collider other)
+        {
+
+        }
     }
 }

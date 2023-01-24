@@ -113,7 +113,7 @@ namespace FTProject
                 else
                 {
                     RectTransform parent = GetPanelLayoutParent(item.UILayout);
-                    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject(item.path, parent, (go) => 
+                    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject(item.name, parent, (go) => 
                     {
                         if (go != null)
                         {

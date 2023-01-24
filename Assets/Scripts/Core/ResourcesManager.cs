@@ -41,15 +41,15 @@ namespace FTProject {
         }
 
         public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback, Vector3 position, Vector3 scale)
-        {
-            AssetItemData data = AssetData.AssetDictionary[name];
+        { 
             if (AssetData.AssetDictionary.TryGetValue(name, out AssetItemData item))
             {
                 GameObject obj = Resources.Load<GameObject>(item.path);
+                
                 if (obj != null)
                 {
                     GameObject go = GameObject.Instantiate(obj);
-
+                    go.name = go.name.Replace("(Clone)", "");
                     go.transform.SetParent(parent);
                     go.transform.localPosition = position;
                     go.transform.localScale = scale;

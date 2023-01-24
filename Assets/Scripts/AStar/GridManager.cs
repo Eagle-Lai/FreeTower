@@ -304,6 +304,7 @@ namespace FTProject
             if (Input.GetKeyDown(KeyCode.R))
             {
                 Launch.Instance.baseEnemy.MoveToGoal();
+                
             }
         }
     }

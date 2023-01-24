@@ -18,6 +18,8 @@ namespace FTProject
             { "MainView", new AssetItemData(){ name = "MainView", path = "UIPrefabs/MainView", UILayout = UILayout.NormalPanel} },
 
             { "NormalTower", new AssetItemData(){name = "NormalTower", path = "Tower/NormalTower" } },
+            { "PowerTower", new AssetItemData(){name = "NormalTower", path = "Tower/PowerTower" } },
+            { "SlowTower", new AssetItemData(){name = "NormalTower", path = "Tower/SlowTower" } },
 
             { "StartNode", new AssetItemData(){ name = "StartNode", path = "Node/StartNode"} },
 

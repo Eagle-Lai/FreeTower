@@ -8,8 +8,9 @@ namespace FTProject
 {
     public class MainView : BaseView
     {
+        NormalTower tower;
 
-        private Button button;                                                
+        private Button normalTowerBtn;
 
         public override void OnInit()
         {
@@ -24,23 +25,21 @@ namespace FTProject
         public override void InitComponent()
         {
             base.InitComponent();
-            button = _gameObject.transform.Find("Button").GetComponent<Button>();
-            UIEventListener.Get(button.gameObject).onPointerDown = OnClickBtnDown;
-            UIEventListener.Get(button.gameObject).onPointerUp = OnClickBtnUp;
+            normalTowerBtn = _gameObject.transform.Find("Button").GetComponent<Button>();
+            normalTowerBtn.onClick.AddListener(OnClickBtn);
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
         }
 
-        private void OnClickBtnDown(GameObject go, PointerEventData eventData)
+        private void OnClickBtn()
         {
-            Debug.Log("=================");
+            TowerManager.Instance.GetTower<NormalTower>(TowerType.Normal);
         }
-
         private void OnClickBtnUp(GameObject go, PointerEventData eventData)
         {
-            Debug.Log("=====###########============");
+           
         }
     }
 }

@@ -15,6 +15,7 @@ namespace FTProject
         public BaseEnemy baseEnemy;
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
             Instance = this;
             TimerManager.Instance.Update(Time.fixedDeltaTime);
             //AStarPath.Instance.Start();
@@ -24,7 +25,7 @@ namespace FTProject
             //Tables table = new Tables(Reader);
             //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
-            //UIManager.Instance.OpenView<MainView>("MainView");
+            UIManager.Instance.OpenView<MainView>("MainView");
         }
 
         private JSONNode Reader(string fileName)
