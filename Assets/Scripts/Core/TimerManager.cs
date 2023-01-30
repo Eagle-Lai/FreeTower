@@ -10,6 +10,7 @@ namespace FTProject
         public int id;
         public float interval;
         public int loopTimes;
+        private float _interval;
 
         public UnityEngine.Object callbackObject;
         public object[] args;
@@ -30,6 +31,7 @@ namespace FTProject
         {
             this.id = id;
             this.interval = interval;
+            this._interval = interval;
             this.loopTimes = loopTimes;
             this.callback = callback;
             this.callbackObjectEvent = actionObject;
@@ -39,6 +41,15 @@ namespace FTProject
             isStop = false;
             isNotLimtied = loopTimes == -1;
             isFree = true;
+        }
+        public void Reset()
+        {
+            this.interval = this._interval;
+            this.loopTimes--;
+            if(loopTimes == 0)
+            {
+                isFree = true;
+            }
         }
     }
 
@@ -83,10 +94,10 @@ namespace FTProject
 
         public void Update(float intervalTime)
         {
-            for (int i = 0; i < _timerDicti.Count;)
+            for (int i = 0; i < _timerDicti.Count; i++)
             {
                 KeyValuePair<int, TimerItem> item = _timerDicti.ElementAt(i);
-                i++;
+                
                 if (!item.Value.isStop)
                 {
                     if (item.Value.isNotLimtied || item.Value.loopTimes > 0)
@@ -106,12 +117,8 @@ namespace FTProject
                             {
                                 item.Value.callbackObjAndArgs(item.Value.callbackObject, item.Value.args);
                             }
+                            item.Value.Reset();
                         }
-                    }
-                    else
-                    {
-                        i--;
-                        _timerDicti.Remove(item.Key);
                     }
                 }
             }
@@ -158,6 +165,12 @@ namespace FTProject
             item1.isFree = false;
             _timerDicti.Add(actionIndex, item1);
             return item1;
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            _timerDicti.Clear();
         }
     }
 }

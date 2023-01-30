@@ -11,6 +11,10 @@ namespace FTProject
     {
         private static GridManager s_Instance = null;
 
+        private Vector3 nodeVector3 = new Vector3(1.9f, 0.5f, 1.9f);
+
+        private float scale = 2f;
+
         public static GridManager Instance
         {
             get
@@ -39,8 +43,8 @@ namespace FTProject
 
 
         #region Fields
-        public int numOfRows;
-        public int numOfColumns;
+        private int numOfRows;
+        private int numOfColumns;
         public float gridCellSize;
         public bool showGrid = true;
         public bool showObstacleBlocks = true;
@@ -70,7 +74,7 @@ namespace FTProject
             GameObject go;
             GameObject parent = ResourcesManager.Instance.LoadAndInitGameObject("NodeParent");
             //nodes = new Node[numOfColumns, numOfRows];
-            nodesObj = new BaseNode[numOfColumns, numOfRows];
+            //nodesObj = new BaseNode[numOfColumns, numOfRows];
             TextAsset textAsset = Resources.Load<TextAsset>("Map");
             int index = 0;
             string path = Application.dataPath + "/Resources/Map.txt";
@@ -80,6 +84,12 @@ namespace FTProject
                 char[] temp = infos[i].ToCharArray();
                 for (int j = 0; j < temp.Length; j++)
                 {
+                    if (nodesObj == null)
+                    {
+                        numOfColumns = infos.Length;
+                        numOfRows = temp.Length;
+                        nodesObj = new BaseNode[infos.Length, temp.Length];
+                    }
                     Vector3 cellPos = GetGridCellCenter(index);
                     Node node = new Node(cellPos);
 
@@ -87,32 +97,41 @@ namespace FTProject
                     switch (temp[j])
                     {
                         case '-':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalNode", parent.transform, null, Vector3.zero, Vector3.one * 0.9f);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalNode", parent.transform, null, Vector3.zero,nodeVector3);
                             nodeObj = go.AddComponent<NormalNode>();
+                            nodeObj.NodeType = NodeType.Normal;
                             break;
+
                         case '*':       //开始点
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("StartNode", parent.transform, null, Vector3.zero, Vector3.one);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("StartNode", parent.transform, null, Vector3.zero, Vector3.one * scale);
                             nodeObj = go.AddComponent<StartNode>();
                             startNode = nodeObj as StartNode;
                             startNode.node = node;
+                            nodeObj.NodeType = NodeType.Start;
                             break;
+
                         case '&':       //结束点
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("EndNode", parent.transform, null, Vector3.zero, Vector3.one);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("EndNode", parent.transform, null, Vector3.zero, Vector3.one * scale);
                             nodeObj = go.AddComponent<EndNode>();
                             endNode = nodeObj as EndNode;
                             endNode.node = node;
+                            nodeObj.NodeType = NodeType.End;
                             break;
+
                         case '#':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalObstacle", parent.transform, null, Vector3.zero, Vector3.one);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalObstacle", parent.transform, null, Vector3.zero, Vector3.one * scale);
                             nodeObj = go.AddComponent<NormalObstacle>();
                             node.MarkAsObstacle();
+                            nodeObj.NodeType = NodeType.Obstacle;
                             break;
+
                         default:
                             break;
                     }
                     nodeObj.node = node;
                     nodeObj.transform.position = cellPos;
                     nodesObj[i, j] = nodeObj;
+                    nodeObj.name += string.Format("({0},{1})", i, j);
                     index++;
                 }
             }
@@ -303,7 +322,7 @@ namespace FTProject
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Launch.Instance.baseEnemy.MoveToGoal();
+                EnemyManager.Instance.GenerateEnemy(GameObject.Find("EnemyParent").transform);
                 
             }
         }

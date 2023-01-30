@@ -14,14 +14,12 @@ namespace FTProject
 
         List<Node> nodes;
         private int index = 0;
-        private int _timerId;
         private float x;
         private float z;
         public override void OnInit()
         {
             base.OnInit();
-            _speed = 10f;
-            _timerId = TimerManager.Instance.AddTimer(Time.deltaTime, -1, OnUpdate);
+            _speed = 20f;
         }
 
         public override void OnStart()
@@ -32,7 +30,6 @@ namespace FTProject
         public override void OnDestroy()
         {
             base.OnDestroy();
-            TimerManager.Instance.RemoveTimerById(_timerId);
         }
 
         public void OnUpdate()

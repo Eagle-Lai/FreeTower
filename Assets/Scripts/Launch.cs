@@ -35,13 +35,7 @@ namespace FTProject
 
         private void Start()
         {
-            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", this.transform, (go) =>
-            {
-                baseEnemy = new NormalEnemy();
-                baseEnemy.gameObject = go;
-                baseEnemy.OnStart();
-            });
-            
+
         }
 
         

@@ -289,6 +289,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &836532593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 836532594}
+  m_Layer: 0
+  m_Name: EnemyParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &836532594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836532593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,8 +404,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.40994716, y: 0.002736324, z: -0.0012298438, w: 0.91210437}
-  m_LocalPosition: {x: 10.625327, y: 11.879121, z: -2.0894108}
+  m_LocalRotation: {x: 0.22250676, y: 0.0014624228, z: -0.00033375382, w: 0.97493005}
+  m_LocalPosition: {x: 19.002226, y: 16.636013, z: -13.780197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -680,9 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb7de5cab5591c4284aa6954e59a6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfRows: 20
-  numOfColumns: 20
-  gridCellSize: 1
+  gridCellSize: 2
   showGrid: 1
   showObstacleBlocks: 1
   intervalTime: 1
@@ -740,12 +769,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1589073994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995825e940d8daa49804b1218c7b9ad2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d07ebfbe91bab2419650b44a658f709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ping: 1
-  IsStart: 0
-  LastTime: 0
 --- !u!1 &1729694516
 GameObject:
   m_ObjectHideFlags: 0

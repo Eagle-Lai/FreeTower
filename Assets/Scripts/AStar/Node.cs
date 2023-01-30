@@ -37,7 +37,7 @@ namespace FTProject
             this.bObstacle = false;
             this.parent = null;
 
-            this.position = pos;
+            this.position = pos + new Vector3(0, 1.2f, 0);
         }
 
         /// <summary>

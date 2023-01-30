@@ -105,6 +105,7 @@
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenTextMeshPro.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONDotNetTypes.cs" />
     <Compile Include="Assets\Scripts\Core\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenDeAudio.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenProShortcuts.cs" />
@@ -131,9 +132,11 @@
     <Compile Include="Assets\Gen\Tower.cs" />
     <Compile Include="Assets\LubanLib\ITypeId.cs" />
     <Compile Include="Assets\Scripts\Node\EndNode.cs" />
+    <Compile Include="Assets\Scripts\Core\Enum\EnumClass.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\Scripts\Tower\TowerPosition.cs" />
     <Compile Include="Assets\Scripts\Core\ResourcesManager.cs" />
     <Compile Include="Assets\Gen\TBTower.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\Obstacle\NormalObstacle.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONBinary.cs" />
+    <Compile Include="Assets\Scripts\Config\TowerCofig.cs" />
     <Compile Include="Assets\Gen\Tables.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
@@ -156,6 +160,7 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\Core\UIEventListener.cs" />
     <Compile Include="Assets\Scripts\Core\Event\HandlerName.cs" />
+    <Compile Include="Assets\Scripts\Util\FTProjectUtils.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Core\TimerManager.cs" />
   </ItemGroup>

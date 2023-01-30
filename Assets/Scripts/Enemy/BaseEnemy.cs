@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace FTProject {
     public class BaseEnemy : BaseDisplayObject
@@ -38,7 +39,25 @@ namespace FTProject {
             set { _Hp = value; }
         }
 
+        protected bool _isFree;
+        public bool IsFree
+        {
+            get { return _isFree; }
+            set { _isFree = value; }
+        }
 
+        protected bool _isMoveState;
+        public bool IsMoveState
+        {
+            get
+            {
+                return _isMoveState;
+            }
+            set
+            {
+                _isMoveState = value;
+            }
+        }
         public override void OnInit()
         {
             base.OnInit();
@@ -53,7 +72,7 @@ namespace FTProject {
         {
             base.OnDestroy();
         }
-        public void MoveToGoal()
+        public void MoveToGoal(Action callback = null)
         {
             List<Node> nodes = GridManager.Instance.GetPath();
             Vector3[] poss = new Vector3[nodes.Count];
@@ -61,7 +80,13 @@ namespace FTProject {
             {
                 poss[i] = nodes[i].position;
             }
-            _go.transform.DOLocalPath(poss, _speed);
+            if (_isMoveState) return;
+            _isMoveState = true;
+            _go.transform.DOLocalPath(poss, _speed).onComplete = ()=> 
+            { 
+                callback();
+                _isMoveState = false;
+            };
         }
     }
 } 
