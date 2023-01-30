@@ -1,3 +1,7 @@
+/**
+Create By LaiZhangYin, Eagle
+if you have any question, please call wechat:782966734
+**/
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +22,37 @@ namespace FTProject
 
         protected TowerPosition _towerPosition;
 
-        protected float _rotateSpeed = 120f;
+        protected float _searchRate = 0.1f;
+
+        protected GameObject currentTargetGameObject;
+
+        public float SearchRate
+        {
+            get
+            {
+                return _searchRate;
+            }
+            set
+            {
+                _searchRate = value;
+            }
+        }
+
+        protected float _searchTimer = 0.1f;
+
+        public float SearchTimer
+        {
+            get
+            {
+                return _searchTimer;
+            }
+            set
+            {
+                _searchTimer = value;
+            }
+        }
+
+        protected float _rotateSpeed = 150f;
         public float RotateSpeed
         {
             get
@@ -54,7 +88,6 @@ namespace FTProject
         private void OnTriggerExit(Collider other)
         {
             TriggerGameObjectExit(other);
-
         }
 
 
@@ -78,10 +111,15 @@ namespace FTProject
 
         protected virtual void OnUpdate()
         {
-            GameObject temp = GetNearsetTarget();
-            if (temp != null)
+            _searchTimer -= Time.deltaTime;
+            if(_searchTimer <=0.0f && currentTargetGameObject == null && _enemyList.Count > 0)
             {
-                Quaternion rot = GetEnemyRotate(temp);
+                currentTargetGameObject = GetNearsetTarget();        
+                _searchTimer = _searchRate;
+            }
+            if (currentTargetGameObject != null)
+            {
+                Quaternion rot = GetEnemyRotate(currentTargetGameObject);
                 _head.rotation = Quaternion.Slerp(_head.rotation, rot, _rotateSpeed * Time.deltaTime);
             }
         }
@@ -115,6 +153,10 @@ namespace FTProject
             if (_towerPosition.isBuild)
             {
                 _enemyList.Remove(other.gameObject);
+                if(currentTargetGameObject == other.gameObject)
+                {
+                    currentTargetGameObject = null;
+                }
             }
         }
 
