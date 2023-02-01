@@ -71,6 +71,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Scripts\Bullet\BaseBullet.cs" />
     <Compile Include="Assets\Gen\item\EQuality.cs" />
     <Compile Include="Assets\Scripts\AStar\GridManager.cs" />
     <Compile Include="Assets\Scripts\Tower\SlowTower.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Gen\Equip.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Scripts\Tower\Tower\Targetter.cs" />
     <Compile Include="Assets\Scripts\Data\AssetData.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Scripts\Config\GlobalConst.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Assets\Scripts\Core\Enum\EnumClass.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\Scripts\Bullet\NormalBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerPosition.cs" />
     <Compile Include="Assets\Scripts\Core\ResourcesManager.cs" />
@@ -163,6 +166,7 @@
     <Compile Include="Assets\Scripts\Util\FTProjectUtils.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Core\TimerManager.cs" />
+    <Compile Include="Assets\Scripts\Bullet\BulletManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

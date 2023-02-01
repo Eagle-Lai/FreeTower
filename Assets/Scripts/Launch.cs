@@ -15,10 +15,21 @@ namespace FTProject
     public class Launch : MonoBehaviour
     {
 
+        private List<BaseManager> managerList = new List<BaseManager>()
+        {
+          new EnemyManager(),
+          new BulletManager(),
+        };
+
         public static Launch Instance;
         public BaseEnemy baseEnemy;
         private void Awake()
         {
+            for (int i = 0; i < managerList.Count; i++)
+            {
+                managerList[i].OnInit();
+            }
+
             DontDestroyOnLoad(gameObject);
             Instance = this;
             TimerManager.Instance.Update(Time.fixedDeltaTime);

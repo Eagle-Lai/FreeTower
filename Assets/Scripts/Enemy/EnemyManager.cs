@@ -29,9 +29,12 @@ namespace FTProject
         }
         public Dictionary<EnemyType, List<BaseEnemy>> enemyDictionary = new Dictionary<EnemyType, List<BaseEnemy>>();
 
+        public Transform EnemyParent;
+
         public override void OnInit()
         {
             base.OnInit();
+            EnemyParent = GameObject.Find("EnemyParent").transform;
         }
 
         public override void OnDestroy()
@@ -39,17 +42,16 @@ namespace FTProject
             base.OnDestroy();
         }
 
-        public void GenerateEnemy(Transform parent) 
+        public void GenerateEnemy() 
         {
             TimerManager.Instance.AddTimer(1f, 10, () => 
             {
-                GetNormalEnemy(parent);
+                GetNormalEnemy<NormalEnemy>(EnemyType.NormalEnemy);
             });
         }
 
-        public BaseEnemy GetNormalEnemy(Transform parent)
+        public T GetNormalEnemy<T>(EnemyType type) where T : BaseEnemy, new()
         {
-            BaseEnemy baseEnemy = null;
             foreach (var item in enemyDictionary)
             {
                 for (int i = 0; i < item.Value.Count; i++)
@@ -62,29 +64,43 @@ namespace FTProject
                             item.Value[i].IsFree = true;
                             item.Value[i].gameObject.transform.position = Vector3.zero;
                         });
-                        return item.Value[i];
+                        return item.Value[i] as T;
                     }
                 }
             }
-            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", parent, (go) =>
+            T t = null;
+            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", EnemyParent, (go) =>
             {
-                baseEnemy = new NormalEnemy();
-                baseEnemy.gameObject = go;
-                baseEnemy.gameObject.transform.localPosition = new Vector3(0, 1.2f, 0);
-                baseEnemy.OnStart();
+                t = go.AddComponent<T>();
+                t.transform.localPosition = new Vector3(0, 1.2f, 0);
             });
-            baseEnemy.IsFree = false;
+            t.IsFree = false;
             if(enemyDictionary.TryGetValue(EnemyType.NormalEnemy, out List<BaseEnemy> enemyList) == false)
             {
                 enemyDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
             }
-            enemyDictionary[EnemyType.NormalEnemy].Add(baseEnemy);
-            baseEnemy.MoveToGoal(()=> 
+            enemyDictionary[EnemyType.NormalEnemy].Add(t);
+            t.MoveToGoal(()=> 
             {
-                baseEnemy.IsFree = true;
-                baseEnemy.gameObject.transform.position = Vector3.zero;
+                t.IsFree = true;
+                t.gameObject.transform.position = Vector3.zero;
             });
-            return baseEnemy;
+            return t;
+        }
+
+        public void RecycleEnemy(EnemyType type, BaseEnemy baseEnemy)
+        {
+            if(enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if(list[i] == baseEnemy)
+                    {
+                        list[i].IsFree = true;
+                        list[i].Reset();
+                    }
+                }
+            }
         }
     }
 }

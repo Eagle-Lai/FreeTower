@@ -10,6 +10,8 @@ namespace FTProject
 {
     public class GlobalConst
     {
-       
+        public const float  SearchRate = 0.05f;
+
+        public const float BulletSpeed = 100f;
     }
 }

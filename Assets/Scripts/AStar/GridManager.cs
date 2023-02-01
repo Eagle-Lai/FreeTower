@@ -326,7 +326,7 @@ namespace FTProject
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
-                EnemyManager.Instance.GenerateEnemy(GameObject.Find("EnemyParent").transform);
+                EnemyManager.Instance.GenerateEnemy();
                 
             }
         }

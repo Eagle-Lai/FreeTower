@@ -9,26 +9,8 @@ using DG.Tweening;
 using System;
 
 namespace FTProject {
-    public class BaseEnemy : BaseDisplayObject
+    public class BaseEnemy : MonoBehaviour
     {
-        public BaseEnemy()
-        {
-            OnInit();
-        }
-
-        public BaseEnemy(GameObject go)
-        {
-            this._go = go;
-            OnInit();
-        }
-
-        protected GameObject _go;
-        public GameObject gameObject
-        {
-            get { return _go; }
-            set { _go = value; }
-        }
-
         protected float _speed;
         public float Speed
         {
@@ -62,20 +44,48 @@ namespace FTProject {
                 _isMoveState = value;
             }
         }
-        public override void OnInit()
+
+        private void Awake()
         {
-            base.OnInit();
+            this.OnAwake();
+        }
+        private void Start()
+        {
+            OnStart();
+        }
+        protected void Update()
+        {
+            OnUpdate();
+        }
+        private void OnDestroy()
+        {
+            Clear();
+        }
+        protected virtual void OnAwake()
+        {
+
         }
 
-        public override void OnStart()
+
+        protected virtual void OnStart()
         {
-            base.OnStart();
+
         }
 
-        public override void OnDestroy()
+
+
+        protected virtual void OnUpdate()
         {
-            base.OnDestroy();
+
         }
+
+
+
+        protected virtual void Clear()
+        {
+
+        }
+
         public void MoveToGoal(Action callback = null)
         {
             List<Node> nodes = GridManager.Instance.GetPath();
@@ -86,11 +96,16 @@ namespace FTProject {
             }
             if (_isMoveState) return;
             _isMoveState = true;
-            _go.transform.DOLocalPath(poss, _speed).onComplete = ()=> 
+            transform.DOLocalPath(poss, _speed).onComplete = ()=> 
             { 
                 callback();
                 _isMoveState = false;
             };
+        }
+
+        public virtual void Reset()
+        {
+            this.gameObject.transform.position = Vector3.zero;
         }
     }
 } 

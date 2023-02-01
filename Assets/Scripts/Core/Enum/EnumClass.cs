@@ -10,10 +10,16 @@ namespace FTProject
 {
     public enum NodeType
     {
-        None = 1,
+        None = 0,
         Start,
         Normal, 
         End,
         Obstacle,
+    }
+
+    public enum BulletType
+    {
+        None = 0,
+        NormalBullet,
     }
 }

@@ -35,6 +35,7 @@ namespace FTProject
 
             { "NormalObstacle", new AssetItemData(){ name = "NormalObstacle", path = "Obstacle/NormalObstacle"} },
             {"NormalEnemy", new AssetItemData(){name = "NormalEnemy", path = "Enemy/NormalEnemy"} },
+            {"NormalBullet", new AssetItemData(){name = "NormalBullet", path = "Bullet/NormalBullet"} },
 
         };
     }

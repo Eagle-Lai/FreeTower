@@ -12,9 +12,8 @@ namespace FTProject
 {
     public class BaseTower : MonoBehaviour
     {
-        public SphereCollider _sphereCollider;
 
-        protected List<GameObject> _enemyList = new List<GameObject>();
+        protected GameObject currentTargetGameObject;
 
         protected Transform _bulletPoint;
 
@@ -22,49 +21,29 @@ namespace FTProject
 
         protected TowerPosition _towerPosition;
 
-        protected float _searchRate = 0.1f;
+        protected Targetter _targetter;
 
-        protected GameObject currentTargetGameObject;
-
+        protected float _searchRate;
         public float SearchRate
         {
-            get
-            {
-                return _searchRate;
-            }
-            set
-            {
-                _searchRate = value;
-            }
+            get { return _searchRate; }
+            set { _searchRate = value; }
         }
 
-        protected float _searchTimer = 0.1f;
+        protected float _searchTimer;
 
         public float SearchTimer
         {
-            get
-            {
-                return _searchTimer;
-            }
-            set
-            {
-                _searchTimer = value;
-            }
+            get { return _searchTimer; }
+            set { _searchTimer = value; }
         }
 
         protected float _rotateSpeed = 150f;
         public float RotateSpeed
         {
-            get
-            {
-                return _rotateSpeed;
-            }
-            set
-            {
-                _rotateSpeed = value;
-            }
+            get { return _rotateSpeed; }
+            set { _rotateSpeed = value; }
         }
-
         private void Awake()
         {
             this.OnAwake();
@@ -81,52 +60,38 @@ namespace FTProject
         {
             Clear();
         }
-        private void OnTriggerEnter(Collider other)
-        {
-            TriggerGameObjectEnter(other);
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            TriggerGameObjectExit(other);
-        }
-
-
 
         protected virtual void OnAwake()
         {
-
+            this._searchRate = GlobalConst.SearchRate;
+            _targetter = transform.Find("Targetter").GetComponent<Targetter>();
+            if (_targetter == null)
+            {
+                _targetter = transform.Find("Targetter").gameObject.AddComponent<Targetter>();
+            }
         }
 
-     
+
         protected virtual void OnStart()
         {
-            _sphereCollider = transform.GetComponent<SphereCollider>();
-            _sphereCollider.radius = TowerCofig.Radius;
+
             _head = transform.Find("Head");
             _bulletPoint = transform.Find("Cube/BulletPoint");
             _towerPosition = transform.GetComponentInChildren<TowerPosition>();
         }
 
-      
+
 
         protected virtual void OnUpdate()
         {
+            currentTargetGameObject = _targetter.GetNearsetTarget();
             _searchTimer -= Time.deltaTime;
-            if(_searchTimer <=0.0f && currentTargetGameObject == null && _enemyList.Count > 0)
+            if (currentTargetGameObject != null && _searchTimer <= 0)
             {
-                currentTargetGameObject = GetNearsetTarget();        
+                Quaternion rot = FTProjectUtils.GetEnemyRotate(this.transform, currentTargetGameObject);
+                _head.rotation = Quaternion.Slerp(_head.rotation, rot, _rotateSpeed * Time.deltaTime);
                 _searchTimer = _searchRate;
             }
-            if (currentTargetGameObject != null)
-            {
-                Quaternion rot = GetEnemyRotate(currentTargetGameObject);
-                _head.rotation = Quaternion.Slerp(_head.rotation, rot, _rotateSpeed * Time.deltaTime);
-            }
-        }
-
-        public Quaternion GetEnemyRotate(GameObject go)
-        {
-           return Quaternion.LookRotation(new Vector3(transform.position.x - go.transform.position.x, 0, transform.position.z - go.transform.position.z));
         }
 
 
@@ -134,51 +99,6 @@ namespace FTProject
         protected virtual void Clear()
         {
 
-        }
-
-        protected virtual void TriggerGameObjectEnter(Collider other)
-        {
-            if (_towerPosition.isBuild)
-            {
-                if (other.gameObject.name.Contains("Enemy"))
-                {
-                    _enemyList.Add(other.gameObject);
-                }
-            }
-        }
-
-
-        protected virtual void TriggerGameObjectExit(Collider other)
-        {
-            if (_towerPosition.isBuild)
-            {
-                _enemyList.Remove(other.gameObject);
-                if(currentTargetGameObject == other.gameObject)
-                {
-                    currentTargetGameObject = null;
-                }
-            }
-        }
-
-        public GameObject GetNearsetTarget()
-        {
-            if (_enemyList.Count <= 0) return null;
-            GameObject nearest = null;
-            float distance = float.MaxValue;
-            for (int i = _enemyList.Count - 1; i > 0; i--)
-            {
-                if(_enemyList[i] == null)
-                {
-                    return null;
-                }
-                float currentDistance = FTProjectUtils.GetPointDistance(gameObject, _enemyList[i]);
-                if(currentDistance < distance)
-                {
-                    nearest = _enemyList[i];
-                    distance = currentDistance;
-                }
-            }
-            return nearest;
         }
     }
 }

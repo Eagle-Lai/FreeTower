@@ -14,5 +14,10 @@ namespace FTProject
         {
             return Vector2.Distance(new Vector2(goA.transform.position.x, goA.transform.position.z), new Vector2(goB.transform.position.x, goB.transform.position.z));
         }
+
+        public static Quaternion GetEnemyRotate(Transform transform, GameObject go)
+        {
+            return Quaternion.LookRotation(new Vector3(transform.position.x - go.transform.position.x, 0, transform.position.z - go.transform.position.z));
+        }
     }
 }
