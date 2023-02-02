@@ -56,7 +56,6 @@ namespace FTProject
 
         protected virtual void OnUpdate()
         {
-            transform.Translate(Vector3.forward * _speed);
         }
 
         protected virtual void Clear()

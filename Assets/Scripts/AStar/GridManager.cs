@@ -296,7 +296,7 @@ namespace FTProject
                     if (index < pathArray.Count)
                     {
                         Node nextNode = (Node)pathArray[index];
-                        Debug.DrawLine(node.position + new Vector3(0, 10, 0), nextNode.position + new Vector3(0, 10, 0), Color.black);
+                        Debug.DrawLine(node.position + new Vector3(0, 10, 0), nextNode.position + new Vector3(0, 10, 0), Color.white);
                         index++;
                     }
                 };

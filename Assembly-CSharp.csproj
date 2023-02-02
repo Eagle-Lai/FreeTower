@@ -129,12 +129,12 @@
     <Compile Include="Assets\Gen\item\TbItem.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
+    <Compile Include="Assets\Scripts\Core\Enum\EnumFile.cs" />
     <Compile Include="Assets\Gen\EquipPosition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Gen\Tower.cs" />
     <Compile Include="Assets\LubanLib\ITypeId.cs" />
     <Compile Include="Assets\Scripts\Node\EndNode.cs" />
-    <Compile Include="Assets\Scripts\Core\Enum\EnumClass.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\Bullet\NormalBullet.cs" />
@@ -154,7 +154,6 @@
     <Compile Include="Assets\Gen\Tables.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\Scripts\Core\ObjectPool.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSON.cs" />
     <Compile Include="Assets\Scripts\Obstacle\BaseObstacle.cs" />
     <Compile Include="Assets\Gen\TbEquip.cs" />

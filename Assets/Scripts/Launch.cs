@@ -25,10 +25,6 @@ namespace FTProject
         public BaseEnemy baseEnemy;
         private void Awake()
         {
-            for (int i = 0; i < managerList.Count; i++)
-            {
-                managerList[i].OnInit();
-            }
 
             DontDestroyOnLoad(gameObject);
             Instance = this;
@@ -40,7 +36,7 @@ namespace FTProject
             //Tables table = new Tables(Reader);
             //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
-            UIManager.Instance.OpenView<MainView>("MainView");
+            
         }
 
         private JSONNode Reader(string fileName)
@@ -50,10 +46,14 @@ namespace FTProject
 
         private void Start()
         {
-
+            for (int i = 0; i < managerList.Count; i++)
+            {
+                managerList[i].OnInit();
+            }
+            UIManager.Instance.OpenView<MainView>("MainView");
         }
 
-        
+
 
         private void OnDrawGizmos()
         {

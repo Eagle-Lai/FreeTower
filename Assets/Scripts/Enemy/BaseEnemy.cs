@@ -60,7 +60,7 @@ namespace FTProject {
         private void OnDestroy()
         {
             Clear();
-        }
+        }                               
         protected virtual void OnAwake()
         {
 
@@ -99,13 +99,15 @@ namespace FTProject {
             transform.DOLocalPath(poss, _speed).onComplete = ()=> 
             { 
                 callback();
-                _isMoveState = false;
+                Reset();
             };
         }
 
         public virtual void Reset()
         {
             this.gameObject.transform.position = Vector3.zero;
+            IsFree = true;
+            _isMoveState = false;
         }
     }
 } 

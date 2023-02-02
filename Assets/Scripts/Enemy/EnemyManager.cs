@@ -8,11 +8,7 @@ using UnityEngine;
 
 namespace FTProject
 {   
-    public enum EnemyType
-    {
-        NONE = 0,
-        NormalEnemy,
-    }
+
     public class EnemyManager : BaseManager
     {
         private static EnemyManager _instance;
@@ -50,25 +46,43 @@ namespace FTProject
             });
         }
 
-        public T GetNormalEnemy<T>(EnemyType type) where T : BaseEnemy, new()
+        public T GetNormalEnemy<T>(EnemyType type) where T : BaseEnemy
         {
-            foreach (var item in enemyDictionary)
+            //foreach (var item in enemyDictionary)
+            //{
+            //    for (int i = 0; i < item.Value.Count; i++)
+            //    {
+            //        if (item.Value[i].IsFree)
+            //        {
+            //            item.Value[i].IsFree = false;
+            //            item.Value[i].MoveToGoal(() =>
+            //            {
+            //                item.Value[i].IsFree = true;
+            //                item.Value[i].gameObject.transform.position = Vector3.zero;
+            //            });
+            //            return item.Value[i] as T;
+            //        }
+            //    }
+            //}
+            if(enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
             {
-                for (int i = 0; i < item.Value.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if (item.Value[i].IsFree)
+                    var item = list[i];
+                    if (item.IsFree)
                     {
-                        item.Value[i].IsFree = false;
-                        item.Value[i].MoveToGoal(() =>
-                        {
-                            item.Value[i].IsFree = true;
-                            item.Value[i].gameObject.transform.position = Vector3.zero;
-                        });
-                        return item.Value[i] as T;
+                        item.IsFree = false;
+                        item.MoveToGoal();
+                        return item as T;
                     }
+
                 }
             }
             T t = null;
+            if (EnemyParent == null)
+            {
+                EnemyParent = GameObject.Find("EnemyParent").transform;
+            }
             ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", EnemyParent, (go) =>
             {
                 t = go.AddComponent<T>();
@@ -80,11 +94,7 @@ namespace FTProject
                 enemyDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
             }
             enemyDictionary[EnemyType.NormalEnemy].Add(t);
-            t.MoveToGoal(()=> 
-            {
-                t.IsFree = true;
-                t.gameObject.transform.position = Vector3.zero;
-            });
+            t.MoveToGoal();
             return t;
         }
 
