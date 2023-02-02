@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\AStar\PriorityQueue.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenTextMeshPro.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONDotNetTypes.cs" />
+    <Compile Include="Assets\Scripts\Core\EventManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenDeAudio.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Assets\Gen\Tables.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\Scripts\Core\ObjectPool.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSON.cs" />
     <Compile Include="Assets\Scripts\Obstacle\BaseObstacle.cs" />
     <Compile Include="Assets\Gen\TbEquip.cs" />
