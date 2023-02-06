@@ -77,7 +77,7 @@ public sealed partial class Equip :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "Color:" + Color + ","
         + "Position:" + Position + ","
-        + "Attack:" + Attack + ","
+        + "BulletAttack:" + Attack + ","
         + "Defence:" + Defence + ","
         + "}";
     }

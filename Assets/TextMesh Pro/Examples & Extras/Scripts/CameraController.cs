@@ -95,7 +95,7 @@ namespace TMPro.Examples
                 }
                 else
                 {
-                    // Free Camera implementation
+                    // Idle Camera implementation
                 }
 
                 if (MovementSmoothing == true)

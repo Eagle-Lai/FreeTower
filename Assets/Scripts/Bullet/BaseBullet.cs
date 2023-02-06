@@ -17,12 +17,17 @@ namespace FTProject
             set { _speed = value; }
         }
 
-        protected bool _isFree;
-        public bool IsFree
-        {
-            get { return _isFree; }
-            set { _isFree = value; }
-        }
+        protected bool _isReset;
+
+        protected float _resetTime;
+
+        protected GameObject currentTarget;
+
+        protected BulletType _bulletType;
+
+        public BulletState BulltState;
+
+        protected int _bulletResetTimerId;
 
         private void Awake()
         {
@@ -44,23 +49,38 @@ namespace FTProject
         protected virtual void OnAwake()
         {
             this._speed = GlobalConst.BulletSpeed;
+            this._resetTime = GlobalConst.BulletResetTimeInterval;
+            this.BulltState = BulletState.None;
         }
-
 
         protected virtual void OnStart()
         {
-
+            
         }
 
-
+        protected void SetRecycleTimer()
+        {
+            _bulletResetTimerId = TimerManager.Instance.AddTimer(3, 1, () =>
+            {
+                //BulletManager.Instance.RecycleBullet(_bulletType, this);
+                Reset();
+            }, false);
+        }
 
         protected virtual void OnUpdate()
         {
+            if(BulltState ==  BulletState.Fire)
+            {
+                transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+            }
         }
 
         protected virtual void Clear()
         {
-
+            if (_bulletResetTimerId > 0)
+            {
+                TimerManager.Instance.RemoveTimerById(_bulletResetTimerId);
+            }
         }
 
         protected void OnTriggerEnter(Collider other)
@@ -75,11 +95,40 @@ namespace FTProject
 
         protected virtual void TriggerGameObject(Collider other)
         {
+            if (other.gameObject.name.Contains("Enemy"))
+            {
+                BaseEnemy BaseEnemy = other.gameObject.GetComponent<BaseEnemy>();
+                if(BaseEnemy != null)
+                {
+                    BaseEnemy.Hit();
+                    Reset();
+                }
+            }
         }
+
+
 
         public virtual void Reset()
         {
-            this.gameObject.transform.position = Vector3.zero;
+            BulltState =  BulletState.Idle;
+            this.transform.SetObjParent(BulletManager.Instance.BulletParent, Vector3.zero, Vector3.one * GlobalConst.BulletScale);
+            this._bulletResetTimerId = 0;
+        }
+
+        public void SetParent(Transform transform)
+        {
+            this.transform.SetObjParent(BulletManager.Instance.BulletParent, Vector3.zero, Vector3.one * GlobalConst.BulletScale);
+        }
+
+        public void ResetBulletScale()
+        {
+            this.transform.localScale = Vector3.one * 0.1f;
+        }
+
+        public void BulletAttack()
+        {
+            BulltState = BulletState.Fire;
+            SetRecycleTimer();
         }
     }
 }

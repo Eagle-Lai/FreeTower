@@ -16,8 +16,10 @@ namespace FTProject
 
         public List<BaseNode> enterNodeList = new List<BaseNode>();
         public bool isBuild = false;
+        public TowerBuildState TowerBuildState;
         private void Awake()
         {
+            TowerBuildState = TowerBuildState.None;
             parent = transform.parent.GetComponent<Transform>();
         }
 
@@ -42,6 +44,7 @@ namespace FTProject
             if ((Input.GetMouseButtonUp(0) || Input.touchCount == 1) && isBuild == false && BuildTower())
             {
                 this.transform.localPosition = new Vector3(0, -1.5f, 0);
+                TowerBuildState = TowerBuildState.Build;
                 isBuild = true;
             }
         }
@@ -55,6 +58,14 @@ namespace FTProject
                     Color color = enterNodeList[i].GetNodeColor();
                     if (color == Color.green)
                     {
+                        BaseNode node = enterNodeList[i];
+                        //node.node.MarkAsObstacle(false);
+                        //List<Node> nodes = GridManager.Instance.GetPath();
+                        //if(nodes == null)
+                        //{
+                        //    node.node.MarkAsObstacle();
+                        //    return false;
+                        //}
                         parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, 1.9f, 0);
                         enterNodeList.Clear();
                         return true;
@@ -74,6 +85,12 @@ namespace FTProject
                     enterNodeList.Add(node);
                 }
             }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            BaseNode node = other.transform.GetComponent<BaseNode>();
+            enterNodeList.Remove(node);
         }
 
     }

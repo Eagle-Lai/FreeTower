@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace FTProject
-{   
+{
 
     public class EnemyManager : BaseManager
     {
@@ -12,7 +12,7 @@ namespace FTProject
         {
             get
             {
-                if(_instance == null)
+                if (_instance == null)
                 {
                     _instance = new EnemyManager();
                 }
@@ -21,12 +21,15 @@ namespace FTProject
         }
         public Dictionary<EnemyType, List<BaseEnemy>> enemyDictionary = new Dictionary<EnemyType, List<BaseEnemy>>();
 
-        public Transform EnemyParent;
+        public Transform IdleEnemyParent;
+
+        public Transform MoveEnemyParent;
 
         public override void OnInit()
         {
             base.OnInit();
-            EnemyParent = GameObject.Find("EnemyParent").transform;
+            IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
+            MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
         }
 
         public override void OnDestroy()
@@ -34,79 +37,51 @@ namespace FTProject
             base.OnDestroy();
         }
 
-        public void GenerateEnemy() 
+        public void GenerateEnemy()
         {
-            TimerManager.Instance.AddTimer(1f, 10, () => 
+            TimerManager.Instance.AddTimer(1f, 10, () =>
             {
-                GetNormalEnemy<NormalEnemy>(EnemyType.NormalEnemy);
+                NormalEnemy enemy = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy);
+                enemy.EnemyAttack();
             });
         }
 
-        public T GetNormalEnemy<T>(EnemyType type) where T : BaseEnemy
+        public T CreateEnemy<T>(EnemyType type) where T : BaseEnemy
         {
-            //foreach (var item in enemyDictionary)
-            //{
-            //    for (int i = 0; i < item.Value.Count; i++)
-            //    {
-            //        if (item.Value[i].IsFree)
-            //        {
-            //            item.Value[i].IsFree = false;
-            //            item.Value[i].MoveToGoal(() =>
-            //            {
-            //                item.Value[i].IsFree = true;
-            //                item.Value[i].gameObject.transform.position = Vector3.zero;
-            //            });
-            //            return item.Value[i] as T;
-            //        }
-            //    }
-            //}
-            if(enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
+            if (enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
             {
                 for (int i = 0; i < list.Count; i++)
                 {
                     var item = list[i];
-                    if (item.IsFree)
+                    if(item.EnemyState == EnemyState.Idle)
                     {
-                        item.IsFree = false;
-                        item.MoveToGoal();
                         return item as T;
                     }
-
                 }
             }
-            T t = null;
-            if (EnemyParent == null)
+            if (IdleEnemyParent == null)
             {
-                EnemyParent = GameObject.Find("EnemyParent").transform;
+                IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
+                MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
             }
-            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", EnemyParent, (go) =>
+            T enemy = null;
+            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", IdleEnemyParent, (go) =>
             {
-                t = go.AddComponent<T>();
-                t.transform.localPosition = new Vector3(0, 1.2f, 0);
+                enemy = go.AddComponent<T>();
+                enemy.transform.localPosition = new Vector3(0, 1f, 0);
             });
-            t.IsFree = false;
-            if(enemyDictionary.TryGetValue(EnemyType.NormalEnemy, out List<BaseEnemy> enemyList) == false)
+            if (enemyDictionary.TryGetValue(EnemyType.NormalEnemy, out List<BaseEnemy> enemyList) == false)
             {
                 enemyDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
             }
-            enemyDictionary[EnemyType.NormalEnemy].Add(t);
-            t.MoveToGoal();
-            return t;
+            enemy.EnemyAttack();
+            enemyDictionary[EnemyType.NormalEnemy].Add(enemy);
+            return enemy;
         }
 
         public void RecycleEnemy(EnemyType type, BaseEnemy baseEnemy)
         {
-            if(enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if(list[i] == baseEnemy)
-                    {
-                        list[i].IsFree = true;
-                        list[i].Reset();
-                    }
-                }
-            }
+            baseEnemy.Reset();
         }
     }
 }

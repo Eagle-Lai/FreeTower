@@ -10,8 +10,29 @@ namespace FTProject
 {
     public class GlobalConst
     {
-        public const float  SearchRate = 0.05f;
+        /// <summary>
+        /// 寻找间隔
+        /// </summary>
+        public const float  SearchRate = 0.05f; 
+        /// <summary>
+        /// 子弹速度
+        /// </summary>
+        public const float BulletSpeed = 20f;                                                                
+        /// <summary>
+        /// 敌人行走速度
+        /// </summary>
+        public const float EnemySpeed = 10f;
+        /// <summary>
+        /// 防御塔攻击间隔
+        /// </summary>
+        public const float FireInterval = 0.2f;
+        /// <summary>
+        /// 子弹重置间隔
+        /// </summary>
+        public const float BulletResetTimeInterval = 3f;
 
-        public const float BulletSpeed = 100f;
+        public const float BulletScale = 0.2f;
+
+        public const float EnemyScale = 1.2f;
     }
 }

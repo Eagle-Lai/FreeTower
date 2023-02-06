@@ -63,7 +63,6 @@
     <Compile Include="Assets\Scripts\Node\NormalNode.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-    <Compile Include="Assets\Scripts\AStar\Node.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONUnity.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
@@ -73,9 +72,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\Bullet\BaseBullet.cs" />
     <Compile Include="Assets\Gen\item\EQuality.cs" />
-    <Compile Include="Assets\Scripts\AStar\GridManager.cs" />
     <Compile Include="Assets\Scripts\Tower\SlowTower.cs" />
-    <Compile Include="Assets\Scripts\AStar\AStar.cs" />
     <Compile Include="Assets\Scripts\UI\MainView.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -104,16 +101,17 @@
     <Compile Include="Assets\Scripts\Core\Event\EventDispatcher.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\Core\BaseManager.cs" />
-    <Compile Include="Assets\Scripts\AStar\PriorityQueue.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenTextMeshPro.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONDotNetTypes.cs" />
     <Compile Include="Assets\Scripts\Core\EventManager.cs" />
+    <Compile Include="Assets\Scripts\AStarWrapper\Test_AStarWrapper.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenDeAudio.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenProShortcuts.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\AStarWrapper\Singleton.cs" />
     <Compile Include="Assets\Scripts\Core\UI\BaseView.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
@@ -133,6 +131,7 @@
     <Compile Include="Assets\Scripts\Core\Enum\EnumFile.cs" />
     <Compile Include="Assets\Gen\EquipPosition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\AStarWrapper\Point.cs" />
     <Compile Include="Assets\Gen\Tower.cs" />
     <Compile Include="Assets\LubanLib\ITypeId.cs" />
     <Compile Include="Assets\Scripts\Node\EndNode.cs" />
@@ -147,6 +146,7 @@
     <Compile Include="Assets\Scripts\Core\BaseDisplayObject.cs" />
     <Compile Include="Assets\LubanLib\ByteBuf.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\AStarWrapper\AStarWrapper.cs" />
     <Compile Include="Assets\LubanLib\StringUtil.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\Obstacle\NormalObstacle.cs" />

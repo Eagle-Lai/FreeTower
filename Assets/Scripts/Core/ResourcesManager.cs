@@ -22,25 +22,32 @@ namespace FTProject {
 
         public GameObject LoadAndInitGameObject(string name)
         {
-            return LoadAndInitGameObject(name, null, null, Vector3.zero, Vector3.one);
+            return LoadAndInitGameObject(name, null, null, Vector3.zero, Vector3.one,Quaternion.identity);
         }
 
         public GameObject LoadAndInitGameObject(string name, Transform parent)
         {
-            return LoadAndInitGameObject(name, parent, null, Vector3.zero, Vector3.one);
+            return LoadAndInitGameObject(name, parent, null, Vector3.zero, Vector3.one,Quaternion.identity);
         }
 
         public GameObject LoadAndInitGameObject(string name, Transform parent, Vector3 position)
         {
-            return LoadAndInitGameObject(name, parent, null, position, Vector3.one);
+            return LoadAndInitGameObject(name, parent, null, position, Vector3.one, Quaternion.identity);
         }
 
         public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback)
         {
-            return LoadAndInitGameObject(name, parent, callback, Vector3.zero, Vector3.one);
+            return LoadAndInitGameObject(name, parent, callback, Vector3.zero, Vector3.one, Quaternion.identity);
         }
 
         public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback, Vector3 position, Vector3 scale)
+        {
+            return LoadAndInitGameObject(name, parent, callback, position, scale, Quaternion.identity);
+        }
+
+
+
+        public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback, Vector3 position, Vector3 scale, Quaternion rot)
         { 
             if (AssetData.AssetDictionary.TryGetValue(name, out AssetItemData item))
             {
@@ -53,7 +60,7 @@ namespace FTProject {
                     go.transform.SetParent(parent);
                     go.transform.localPosition = position;
                     go.transform.localScale = scale;
-
+                    go.transform.rotation = rot;
                     if (callback != null)
                     {
                         callback(go);

@@ -32,18 +32,21 @@ namespace FTProject
 
         protected float _searchTimer;
 
-        public float SearchTimer
-        {
-            get { return _searchTimer; }
-            set { _searchTimer = value; }
-        }
-
         protected float _rotateSpeed = 150f;
         public float RotateSpeed
         {
             get { return _rotateSpeed; }
             set { _rotateSpeed = value; }
         }
+        public float FireInterval
+        {
+            get { return GlobalConst.FireInterval; }
+        }
+
+        protected float _fireTimer;
+
+        
+
         private void Awake()
         {
             this.OnAwake();
@@ -64,11 +67,13 @@ namespace FTProject
         protected virtual void OnAwake()
         {
             this._searchRate = GlobalConst.SearchRate;
+            
             _targetter = transform.Find("Targetter").GetComponent<Targetter>();
             if (_targetter == null)
             {
                 _targetter = transform.Find("Targetter").gameObject.AddComponent<Targetter>();
             }
+            _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
         }
 
 
@@ -81,21 +86,34 @@ namespace FTProject
         }
 
 
-
         protected virtual void OnUpdate()
         {
             currentTargetGameObject = _targetter.GetNearsetTarget();
             _searchTimer -= Time.deltaTime;
             if (currentTargetGameObject != null && _searchTimer <= 0)
             {
-                Quaternion rot = FTProjectUtils.GetEnemyRotate(this.transform, currentTargetGameObject);
+                Quaternion rot = FTProjectUtils.GetRotate(currentTargetGameObject.transform, gameObject);
                 _head.rotation = Quaternion.Slerp(_head.rotation, rot, _rotateSpeed * Time.deltaTime);
                 _searchTimer = _searchRate;
             }
+            _fireTimer -= Time.deltaTime;
+            if (IsCanFire())
+            {
+                _fireTimer = FireInterval;
+                TowerAttack();
+            }
         }
 
+        protected virtual bool IsCanFire()
+        {
+            return currentTargetGameObject != null && _fireTimer <= 0 && _towerPosition.TowerBuildState == TowerBuildState.Build;
+        }
 
-
+        protected virtual void TowerAttack()
+        {
+           
+        }
+        
         protected virtual void Clear()
         {
 

@@ -20,26 +20,11 @@ namespace FTProject {
             get { return _Hp; }
             set { _Hp = value; }
         }
+        public EnemyState EnemyState;
 
-        protected bool _isFree;
-        public bool IsFree
-        {
-            get { return _isFree; }
-            set { _isFree = value; }
-        }
+        protected int _currentPositionIndex;
 
-        protected bool _isMoveState;
-        public bool IsMoveState
-        {
-            get
-            {
-                return _isMoveState;
-            }
-            set
-            {
-                _isMoveState = value;
-            }
-        }
+        protected Vector3[] _pathPosition;
 
         private void Awake()
         {
@@ -56,23 +41,28 @@ namespace FTProject {
         private void OnDestroy()
         {
             Clear();
-        }                               
+        }
         protected virtual void OnAwake()
         {
-
+            _currentPositionIndex = 0;
+            _speed = GlobalConst.EnemySpeed;
+            EnemyState = EnemyState.Idle;
         }
 
 
         protected virtual void OnStart()
         {
-
+            UpdatePath();
         }
 
 
 
         protected virtual void OnUpdate()
         {
-
+            if (EnemyState == EnemyState.Move)
+            {
+                MoveToGoal();
+            }
         }
 
 
@@ -82,28 +72,47 @@ namespace FTProject {
 
         }
 
+        public virtual void Hit()
+        {
+            Reset();
+            
+        }
         public void MoveToGoal(Action callback = null)
         {
-            List<Node> nodes = GridManager.Instance.GetPath();
-            Vector3[] poss = new Vector3[nodes.Count];
-            for (int i = 0; i < nodes.Count; i++)
+            if(_currentPositionIndex < _pathPosition.Length)
             {
-                poss[i] = nodes[i].position;
+                Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex], transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 120.0f * Time.deltaTime);
+                transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+                float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex], transform.position);
+                if (distance < 0.1f)
+                {
+                    _currentPositionIndex++;
+                }
             }
-            if (_isMoveState) return;
-            _isMoveState = true;
-            transform.DOLocalPath(poss, _speed).onComplete = ()=> 
-            { 
-                callback();
-                Reset();
-            };
+            
+        }
+
+        public void UpdatePath()
+        {
+            //List<Node> nodes = GridManager.Instance.GetPath();
+            //_pathPosition = new Vector3[nodes.Count];
+            //for (int i = 0; i < nodes.Count; i++)
+            //{
+            //    _pathPosition[i] = nodes[i].position;
+            //}
+        }
+
+        public virtual void EnemyAttack()
+        {
+            EnemyState = EnemyState.Move;
+            transform.SetObjParent(EnemyManager.Instance.MoveEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
         }
 
         public virtual void Reset()
         {
-            this.gameObject.transform.position = Vector3.zero;
-            IsFree = true;
-            _isMoveState = false;
+            EnemyState = EnemyState.Idle;
+            transform.SetObjParent(EnemyManager.Instance.IdleEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
         }
     }
 } 

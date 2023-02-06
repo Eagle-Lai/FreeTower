@@ -12,12 +12,31 @@ namespace FTProject
     {
         private Dictionary<BulletType, List<BaseBullet>> bulletDictionary = new Dictionary<BulletType, List<BaseBullet>>();
 
-        private Transform BulletParent;
+        private Transform _BulletParent;
+
+        public Transform BulletParent
+        {
+            get { return _BulletParent; }
+        }
+
+        private static BulletManager _instance;
+        public static BulletManager Instance
+        {
+            get
+            {
+                if(_instance == null)
+                {
+                    _instance = new BulletManager();
+                    _instance.OnInit();
+                }
+                return _instance;
+            }
+        }
 
         public override void OnInit()
         {
             base.OnInit();
-            BulletParent = GameObject.Find("BulletParent").transform;
+            _BulletParent = GameObject.Find("BulletParent").transform;
         }
 
         public override void OnDestroy()
@@ -32,36 +51,49 @@ namespace FTProject
                 for (int i = 0; i < list.Count; i++)
                 {
                     BaseBullet bullet = list[i];
-                    if (bullet.IsFree)
+                    if (bullet.BulltState ==  BulletState.Idle)
                     {
-                        bullet.IsFree = false;
+                        bullet.BulltState =  BulletState.Fire;
+                       // Debug.Log("333 +");
                         return bullet as T;
                     }
                 }
             }
-            GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("NormalBullet");
+            GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("NormalBullet", _BulletParent, null, Vector3.zero, Vector3.one * GlobalConst.BulletScale);
             T t = go.AddComponent<T>();
             if(bulletDictionary.TryGetValue(type, out List<BaseBullet> blist) == false)
             {
                 bulletDictionary.Add(type, new List<BaseBullet>());
             }
             bulletDictionary[type].Add(t);
-            t.IsFree = false;
+            t.BulltState =  BulletState.Fire;
+           // Debug.Log("111 +");
             return t;
+        }
+
+        public T AttackEnemy<T>(BulletType type) where T : BaseBullet
+        {
+            return GetBullet<T>(type);
         }
 
         public void RecycleBullet(BulletType type, BaseBullet baseBullet)
         {
-            if(bulletDictionary.TryGetValue(type, out List<BaseBullet> list))
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if(list[i] == baseBullet)
-                    {
-                        list[i].IsFree = true;
-                    }
-                }
-            }
+            //if(bulletDictionary.TryGetValue(type, out List<BaseBullet> list))
+            //{
+            //    switch (type)
+            //    {
+            //        case BulletType.None:
+            //            break;
+            //        case BulletType.NormalBullet:
+            //            baseBullet = baseBullet as NormalBullet;
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            ////}
+            //baseBullet.transform.SetObjParent(BulletParent, Vector3.zero, Vector3.one * GlobalConst.BulletScale);
+            //baseBullet.BulltState =  BulletState.Idle;
+            baseBullet.Reset();
         }
     }
 }

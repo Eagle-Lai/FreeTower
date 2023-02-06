@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using DG.Tweening;
 
 namespace FTProject
 {
@@ -21,7 +22,11 @@ namespace FTProject
         public BaseEnemy baseEnemy;
         private void Awake()
         {
-
+            DOTween.defaultAutoKill = true;
+            for (int i = 0; i < managerList.Count; i++)
+            {
+                managerList[i].OnInit();
+            }
             DontDestroyOnLoad(gameObject);
             Instance = this;
             TimerManager.Instance.Update(Time.fixedDeltaTime);
@@ -32,7 +37,6 @@ namespace FTProject
             //Tables table = new Tables(Reader);
             //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
-            
         }
 
         private JSONNode Reader(string fileName)
@@ -42,10 +46,7 @@ namespace FTProject
 
         private void Start()
         {
-            for (int i = 0; i < managerList.Count; i++)
-            {
-                managerList[i].OnInit();
-            }
+            
             UIManager.Instance.OpenView<MainView>("MainView");
         }
 

@@ -10,20 +10,27 @@ namespace FTProject
 {
     public class NormalBullet : BaseBullet
     {
+        protected override void OnStart()
+        {
+            base.OnStart();
+            _bulletType = BulletType.NormalBullet;
+        }
 
         protected override void OnUpdate()
         {
             base.OnUpdate();
-            transform.Translate(Vector3.forward * _speed);
         }
         protected override void TriggerGameObject(Collider other)
         {
             base.TriggerGameObject(other);
             if (other.gameObject.name.Contains("Enemy"))
             {
-                BaseEnemy enemy = other.GetComponent<NormalEnemy>();
-                enemy.Reset();
-                Reset();
+                BaseEnemy BaseEnemy = other.gameObject.GetComponent<BaseEnemy>();
+                if (BaseEnemy != null)
+                {
+                    BaseEnemy.Hit();
+                    Reset();
+                }
             }
         }
     }
