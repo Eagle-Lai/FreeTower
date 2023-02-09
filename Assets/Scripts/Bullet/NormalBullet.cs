@@ -23,15 +23,6 @@ namespace FTProject
         protected override void TriggerGameObject(Collider other)
         {
             base.TriggerGameObject(other);
-            if (other.gameObject.name.Contains("Enemy"))
-            {
-                BaseEnemy BaseEnemy = other.gameObject.GetComponent<BaseEnemy>();
-                if (BaseEnemy != null)
-                {
-                    BaseEnemy.Hit();
-                    Reset();
-                }
-            }
         }
     }
 }

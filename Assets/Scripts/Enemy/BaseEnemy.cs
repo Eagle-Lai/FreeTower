@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using AStar;
 
 namespace FTProject {
     public class BaseEnemy : MonoBehaviour
@@ -75,44 +76,56 @@ namespace FTProject {
         public virtual void Hit()
         {
             Reset();
-            
         }
         public void MoveToGoal(Action callback = null)
         {
-            if(_currentPositionIndex < _pathPosition.Length)
+            if (_pathPosition != null && _pathPosition.Length > 0)
             {
-                Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex], transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 120.0f * Time.deltaTime);
-                transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-                float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex], transform.position);
-                if (distance < 0.1f)
+                if (_currentPositionIndex < _pathPosition.Length)
                 {
-                    _currentPositionIndex++;
+                    Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex], transform.position);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rot, 120.0f * Time.deltaTime);
+                    transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+                    float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex], transform.position);
+                    if (distance < 0.1f)
+                    {
+                        _currentPositionIndex++;
+                    }
+                }
+                else
+                {
+                    Reset();
                 }
             }
-            
         }
 
         public void UpdatePath()
         {
-            //List<Node> nodes = GridManager.Instance.GetPath();
-            //_pathPosition = new Vector3[nodes.Count];
-            //for (int i = 0; i < nodes.Count; i++)
-            //{
-            //    _pathPosition[i] = nodes[i].position;
-            //}
+            List<Point> path = AStarManager.Instance.GetAStarPath();
+            path.Reverse();
+            path.Add(AStarManager.Instance.GetEndPoint());
+            _pathPosition = new Vector3[path.Count];
+            for (int i = 0; i < path.Count; i++)
+            {
+                _pathPosition[i] = path[i].position;
+            }
+            
         }
 
         public virtual void EnemyAttack()
         {
             EnemyState = EnemyState.Move;
+            this.gameObject.SetActive(true);
             transform.SetObjParent(EnemyManager.Instance.MoveEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
         }
 
         public virtual void Reset()
         {
             EnemyState = EnemyState.Idle;
+            _currentPositionIndex = 0;
             transform.SetObjParent(EnemyManager.Instance.IdleEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
+            this.gameObject.SetActive(false);
+            EventDispatcher.TriggerEvent<BaseEnemy>(HandlerName.EnemyResetEvent, this);
         }
     }
 } 

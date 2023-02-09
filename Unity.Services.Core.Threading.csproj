@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B35C65EF-7C26-A42D-7A9E-A77AAA59ED86}</ProjectGuid>
+    <ProjectGuid>{1FF7F806-A3B0-B73E-6070-6BAF19816B80}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.Services.Core.Threading</AssemblyName>
@@ -746,11 +746,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Services.Core.csproj">
-      <Project>{F1512F28-1852-AD9F-6DEA-82D3C46887BF}</Project>
+      <Project>{889BFD50-C35A-FE3A-77A9-7EBB12FBA5D5}</Project>
       <Name>Unity.Services.Core</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Internal.csproj">
-      <Project>{A5B5F3C6-8D02-F63D-D9E7-002017DCB5EB}</Project>
+      <Project>{4EB69322-2077-A537-50B9-465A7CC63139}</Project>
       <Name>Unity.Services.Core.Internal</Name>
     </ProjectReference>
   </ItemGroup>

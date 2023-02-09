@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{555EC623-C37D-A874-7860-41AE9EDF31EA}</ProjectGuid>
+    <ProjectGuid>{7398B4A6-A893-40F5-91C8-DBC73D0D37DB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.Collections.DocCodeSamples</AssemblyName>
@@ -761,15 +761,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Collections.csproj">
-      <Project>{753B6A8E-F953-E5A7-B3DC-BEED2E3D5465}</Project>
+      <Project>{295EA7CE-6D80-BFBA-FDFA-54B3B6ADA752}</Project>
       <Name>Unity.Collections</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.TestRunner.csproj">
-      <Project>{771D4D1F-E864-63ED-118F-E06BA171DDFF}</Project>
+      <Project>{26D77B40-944C-2FCA-6604-A1F3DA3ECCA2}</Project>
       <Name>UnityEditor.TestRunner</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{8BC5C440-0685-F386-B05E-DF965271778A}</Project>
+      <Project>{41812076-7897-F198-4697-E90E060B7D74}</Project>
       <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{09EE3D3A-1795-D95E-5E08-CE4D2E197495}</ProjectGuid>
+    <ProjectGuid>{2C9C7D37-8E7F-755A-EC77-184A85F3F644}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>PsdPlugin</AssemblyName>
@@ -805,15 +805,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.Burst.csproj">
-      <Project>{E4F54D54-6B14-836F-E5C3-82ED98784C35}</Project>
+      <Project>{EB2619AE-3983-3FD2-DF8C-C4DD3FD19AB0}</Project>
       <Name>Unity.Burst</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.TestRunner.csproj">
-      <Project>{771D4D1F-E864-63ED-118F-E06BA171DDFF}</Project>
+      <Project>{26D77B40-944C-2FCA-6604-A1F3DA3ECCA2}</Project>
       <Name>UnityEditor.TestRunner</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{8BC5C440-0685-F386-B05E-DF965271778A}</Project>
+      <Project>{41812076-7897-F198-4697-E90E060B7D74}</Project>
       <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>

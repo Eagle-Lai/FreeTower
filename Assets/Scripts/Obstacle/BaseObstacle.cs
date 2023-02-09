@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FTProject
 {
-    public class BaseObstacle : BaseNode
+    public class BaseObstacle : BasePoint
     {
     }
 }

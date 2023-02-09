@@ -19,6 +19,7 @@ namespace FTProject
 
         private void Awake()
         {
+            EventDispatcher.AddEventListener<BaseEnemy>(HandlerName.EnemyResetEvent, EnemyReset);
             _sphereCollider = transform.GetComponent<SphereCollider>();
             if(_sphereCollider == null)
             {
@@ -31,6 +32,14 @@ namespace FTProject
         private void Start()
         {
             
+        }
+
+        private void EnemyReset(BaseEnemy baseEnemy)
+        {
+            if(baseEnemy != null)
+            {
+                _enemyList.Remove(baseEnemy.gameObject);
+            }
         }
 
         private void OnDestroy()
@@ -54,22 +63,6 @@ namespace FTProject
         public GameObject GetNearsetTarget()
         {
             if (_enemyList.Count <= 0) return null;
-            //GameObject nearest = null;
-            //float distance = float.MaxValue;
-            //for (int i = _enemyList.Count - 1; i > 0; i--)
-            //{
-            //    if (_enemyList[i] == null)
-            //    {
-            //        return null;
-            //    }
-            //    float currentDistance = FTProjectUtils.GetPointDistance(gameObject, _enemyList[i]);
-            //    if (currentDistance < distance)
-            //    {
-            //        nearest = _enemyList[i];
-            //        distance = currentDistance;
-            //    }
-            //}
-            //return nearest;
             return _enemyList[0];
         }
     }

@@ -49,7 +49,7 @@ namespace FTProject {
 
         public GameObject LoadAndInitGameObject(string name, Transform parent, Action<GameObject> callback, Vector3 position, Vector3 scale, Quaternion rot)
         { 
-            if (AssetData.AssetDictionary.TryGetValue(name, out AssetItemData item))
+            if (AssetData.AssetDictionary.TryGetValue(name, out AssetData.AssetItemData item))
             {
                 GameObject obj = Resources.Load<GameObject>(item.path);
                 

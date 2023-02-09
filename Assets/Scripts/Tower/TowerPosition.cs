@@ -10,11 +10,11 @@ namespace FTProject
         Vector3 cubeScreenPos;
 
 
-        private float yPos = 1.8f;
+        private float yPos = 1.6f;
 
         Transform parent;
 
-        public List<BaseNode> enterNodeList = new List<BaseNode>();
+        public List<BasePoint> enterNodeList = new List<BasePoint>();
         public bool isBuild = false;
         public TowerBuildState TowerBuildState;
         private void Awake()
@@ -39,7 +39,7 @@ namespace FTProject
                 //目前的鼠标三维坐标转为世界坐标
                 curMousePos = Camera.main.ScreenToWorldPoint(curMousePos);
                 //物体世界位置
-                parent.position = new Vector3(curMousePos.x, yPos, curMousePos.z);
+                parent.position = new Vector3(curMousePos.x, GlobalConst.UnbuildYPosition, curMousePos.z);
             }
             if ((Input.GetMouseButtonUp(0) || Input.touchCount == 1) && isBuild == false && BuildTower())
             {
@@ -58,16 +58,26 @@ namespace FTProject
                     Color color = enterNodeList[i].GetNodeColor();
                     if (color == Color.green)
                     {
-                        BaseNode node = enterNodeList[i];
+                        BasePoint point = enterNodeList[i];
                         //node.node.MarkAsObstacle(false);
                         //List<Node> nodes = GridManager.Instance.GetPath();
-                        //if(nodes == null)
+                        //if (nodes == null)
                         //{
                         //    node.node.MarkAsObstacle();
                         //    return false;
                         //}
-                        parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, 1.9f, 0);
+                        point.Point.IsWall = true;
+                        bool isFind = AStarManager.Instance.IsFindPath();
+                        if (!isFind)
+                        {
+                            point.Point.IsWall = false;
+                            return false;
+                        }
+                        parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
                         enterNodeList.Clear();
+                        BasePoint node = point.transform.GetComponent<BasePoint>();
+                        node.Point.IsWall = true;
+                        node.PointType = PointType.Obstacle;
                         return true;
                     }
                 }
@@ -77,9 +87,9 @@ namespace FTProject
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.name.Contains("NormalNode") && isBuild == false)
+            if (other.gameObject.name.Contains("NormalPoint") && isBuild == false)
             {
-                BaseNode node = other.transform.GetComponent<BaseNode>();
+                BasePoint node = other.transform.GetComponent<BasePoint>();
                 if (node != null && enterNodeList != null)
                 {
                     enterNodeList.Add(node);
@@ -89,8 +99,11 @@ namespace FTProject
 
         private void OnTriggerExit(Collider other)
         {
-            BaseNode node = other.transform.GetComponent<BaseNode>();
-            enterNodeList.Remove(node);
+            BasePoint node = other.transform.GetComponent<BasePoint>();
+            if (node != null)
+            {
+                enterNodeList.Remove(node);
+            }
         }
 
     }

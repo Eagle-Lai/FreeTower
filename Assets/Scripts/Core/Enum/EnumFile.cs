@@ -13,7 +13,7 @@ namespace FTProject
         /// </summary>
         NormalEnemy,
     }
-    public enum NodeType
+    public enum PointType
     {
         None = 0,
         /// <summary>

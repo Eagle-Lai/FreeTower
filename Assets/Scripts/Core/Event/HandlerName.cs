@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +7,16 @@ namespace FTProject
     public static class HandlerName
     {
         /// <summary>
-        /// ´´½¨ÆÕÍ¨·ÀÓùËş
+        /// åˆ›å»ºæ™®é€šé˜²å¾¡å¡”
         /// </summary>
         public static string BuildNormalTower = "BuildNormalTower";
         /// <summary>
-        /// Ì§ÆğÊÂ¼ş
+        /// æŠ¬èµ·äº‹ä»¶
         /// </summary>
         public static string OperateUp = "OperateUp";
+        /// <summary>
+        /// æ•Œäººé‡ç½®äº‹ä»¶
+        /// </summary>
+        public static string EnemyResetEvent = "EnemyResetEvent";
     }
 }

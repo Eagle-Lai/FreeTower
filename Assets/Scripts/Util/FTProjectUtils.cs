@@ -33,5 +33,15 @@ namespace FTProject
             transform.transform.localScale = scale;
             transform.transform.localRotation = quaternion;           
         }
+
+        public static void HideObject(this GameObject gameObject)
+        {
+            gameObject.SetActive(false);
+        }
+
+        public static void ShowObject(this GameObject gameObject)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

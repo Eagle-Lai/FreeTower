@@ -23,9 +23,13 @@ namespace AStar
         // 是否是障碍物（例如墙）
         public bool IsWall { get; set; }
 
-        // 该点的游戏物体（根据需要可不用可删除）
+        /// <summary>
+        /// /// 该点的游戏物体（根据需要可不用可删除）
+        /// </summary>
         public GameObject gameObject;
-        // 该点的空间位置（根据需要可不用可删除）
+        /// <summary>
+        /// // 该点的空间位置（根据需要可不用可删除）
+        /// </summary>
         public Vector3 position;
 
         /// <summary>

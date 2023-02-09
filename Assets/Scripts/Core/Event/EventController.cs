@@ -10,7 +10,9 @@ namespace FTProject
     /// </summary>
     public class EventController
     {
-        //永久性的消息，在Cleanup的时候，这些消息的响应是不会被清理的。
+        /// <summary>
+        /// //永久性的消息，在Cleanup的时候，这些消息的响应是不会被清理的。
+        /// </summary>
         private List<string> m_permanentEvents = new List<string>();
         private Dictionary<string, Delegate> m_theRouter = new Dictionary<string, Delegate>();
 

@@ -14,8 +14,8 @@ namespace FTProject
         protected string _layout;
         public string Layout { get; set; }
 
-        private AssetItemData uIItemData;
-        public AssetItemData UIItemData { get { return uIItemData; } }
+        private AssetData.AssetItemData uIItemData;
+        public AssetData.AssetItemData UIItemData { get { return uIItemData; } }
 
         public override void OnInit()
         {
@@ -49,7 +49,7 @@ namespace FTProject
 
         }
 
-        public void SetUIItem(AssetItemData data)
+        public void SetUIItem(AssetData.AssetItemData data)
         {
             this.uIItemData = data;
         }

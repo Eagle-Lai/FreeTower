@@ -62,7 +62,6 @@ namespace FTProject
         {
             _bulletResetTimerId = TimerManager.Instance.AddTimer(3, 1, () =>
             {
-                //BulletManager.Instance.RecycleBullet(_bulletType, this);
                 Reset();
             }, false);
         }
@@ -113,6 +112,7 @@ namespace FTProject
             BulltState =  BulletState.Idle;
             this.transform.SetObjParent(BulletManager.Instance.BulletParent, Vector3.zero, Vector3.one * GlobalConst.BulletScale);
             this._bulletResetTimerId = 0;
+            gameObject.HideObject();
         }
 
         public void SetParent(Transform transform)
@@ -129,6 +129,7 @@ namespace FTProject
         {
             BulltState = BulletState.Fire;
             SetRecycleTimer();
+            gameObject.ShowObject();
         }
     }
 }

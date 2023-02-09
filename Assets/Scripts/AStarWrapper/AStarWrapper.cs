@@ -123,7 +123,6 @@ namespace AStar {
         {
             // 一个点一般会有上、下、左、右，左上、左下、右上、右下 八个点
             Point up = null, down = null, left = null, right = null;
-            Point lu = null, ru = null, ld = null, rd = null;
 
             // 如果 点 Y 小于 mapHeight - 1，则表明不是最顶端，有上点
             if (point.Y < mapHeight - 1)
@@ -148,25 +147,25 @@ namespace AStar {
 
             // 边角点
             // 有上点和左点，说明有左上点
-            if (up != null && left != null)
-            {
-                lu = map[point.X - 1, point.Y + 1];
-            }
-            // 有上点和右点，说明有右上点
-            if (up != null && right != null)
-            {
-                ru = map[point.X + 1, point.Y + 1];
-            }
-            // 有下点和左点，说明有左下点
-            if (down != null && left != null)
-            {
-                ld = map[point.X - 1, point.Y - 1];
-            }
-            // 有下点和右点，说明有右下点
-            if (down != null && right != null)
-            {
-                rd = map[point.X + 1, point.Y - 1];
-            }
+            //if (up != null && left != null)
+            //{
+            //    lu = map[point.X - 1, point.Y + 1];
+            //}
+            //// 有上点和右点，说明有右上点
+            //if (up != null && right != null)
+            //{
+            //    ru = map[point.X + 1, point.Y + 1];
+            //}
+            //// 有下点和左点，说明有左下点
+            //if (down != null && left != null)
+            //{
+            //    ld = map[point.X - 1, point.Y - 1];
+            //}
+            //// 有下点和右点，说明有右下点
+            //if (down != null && right != null)
+            //{
+            //    rd = map[point.X + 1, point.Y - 1];
+            //}
 
             // 新建一个列表
             List<Point> list = new List<Point>();
@@ -189,24 +188,24 @@ namespace AStar {
                 list.Add(right);
             }
 
-            // 添加边角到列表
-            // 左上点不为空且不是障碍物，并且 左点和上点都不是障碍物，则添加到返回列表，以下同理
-            if (lu != null && lu.IsWall == false && left.IsWall == false && up.IsWall == false)
-            {
-                list.Add(lu);
-            }
-            if (ru != null && ru.IsWall == false && right.IsWall == false && up.IsWall == false)
-            {
-                list.Add(ru);
-            }
-            if (ld != null && ld.IsWall == false && left.IsWall == false && down.IsWall == false)
-            {
-                list.Add(ld);
-            }
-            if (rd != null && rd.IsWall == false && right.IsWall == false && down.IsWall == false)
-            {
-                list.Add(rd);
-            }
+            //// 添加边角到列表
+            //// 左上点不为空且不是障碍物，并且 左点和上点都不是障碍物，则添加到返回列表，以下同理
+            //if (lu != null && lu.IsWall == false && left.IsWall == false && up.IsWall == false)
+            //{
+            //    list.Add(lu);
+            //}
+            //if (ru != null && ru.IsWall == false && right.IsWall == false && up.IsWall == false)
+            //{
+            //    list.Add(ru);
+            //}
+            //if (ld != null && ld.IsWall == false && left.IsWall == false && down.IsWall == false)
+            //{
+            //    list.Add(ld);
+            //}
+            //if (rd != null && rd.IsWall == false && right.IsWall == false && down.IsWall == false)
+            //{
+            //    list.Add(rd);
+            //}
 
             // 返回列表
             return list;

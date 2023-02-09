@@ -99,7 +99,7 @@ namespace FTProject
 
         public T OpenView<T>(string ViewName, object[] data = null) where T : BaseView, new()
         {
-            if (AssetData.AssetDictionary.TryGetValue(ViewName, out AssetItemData item))
+            if (AssetData.AssetDictionary.TryGetValue(ViewName, out AssetData.AssetItemData item))
             {
                 T t = null;
                 if (panelDictionary.ContainsKey(ViewName))
