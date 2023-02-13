@@ -12,6 +12,8 @@ namespace FTProject
 
         private Button normalTowerBtn;
 
+        private Button generateEnemyBtn;
+
         public override void OnInit()
         {
             base.OnInit();
@@ -26,7 +28,9 @@ namespace FTProject
         {
             base.InitComponent();
             normalTowerBtn = _gameObject.transform.Find("Button").GetComponent<Button>();
+            generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
             normalTowerBtn.onClick.AddListener(OnClickBtn);
+            generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
         }
         public override void OnDestroy()
         {
@@ -36,6 +40,11 @@ namespace FTProject
         private void OnClickBtn()
         {
             TowerManager.Instance.GetTower<NormalTower>(TowerType.Normal);
+        }
+
+        private void OnClickGenerateEnemyBtn()
+        {
+            EnemyManager.Instance.GenerateEnemy();
         }
         private void OnClickBtnUp(GameObject go, PointerEventData eventData)
         {

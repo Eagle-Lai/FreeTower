@@ -19,7 +19,7 @@ namespace FTProject
 
         private void Awake()
         {
-            EventDispatcher.AddEventListener<BaseEnemy>(HandlerName.EnemyResetEvent, EnemyReset);
+            EventDispatcher.AddEventListener<BaseEnemy>(EventName.EnemyResetEvent, EnemyReset);
             _sphereCollider = transform.GetComponent<SphereCollider>();
             if(_sphereCollider == null)
             {

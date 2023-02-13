@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FTProject
 {
-    public class BaseManager
+    public class BaseManager<T> where T : class, new()
     {
         public virtual void OnInit()
         {
@@ -16,6 +16,20 @@ namespace FTProject
         public virtual void OnDestroy()
         {
 
+        }
+
+        private static T instance;
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new T();
+                }
+
+                return instance;
+            }
         }
     }
 }

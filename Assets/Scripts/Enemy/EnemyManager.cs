@@ -5,20 +5,8 @@ using UnityEngine;
 namespace FTProject
 {
 
-    public class EnemyManager : BaseManager
+    public class EnemyManager : BaseManager<EnemyManager>
     {
-        private static EnemyManager _instance;
-        public static EnemyManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new EnemyManager();
-                }
-                return _instance;
-            }
-        }
         public Dictionary<EnemyType, List<BaseEnemy>> enemyDictionary = new Dictionary<EnemyType, List<BaseEnemy>>();
 
         public Transform IdleEnemyParent;

@@ -900,10 +900,10 @@ namespace UnityEditor.Tilemaps
 
             using (new PreviewInstanceScope(guiRect, m_PreviewUtility, paletteInstance, GridPaintingState.drawGizmos))
             {
+                m_PreviewUtility.Render(true);
                 if (GridPaintingState.drawGridGizmo)
                     RenderGrid();
                 CallOnPaintSceneGUI(mouseGridPosition);
-                m_PreviewUtility.Render();
                 if (GridPaintingState.drawGizmos)
                 {
                     // Set CameraType to SceneView to force Gizmos to be drawn

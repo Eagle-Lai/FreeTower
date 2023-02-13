@@ -102,15 +102,7 @@ namespace FTProject
                 _fireTimer = FireInterval;
                 TowerAttack();
             }
-            if (Input.GetMouseButtonDown(1))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                bool isHit = Physics.Raycast(ray, out RaycastHit hit,1000, 3,QueryTriggerInteraction.Ignore);
-                if (isHit && hit.collider.gameObject.name.Contains("Tower"))
-                {
-                    GameObject.Destroy(this.gameObject);
-                }
-            }
+           
         }
 
         protected virtual bool IsCanFire()

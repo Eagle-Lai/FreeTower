@@ -12,22 +12,11 @@ public enum UILayout
 
 namespace FTProject
 {
-    public class UIManager : BaseManager
+    public class UIManager : BaseManager<UIManager>
     {
 
 
-        private static UIManager _instance;
-        public static UIManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new UIManager();
-                }
-                return _instance;
-            }
-        }
+       
 
        
         private Dictionary<UILayout, RectTransform> layoutDicitonary = new Dictionary<UILayout, RectTransform>();

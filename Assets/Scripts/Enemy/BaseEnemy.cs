@@ -48,12 +48,14 @@ namespace FTProject {
             _currentPositionIndex = 0;
             _speed = GlobalConst.EnemySpeed;
             EnemyState = EnemyState.Idle;
+            EventDispatcher.AddEventListener(EventName.UpdateAStarPath, SetPath);
+            _Hp = GlobalConst.EnemyHp;
         }
 
 
         protected virtual void OnStart()
         {
-            UpdatePath();
+            SetPath();
         }
 
 
@@ -75,7 +77,14 @@ namespace FTProject {
 
         public virtual void Hit()
         {
-            Reset();
+            if(_Hp > 0)
+            {
+                _Hp--;
+            }
+            else
+            {
+                Reset();
+            }
         }
         public void MoveToGoal(Action callback = null)
         {
@@ -99,7 +108,7 @@ namespace FTProject {
             }
         }
 
-        public void UpdatePath()
+        public void SetPath()
         {
             List<Point> path = AStarManager.Instance.GetAStarPath();
             path.Reverse();
@@ -125,7 +134,8 @@ namespace FTProject {
             _currentPositionIndex = 0;
             transform.SetObjParent(EnemyManager.Instance.IdleEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
             this.gameObject.SetActive(false);
-            EventDispatcher.TriggerEvent<BaseEnemy>(HandlerName.EnemyResetEvent, this);
+            EventDispatcher.TriggerEvent<BaseEnemy>(EventName.EnemyResetEvent, this);
+            _Hp = GlobalConst.EnemyHp;
         }
     }
 } 

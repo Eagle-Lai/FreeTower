@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace FTProject
 {
-    public class BulletManager : BaseManager
+    public class BulletManager : BaseManager<BulletManager>
     {
         private Dictionary<BulletType, List<BaseBullet>> bulletDictionary = new Dictionary<BulletType, List<BaseBullet>>();
 
@@ -19,19 +19,7 @@ namespace FTProject
             get { return _BulletParent; }
         }
 
-        private static BulletManager _instance;
-        public static BulletManager Instance
-        {
-            get
-            {
-                if(_instance == null)
-                {
-                    _instance = new BulletManager();
-                    _instance.OnInit();
-                }
-                return _instance;
-            }
-        }
+        
 
         public override void OnInit()
         {

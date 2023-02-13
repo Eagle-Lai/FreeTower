@@ -46,6 +46,7 @@ namespace FTProject
                 this.transform.localPosition = new Vector3(0, -1.5f, 0);
                 TowerBuildState = TowerBuildState.Build;
                 isBuild = true;
+                EventDispatcher.TriggerEvent(EventName.UpdateAStarPath);
             }
         }
 

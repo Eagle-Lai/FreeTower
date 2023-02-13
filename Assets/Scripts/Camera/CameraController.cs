@@ -24,6 +24,8 @@ namespace FTProject
         //旋转还是移动布尔
         bool _bMoveOrRotation;
 
+        private Vector3 orginPosition;
+
         //相机初始位置
         Vector3 _OldPosition;
 
@@ -31,6 +33,7 @@ namespace FTProject
         {
             //记录开始摄像机的Position
             _OldPosition = Camera.main.transform.position;
+            this.orginPosition = transform.position;
         }
         void Update()
         {
@@ -119,6 +122,20 @@ namespace FTProject
             {
                 transform.Translate(Vector3.left * Input.GetAxis("Mouse X") * move_speed);
                 transform.Translate(Vector3.up * Input.GetAxis("Mouse Y") * -move_speed);
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                this.transform.position = orginPosition;
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                bool isHit = Physics.Raycast(ray, out RaycastHit hit, 100, 3, QueryTriggerInteraction.Ignore);
+                if (isHit && hit.collider.gameObject.name.Contains("Tower"))
+                {
+                    GameObject.Destroy(hit.collider.gameObject);
+                }
             }
 #endif
         }

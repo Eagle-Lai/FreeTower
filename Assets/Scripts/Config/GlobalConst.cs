@@ -21,7 +21,7 @@ namespace FTProject
         /// <summary>
         /// 敌人行走速度
         /// </summary>
-        public const float EnemySpeed = 10f;
+        public const float EnemySpeed = 15f;
         /// <summary>
         /// 防御塔攻击间隔
         /// </summary>
@@ -30,7 +30,6 @@ namespace FTProject
         /// 子弹重置间隔
         /// </summary>
         public const float BulletResetTimeInterval = 3f;
-
         /// <summary>
         /// 子弹缩放
         /// </summary>
@@ -60,5 +59,7 @@ namespace FTProject
         /// 建造后Y点的坐标
         /// </summary>
         public const float BuildYPosition = 1.75f;
+
+        public const int EnemyHp = 2;
     }
 }

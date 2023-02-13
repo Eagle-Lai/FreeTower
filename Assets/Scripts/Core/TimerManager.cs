@@ -7,7 +7,7 @@ namespace FTProject
 {
 
 
-    public class TimerManager : BaseManager
+    public class TimerManager : BaseManager<TimerManager>
     {
         class TimerItem
         {
@@ -59,18 +59,7 @@ namespace FTProject
                 isFree = loopTimes == 0;
             }
         }
-        public static TimerManager _timerManager;
-        public static TimerManager Instance
-        {
-            get
-            {
-                if (_timerManager == null)
-                {
-                    _timerManager = new TimerManager();
-                }
-                return _timerManager;
-            }
-        }
+       
         private Dictionary<int, TimerItem> _timerDicti;
         public int actionIndex;
         public TimerManager()

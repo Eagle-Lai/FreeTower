@@ -5,21 +5,9 @@ using UnityEngine;
 
 namespace FTProject
 {
-    public class EventManager : BaseManager
+    public class EventManager : BaseManager<EnemyManager>
     {
-        private static EventManager _instance;
-
-        public static EventManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new EventManager();
-                }
-                return _instance;
-            }
-        }
+       
 
         private Dictionary<string, Delegate> actionDictionary = new Dictionary<string, Delegate>();
         public void TriggerEvent(string name)
