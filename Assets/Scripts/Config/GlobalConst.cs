@@ -60,6 +60,6 @@ namespace FTProject
         /// </summary>
         public const float BuildYPosition = 1.75f;
 
-        public const int EnemyHp = 2;
+        public const int EnemyHp = 3;
     }
 }

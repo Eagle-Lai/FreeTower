@@ -47,6 +47,10 @@ namespace FTProject
                     }
                 }
             }
+            if(_BulletParent == null)
+            {
+                _BulletParent = GameObject.Find("BulletParent").transform;
+            }
             GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("NormalBullet", _BulletParent, null, Vector3.zero, Vector3.one * GlobalConst.BulletScale);
             T t = go.AddComponent<T>();
             if(bulletDictionary.TryGetValue(type, out List<BaseBullet> blist) == false)

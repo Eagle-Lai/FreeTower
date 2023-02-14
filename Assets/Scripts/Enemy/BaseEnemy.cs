@@ -9,18 +9,21 @@ namespace FTProject {
     public class BaseEnemy : MonoBehaviour
     {
         protected float _speed;
+
+        protected Transform _ArticleBlood;
+
+        protected Transform _HpTransform;
+
         public float Speed
         {
             get { return _speed; }
             set { _speed = value; }
         }
 
-        protected float _Hp;
-        public float Hp
-        {
-            get { return _Hp; }
-            set { _Hp = value; }
-        }
+        protected float _TotalHp;
+
+        protected float _CurrentHp;
+       
         public EnemyState EnemyState;
 
         protected int _currentPositionIndex;
@@ -49,13 +52,16 @@ namespace FTProject {
             _speed = GlobalConst.EnemySpeed;
             EnemyState = EnemyState.Idle;
             EventDispatcher.AddEventListener(EventName.UpdateAStarPath, SetPath);
-            _Hp = GlobalConst.EnemyHp;
+            _CurrentHp = GlobalConst.EnemyHp;
+            _TotalHp = GlobalConst.EnemyHp;
         }
-
+         
 
         protected virtual void OnStart()
         {
             SetPath();
+            _ArticleBlood = transform.Find("HpParent");
+            _HpTransform = transform.Find("HpParent/Bg/Hp");
         }
 
 
@@ -66,26 +72,43 @@ namespace FTProject {
             {
                 MoveToGoal();
             }
+            LookAtCamera();
         }
 
+        protected void LookAtCamera()
+        {
+            //使用  Vector3.ProjectOnPlane （投影向量，投影平面法向量）用于计算某个向量在某个平面上的投影向量  
+            Vector3 lookPoint = Vector3.ProjectOnPlane(this._ArticleBlood.transform.position - Camera.main.transform.position, Camera.main.transform.forward);
+            this._ArticleBlood.LookAt(Camera.main.transform.position + lookPoint);
+            Quaternion rot = FTProjectUtils.GetRotate(Camera.main.transform.position, _ArticleBlood.position);
+            _ArticleBlood.rotation = Quaternion.Slerp(_ArticleBlood.rotation, rot, 120.0f * Time.deltaTime);
+        }
 
 
         protected virtual void Clear()
         {
-
+            
         }
 
         public virtual void Hit()
         {
-            if(_Hp > 0)
+            if(_CurrentHp > 0)
             {
-                _Hp--;
+                _CurrentHp--;
+                UpdateHp();
             }
             else
             {
                 Reset();
             }
         }
+
+        protected void UpdateHp()
+        {
+            _HpTransform.localScale = new Vector3(_CurrentHp / _TotalHp, 1, 1);
+        }
+        
+
         public void MoveToGoal(Action callback = null)
         {
             if (_pathPosition != null && _pathPosition.Length > 0)
@@ -135,7 +158,9 @@ namespace FTProject {
             transform.SetObjParent(EnemyManager.Instance.IdleEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
             this.gameObject.SetActive(false);
             EventDispatcher.TriggerEvent<BaseEnemy>(EventName.EnemyResetEvent, this);
-            _Hp = GlobalConst.EnemyHp;
+            _CurrentHp = GlobalConst.EnemyHp;
+            _ArticleBlood.rotation = Quaternion.identity;
+            _HpTransform.transform.localScale = Vector3.one;
         }
     }
 } 

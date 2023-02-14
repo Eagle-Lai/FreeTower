@@ -1,0 +1,2 @@
+F:\FreedomTower\FreedomTower\obj\Debug\Unity.Timeline.csproj.AssemblyReference.cache
+F:\FreedomTower\FreedomTower\obj\Debug\Unity.Timeline.csproj.CoreCompileInputs.cache
