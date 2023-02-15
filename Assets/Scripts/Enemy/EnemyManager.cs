@@ -25,13 +25,11 @@ namespace FTProject
             base.OnDestroy();
         }
 
-        public void GenerateEnemy()
+        public BaseEnemy GenerateEnemy()
         {
-            TimerManager.Instance.AddTimer(1f, 10, () =>
-            {
-                NormalEnemy enemy = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy);
-                enemy.EnemyAttack();
-            });
+            NormalEnemy enemy = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy);
+            enemy.EnemyAttack();
+            return enemy;
         }
 
         public T CreateEnemy<T>(EnemyType type) where T : BaseEnemy

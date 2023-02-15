@@ -448,6 +448,8 @@
 "Assets/Scripts/Node/StartPoint.cs"
 "Assets/Scripts/Obstacle/BaseObstacle.cs"
 "Assets/Scripts/Obstacle/NormalObstacle.cs"
+"Assets/Scripts/Round/BaseRoundCount.cs"
+"Assets/Scripts/Round/RoundCountManager.cs"
 "Assets/Scripts/Tower/BaseTower.cs"
 "Assets/Scripts/Tower/NormalTower.cs"
 "Assets/Scripts/Tower/PowerTower.cs"

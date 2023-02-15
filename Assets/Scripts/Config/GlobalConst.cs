@@ -60,6 +60,29 @@ namespace FTProject
         /// </summary>
         public const float BuildYPosition = 1.75f;
 
+        /// <summary>
+        /// 敌人血量
+        /// </summary>
         public const int EnemyHp = 3;
+
+        /// <summary>
+        /// 玩家血量
+        /// </summary>
+        public const int PlayerHp = 10;
+        
+        /// <summary>
+        /// 回合数
+        /// </summary>
+        public const int RoundCount = 10;
+
+        /// <summary>
+        /// 敌人生成间隔
+        /// </summary>
+        public const float EnemyGenerateInterval = 1.0f;
+
+        /// <summary>
+        /// 一次生成的敌人数量
+        /// </summary>
+        public const int RoundEnemyNumber = 10;
     }
 }

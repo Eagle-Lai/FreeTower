@@ -16,6 +16,7 @@ namespace FTProject
         {
           new EnemyManager(),
           new BulletManager(),
+          new RoundCountManager(),
         };
 
         public static Launch Instance;
