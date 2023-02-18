@@ -129,7 +129,7 @@ namespace FTProject
         public Util.VoidDelegate onPointerDown;
         public Util.VoidDelegate onPointerUp;
         public Util.VoidDelegate onDragPointerEnter;
-        public Util.VoidDelegate onDragPointerExit;
+        public Util.VoidDelegate onDragPointerExit; 
         public Util.VoidDelegate onPointerEnter;
         public Util.VoidDelegate onPointerExit;
         public Util.VoidDelegate onLongPress;

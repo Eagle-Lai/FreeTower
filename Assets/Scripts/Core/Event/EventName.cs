@@ -32,5 +32,10 @@ namespace FTProject
         /// 回合改变事件
         /// </summary>
         public const string PlayerRoundCountChange = "PlayerRoundCountChange";
+
+        /// <summary>
+        /// 创建防御塔失败事件
+        /// </summary>
+        public const string BuildTowerFail = "BuildTowerFail";
     }
 }

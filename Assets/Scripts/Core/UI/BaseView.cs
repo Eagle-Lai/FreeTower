@@ -38,6 +38,17 @@ namespace FTProject
 
         }
 
+        public void SetUI(Transform parent)
+        {
+
+            RectTransform transform = _gameObject.GetComponent<RectTransform>();
+            transform.SetParent(parent);
+            transform.anchorMin = Vector2.zero;
+            transform.anchorMax = Vector2.one;
+            transform.anchoredPosition = Vector2.zero;
+            transform.sizeDelta = Vector2.zero;
+
+        }
         public override void SetGameObject(GameObject gameObject)
         {
             base.SetGameObject(gameObject);

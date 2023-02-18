@@ -10,7 +10,7 @@ namespace FTProject
         [SerializeField]
         public Point Point;
         public PointType PointType;
-
+        public bool IsHaveBuild = false;
        
 
         protected MeshRenderer meshRenderer;
@@ -26,6 +26,7 @@ namespace FTProject
         }
         protected virtual void Start()
         {
+            EventDispatcher.AddEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
             meshRenderer = transform.GetComponent<MeshRenderer>();
         }
 
@@ -59,6 +60,17 @@ namespace FTProject
                 if (Mathf.Max(0.1f, distance) < 0.6f )
                 {
                     ChangeColor(Color.green);
+                }
+            }
+        }
+
+        private void BuildFail(List<BasePoint> points)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                if(points[i] == this)
+                {
+                    ChangeColor(Color.black);
                 }
             }
         }

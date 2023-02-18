@@ -44,24 +44,31 @@ namespace FTProject
             base.InitComponent();
             normalTowerBtn = _gameObject.transform.Find("Button").GetComponent<Button>();
             generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
-            normalTowerBtn.onClick.AddListener(OnClickBtn);
+           // normalTowerBtn.onClick.AddListener(OnClickBtn);
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
             _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshPro>();
             _countTxt = _gameObject.transform.Find("Count").GetComponent<TextMeshPro>();
+            UIEventListener.Get(normalTowerBtn.gameObject).onPointerDown = GenerateClick;
             _hp = GlobalConst.PlayerHp;
             _count = GlobalConst.RoundCount;
-            _countTxt.text = _count.ToString();
-            _hpTxt.text = _hp.ToString();
+            //_countTxt.text = _count.ToString();
+            //_hpTxt.text = _hp.ToString();
             _TotalCount = GlobalConst.RoundCount;
+            
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
         }
+        
+        private void GenerateClick(GameObject go, PointerEventData eventData)
+        {
+            TowerManager.Instance.GetTower<NormalTower>(TowerType.Normal);
+        }
 
         private void OnClickBtn()
         {
-            TowerManager.Instance.GetTower<NormalTower>(TowerType.Normal);
+            
         }
 
         private void OnClickGenerateEnemyBtn()

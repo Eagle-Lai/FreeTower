@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace FTProject
 {
@@ -38,6 +39,12 @@ namespace FTProject
             //Tables table = new Tables(Reader);
             //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
+            Screen.orientation = ScreenOrientation.AutoRotation;
+            Screen.autorotateToPortrait = false;
+            Screen.autorotateToPortraitUpsideDown = false;
+            Screen.autorotateToLandscapeLeft = true;
+            Screen.autorotateToLandscapeRight = true;
+
         }
 
         private JSONNode Reader(string fileName)

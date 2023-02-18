@@ -44,7 +44,6 @@ namespace FTProject
             {
                 return;
             }
-
             //µ¥µã´¥Ãþ   
             if (1 == Input.touchCount)
             {

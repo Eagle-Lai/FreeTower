@@ -17,7 +17,7 @@ namespace FTProject
 
     public class RoundCountManager : BaseManager<RoundCountManager>
     {
-        RoundInfoItem _RoundInfoItem;
+        public RoundInfoItem _RoundInfoItem;
 
         public override void OnInit()
         {
@@ -53,6 +53,8 @@ namespace FTProject
 
         public void GenerateEnemyByInfoItem()
         {
+            _RoundInfoItem.Number = GlobalConst.RoundEnemyNumber;
+            _RoundInfoItem.Interval = GlobalConst.EnemyGenerateInterval;
             TimerManager.Instance.AddTimer(_RoundInfoItem.Interval, _RoundInfoItem.Number, GenerateEnemy);
         }
     }

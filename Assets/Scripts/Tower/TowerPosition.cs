@@ -41,7 +41,7 @@ namespace FTProject
                 //物体世界位置
                 parent.position = new Vector3(curMousePos.x, GlobalConst.UnbuildYPosition, curMousePos.z);
             }
-            if ((Input.GetMouseButtonUp(0) || Input.touchCount == 1) && isBuild == false && BuildTower())
+            if ((Input.GetMouseButtonUp(0)) && isBuild == false && BuildTower())
             {
                 this.transform.localPosition = new Vector3(0, -1.5f, 0);
                 TowerBuildState = TowerBuildState.Build;
@@ -57,7 +57,7 @@ namespace FTProject
                 for (int i = 0; i < enterNodeList.Count; i++)
                 {
                     Color color = enterNodeList[i].GetNodeColor();
-                    if (color == Color.green)
+                    if (color == Color.green && !enterNodeList[i].IsHaveBuild)
                     {
                         BasePoint point = enterNodeList[i];
                         //node.node.MarkAsObstacle(false);
@@ -72,18 +72,28 @@ namespace FTProject
                         if (!isFind)
                         {
                             point.Point.IsWall = false;
+                            BuildFail();
                             return false;
                         }
                         parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
                         enterNodeList.Clear();
                         BasePoint node = point.transform.GetComponent<BasePoint>();
                         node.Point.IsWall = true;
+                        node.IsHaveBuild = true;
+                        node.ChangeColor(Color.black);
                         node.PointType = PointType.Obstacle;
                         return true;
                     }
                 }
             }
+            BuildFail();
             return false;
+        }
+
+        private void BuildFail()
+        {
+            EventDispatcher.TriggerEvent(EventName.BuildNormalTower, enterNodeList);
+            Destroy(parent.gameObject);
         }
 
         private void OnTriggerEnter(Collider other)

@@ -53,6 +53,12 @@ namespace FTProject
         public void SetParent(Transform parent)
         {
             _gameObject.transform.SetParent(parent);
+            RectTransform transform = _gameObject.GetComponent<RectTransform>();
+            transform.SetParent(parent);
+            transform.anchorMin = Vector2.zero;
+            transform.anchorMax = Vector2.one;
+            transform.anchoredPosition = Vector2.zero;
+            transform.sizeDelta = Vector2.zero;
         }
     }
 }

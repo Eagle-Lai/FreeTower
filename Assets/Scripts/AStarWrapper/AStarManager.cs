@@ -1,4 +1,5 @@
 ﻿using AStar;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +10,9 @@ namespace FTProject
 {
     public class AStarManager : MonoBehaviour
     {
+
+        private Action<string> callback; 
+
         public int mapWidth;
         public int mapHeight;
         Point[,] map = null;
@@ -23,24 +27,37 @@ namespace FTProject
         Color startPosColor = Color.green;
         Color targetPosColor = Color.red;
         Color pathPosColor = Color.yellow;
-
+        string path;
         public static AStarManager Instance;
-        private void Awake()
+        void Awake()
         {
             Instance = this;
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            Init();
-        }
-
-        void Init()
-        {
+          path =
+#if UNITY_ANDROID && !UNITY_EDITOR
+        Application.streamingAssetsPath + "/Map.txt";
+#elif UNITY_IPHONE && !UNITY_EDITOR
+        "file://" + Application.streamingAssetsPath + "/Map.txt";
+#elif UNITY_STANDLONE_WIN || UNITY_EDITOR
+        "file://" + Application.streamingAssetsPath + "/Map.txt";
+#else
+        string.Empty;
+#endif
            
+        }
+
+        IEnumerator ReadData(string path, Action<string> action)
+        {
+            WWW www = new WWW(path);
+            yield return www;
+            while (www.isDone == false)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(0.5f);
+            string data = www.text;
+            action(data);
             newPath = new List<Point>();
-            InitMap();
+
             if (startPoint != null && targetPoint != null)
             {
                 bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
@@ -50,29 +67,39 @@ namespace FTProject
                     newPath = GetAStarPath();
                 }
             }
+            yield return new WaitForEndOfFrame();
         }
 
-        void InitMap()
+        // Start is called before the first frame update
+        void Start()
         {
-            TextAsset textAsset = Resources.Load<TextAsset>("Map");
-            GameObject parent = ResourcesManager.Instance.LoadAndInitGameObject("PointParent");
-            int index = 0;
-            string path = Application.dataPath + "/Resources/Map.txt";
-            string[] infos = File.ReadAllLines(path);
-            //mapWidth = 12;
-            //mapHeight = 10;
-            //map = new Point[mapWidth, mapHeight];
+            Init();
+            StartCoroutine(ReadData(path, (value) => { Debug.Log(value); InitMap(value);  }));
+        }
+
+        void Init()
+        {
+           
+          
+        }
+
+        void InitMap(string valueStr)
+        {
+            Transform parent = ResourcesManager.Instance.LoadAndInitGameObject("PointParent").transform;
             GameObject go;
+            string[] infos = valueStr.Split("\r\n");
+            Debug.Log(infos.Length);
             for (int i = 0; i < infos.Length; i++)
             {
+                Debug.Log(infos[i]);
                 char[] temp = infos[i].ToCharArray();
                 for (int j = 0; j < temp.Length; j++)
                 {
                     if (map == null)
                     {
-                        mapWidth = infos.Length;
-                        mapHeight = temp.Length;
-                        map = new Point[infos.Length, temp.Length];
+                        mapWidth =  temp.Length;
+                        mapHeight = infos.Length;
+                        map = new Point[mapHeight + 1, mapWidth + 1];
                     }
                     BasePoint pointObj = null;
                     Point tempPoint = new Point(i, j);
@@ -106,6 +133,8 @@ namespace FTProject
                             tempPoint.IsWall = true;
                             break;
                         default:
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            pointObj = go.AddComponent<BasePoint>();
                             break;
                     }
                     pointObj.name += string.Format("({0},{1})", i, j);
@@ -113,7 +142,6 @@ namespace FTProject
                     pointObj.Point = tempPoint;
                     map[i, j] = tempPoint;
                     tempPoint.gameObject = pointObj.gameObject;
-                    index++;
                 }
             }
         }
@@ -163,7 +191,7 @@ namespace FTProject
         {
 
 #if UNITY_EDITOR
-            if (Application.isPlaying)
+            if (Application.isPlaying && startPoint != null && targetPoint != null && map != null)
             {
                 bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
                 if (isFind == true)
