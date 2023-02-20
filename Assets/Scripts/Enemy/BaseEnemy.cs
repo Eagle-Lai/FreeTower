@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 using AStar;
+using TMPro;
 
 namespace FTProject {
     public class BaseEnemy : MonoBehaviour
@@ -29,6 +30,10 @@ namespace FTProject {
         protected int _currentPositionIndex;
 
         protected Vector3[] _pathPosition;
+
+        private float _rotateSpeed = 180.0f;
+
+        private TextMeshPro _HpTxt;
 
         private void Awake()
         {
@@ -62,6 +67,7 @@ namespace FTProject {
             SetPath();
             _ArticleBlood = transform.Find("HpParent");
             _HpTransform = transform.Find("HpParent/Bg/Hp");
+            _HpTxt = transform.Find("HpParent/EnemyHpTxt").GetComponent<TextMeshPro>();
         }
 
 
@@ -81,7 +87,8 @@ namespace FTProject {
             Vector3 lookPoint = Vector3.ProjectOnPlane(this._ArticleBlood.transform.position - Camera.main.transform.position, Camera.main.transform.forward);
             this._ArticleBlood.LookAt(Camera.main.transform.position + lookPoint);
             Quaternion rot = FTProjectUtils.GetRotate(Camera.main.transform.position, _ArticleBlood.position);
-            _ArticleBlood.rotation = Quaternion.Slerp(_ArticleBlood.rotation, rot, 120.0f * Time.deltaTime);
+            //_ArticleBlood.rotation = Quaternion.Slerp(_ArticleBlood.rotation, rot, _rotateSpeed * Time.deltaTime);
+            //_HpTxt.transform.rotation = Quaternion.Slerp(_HpTxt.transform.rotation, rot * Quaternion.identity, _rotateSpeed * Time.deltaTime);
         }
 
 

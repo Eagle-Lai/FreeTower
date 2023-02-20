@@ -23,6 +23,11 @@ namespace FTProject
             parent = transform.parent.GetComponent<Transform>();
         }
 
+        private void Start()
+        {
+            EventDispatcher.TriggerEvent(EventName.BuildingTower);
+        }
+
         private void Update()
         {
             if (isBuild == false)
@@ -78,10 +83,8 @@ namespace FTProject
                         parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
                         enterNodeList.Clear();
                         BasePoint node = point.transform.GetComponent<BasePoint>();
-                        node.Point.IsWall = true;
-                        node.IsHaveBuild = true;
-                        node.ChangeColor(Color.black);
-                        node.PointType = PointType.Obstacle;
+                        node.BuildSuccess();
+                        BuildSuccess();
                         return true;
                     }
                 }
@@ -94,6 +97,11 @@ namespace FTProject
         {
             EventDispatcher.TriggerEvent(EventName.BuildNormalTower, enterNodeList);
             Destroy(parent.gameObject);
+        }
+
+        private void BuildSuccess()
+        {
+            EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
         }
 
         private void OnTriggerEnter(Collider other)

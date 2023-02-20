@@ -91,7 +91,7 @@ namespace FTProject
             Debug.Log(infos.Length);
             for (int i = 0; i < infos.Length; i++)
             {
-                Debug.Log(infos[i]);
+                //Debug.Log(infos[i]);
                 char[] temp = infos[i].ToCharArray();
                 for (int j = 0; j < temp.Length; j++)
                 {

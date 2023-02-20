@@ -15,9 +15,9 @@ namespace FTProject
 
         private Button generateEnemyBtn;
 
-        private TextMeshPro _hpTxt;
+        private TextMeshProUGUI _hpTxt;
 
-        private TextMeshPro _countTxt;
+        private TextMeshProUGUI _countTxt;
 
         private int _hp;
 
@@ -46,13 +46,13 @@ namespace FTProject
             generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
            // normalTowerBtn.onClick.AddListener(OnClickBtn);
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
-            _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshPro>();
-            _countTxt = _gameObject.transform.Find("Count").GetComponent<TextMeshPro>();
+            _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshProUGUI>();
+            _countTxt = _gameObject.transform.Find("Count").GetComponent<TextMeshProUGUI>();
             UIEventListener.Get(normalTowerBtn.gameObject).onPointerDown = GenerateClick;
             _hp = GlobalConst.PlayerHp;
             _count = GlobalConst.RoundCount;
-            //_countTxt.text = _count.ToString();
-            //_hpTxt.text = _hp.ToString();
+            _countTxt.text = _count.ToString();
+            _hpTxt.text = _hp.ToString();
             _TotalCount = GlobalConst.RoundCount;
             
         }

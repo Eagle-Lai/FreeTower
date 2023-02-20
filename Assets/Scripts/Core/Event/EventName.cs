@@ -37,5 +37,15 @@ namespace FTProject
         /// 创建防御塔失败事件
         /// </summary>
         public const string BuildTowerFail = "BuildTowerFail";
+
+        /// <summary>
+        /// 创建防御塔成功事件
+        /// </summary>
+        public const string BuildTowerSuccess = "BuildTowerSuccess";
+
+        /// <summary>
+        /// 正在创建防御塔开始事件
+        /// </summary>
+        public const string BuildingTower = "BuildingTower";
     }
 }

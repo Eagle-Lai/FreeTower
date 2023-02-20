@@ -104,5 +104,21 @@ namespace FTProject
         {
             return meshRenderer.material.color;
         }
+
+        public void BuildSuccess()
+        {
+            Point.IsWall = true;
+            IsHaveBuild = true;
+            ChangeColor(Color.black);
+            PointType = PointType.Obstacle;
+        }
+
+        public void DestroyTower()
+        {
+            Point.IsWall = false;
+            IsHaveBuild = false;
+            ChangeColor(Color.black);
+            PointType = PointType.Normal;
+        }
     }
 }

@@ -29,11 +29,15 @@ namespace FTProject
         //相机初始位置
         Vector3 _OldPosition;
 
+        private bool isBuildingTower = false;
+
         void Start()
         {
             //记录开始摄像机的Position
             _OldPosition = Camera.main.transform.position;
             this.orginPosition = transform.position;
+            EventDispatcher.AddEventListener(EventName.BuildingTower, BuildingTower);
+            EventDispatcher.AddEventListener(EventName.BuildTowerSuccess, BuildTowerSuccess);
         }
         void Update()
         {
@@ -45,7 +49,7 @@ namespace FTProject
                 return;
             }
             //单点触摸   
-            if (1 == Input.touchCount)
+            if (1 == Input.touchCount && !isBuildingTower)
             {
                 //如果为 True 单指操作为旋转  如果为 Fals 单指操作为移动
                 if (_bMoveOrRotation)
@@ -139,6 +143,15 @@ namespace FTProject
 #endif
         }
 
+        private void BuildingTower()
+        {
+            isBuildingTower = true;
+        }
+
+        private void BuildTowerSuccess()
+        {
+            isBuildingTower = false;
+        }
 
         //通过按钮让物体回到最初的位置
         public void BackPosition()
