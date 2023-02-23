@@ -35,6 +35,10 @@ namespace FTProject {
 
         private TextMeshPro _HpTxt;
 
+        private float _HpSpeed = 0;
+
+        private TweenCallback _tweenCallback;
+
         private void Awake()
         {
             this.OnAwake();
@@ -68,6 +72,7 @@ namespace FTProject {
             _ArticleBlood = transform.Find("HpParent");
             _HpTransform = transform.Find("HpParent/Bg/Hp");
             _HpTxt = transform.Find("HpParent/EnemyHpTxt").GetComponent<TextMeshPro>();
+            _HpTxt.gameObject.SetActive(false);
         }
 
 
@@ -101,13 +106,27 @@ namespace FTProject {
         {
             if(_CurrentHp > 0)
             {
-                _CurrentHp--;
                 UpdateHp();
             }
             else
             {
                 Reset();
             }
+        }
+
+        public void Hurt(float hurt)
+        {
+            _HpTxt.gameObject.SetActive(true);
+            _HpTxt.DOFade(0, 2f);
+            _tweenCallback = _HpTxt.transform.DOLocalMoveY(2f, 2f).onComplete = HPTxt;
+            _CurrentHp -= hurt;
+            _HpTxt.text = _CurrentHp.ToString();
+        }
+
+        private void HPTxt()
+        {
+            _HpTxt.DOFade(1, 0f);
+            ResetHpTxt();
         }
 
         protected void UpdateHp()
@@ -168,6 +187,13 @@ namespace FTProject {
             _CurrentHp = GlobalConst.EnemyHp;
             _ArticleBlood.rotation = Quaternion.identity;
             _HpTransform.transform.localScale = Vector3.one;
+            ResetHpTxt();
+        }
+
+        private void ResetHpTxt()
+        {
+            _HpTxt.transform.localPosition = new Vector3(0, 1, 0);
+            _HpTxt.gameObject.SetActive(false);
         }
     }
 } 

@@ -100,6 +100,7 @@ namespace FTProject
                 if(BaseEnemy != null)
                 {
                     BaseEnemy.Hit();
+                    BaseEnemy.Hurt(1);
                     Reset();
                 }
             }

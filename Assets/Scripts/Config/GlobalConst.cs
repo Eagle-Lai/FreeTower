@@ -63,7 +63,7 @@ namespace FTProject
         /// <summary>
         /// 敌人血量
         /// </summary>
-        public const int EnemyHp = 3;
+        public const int EnemyHp = 6;
 
         /// <summary>
         /// 玩家血量
