@@ -17,6 +17,7 @@ public sealed partial class Tables
     public item.TbItem TbItem {get; }
     public TbEquip TbEquip {get; }
     public TBTower TBTower {get; }
+    public TBEnemyData TBEnemyData {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -27,11 +28,14 @@ public sealed partial class Tables
         tables.Add("TbEquip", TbEquip);
         TBTower = new TBTower(loader("tbtower")); 
         tables.Add("TBTower", TBTower);
+        TBEnemyData = new TBEnemyData(loader("tbenemydata")); 
+        tables.Add("TBEnemyData", TBEnemyData);
         PostInit();
 
         TbItem.Resolve(tables); 
         TbEquip.Resolve(tables); 
         TBTower.Resolve(tables); 
+        TBEnemyData.Resolve(tables); 
         PostResolve();
     }
 
@@ -40,6 +44,7 @@ public sealed partial class Tables
         TbItem.TranslateText(translator); 
         TbEquip.TranslateText(translator); 
         TBTower.TranslateText(translator); 
+        TBEnemyData.TranslateText(translator); 
     }
     
     partial void PostInit();
