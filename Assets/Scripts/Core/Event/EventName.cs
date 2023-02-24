@@ -6,6 +6,8 @@ namespace FTProject
 {
     public class EventName
     {
+        public const string UpdateEvent = "UpdateEvent";
+
         /// <summary>
         /// 创建普通防御塔
         /// </summary>

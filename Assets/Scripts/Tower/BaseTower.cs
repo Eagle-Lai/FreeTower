@@ -55,7 +55,7 @@ namespace FTProject
         {
             OnStart();
         }
-        protected void Update()
+        protected void MyUpdate()
         {
             OnUpdate();
         }
@@ -66,6 +66,7 @@ namespace FTProject
 
         protected virtual void OnAwake()
         {
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             this._searchRate = GlobalConst.SearchRate;
             
             _targetter = transform.Find("Targetter").GetComponent<Targetter>();
@@ -117,7 +118,7 @@ namespace FTProject
         
         protected virtual void Clear()
         {
-
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
         }
     }
 }

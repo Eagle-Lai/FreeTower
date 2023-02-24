@@ -44,7 +44,7 @@ namespace FTProject
 
         private void OnDestroy()
         {
-            
+            EventDispatcher.RemoveEventListener<BaseEnemy>(EventName.EnemyResetEvent, EnemyReset);
         }
 
         private void OnTriggerEnter(Collider other)

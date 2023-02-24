@@ -18,19 +18,20 @@ namespace FTProject
           new EnemyManager(),
           new BulletManager(),
           new RoundCountManager(),
+          new GameSceneManager(),
         };
 
         public static Launch Instance;
         public BaseEnemy baseEnemy;
         private void Awake()
         {
-            DOTween.defaultAutoKill = true;
+            Instance = this;
+            InitGameInfo();
             for (int i = 0; i < managerList.Count; i++)
             {
                 managerList[i].OnInit();
             }
             DontDestroyOnLoad(gameObject);
-            Instance = this;
             TimerManager.Instance.Update(Time.fixedDeltaTime);
             //AStarPath.Instance.Start();
             //Tables t = new Tables(Reader);
@@ -39,12 +40,18 @@ namespace FTProject
             //Tables table = new Tables(Reader);
             //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
+            //FTProjectUtils.ReadData("tbenemydata", ())
+        }
+
+
+
+        private void InitGameInfo()
+        {
             Screen.orientation = ScreenOrientation.AutoRotation;
             Screen.autorotateToPortrait = false;
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.autorotateToLandscapeLeft = true;
             Screen.autorotateToLandscapeRight = true;
-
         }
 
         private JSONNode Reader(string fileName)
@@ -54,7 +61,6 @@ namespace FTProject
 
         private void Start()
         {
-            
             UIManager.Instance.OpenView<MainView>("MainView");
         }
 
@@ -62,11 +68,17 @@ namespace FTProject
 
         private void OnDrawGizmos()
         {
-           
+
         }
         private void Update()
         {
-            TimerManager.Instance.Update(Time.fixedDeltaTime);
+            TimerManager.Instance.Update(Time.deltaTime);
+            EventDispatcher.TriggerEvent(EventName.UpdateEvent);
+        }
+
+        private void FixedUpdate()
+        {
+
         }
 
     }

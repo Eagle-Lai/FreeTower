@@ -37,7 +37,7 @@ namespace FTProject
         {
             OnStart();
         }
-        protected void Update()
+        protected void MyUpdate()
         {
             OnUpdate();
         }
@@ -48,6 +48,7 @@ namespace FTProject
 
         protected virtual void OnAwake()
         {
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             this._speed = GlobalConst.BulletSpeed;
             this._resetTime = GlobalConst.BulletResetTimeInterval;
             this.BulltState = BulletState.None;
@@ -80,6 +81,7 @@ namespace FTProject
             {
                 TimerManager.Instance.RemoveTimerById(_bulletResetTimerId);
             }
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
         }
 
         protected void OnTriggerEnter(Collider other)

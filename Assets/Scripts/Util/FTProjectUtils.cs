@@ -1,3 +1,5 @@
+using SimpleJSON;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +8,23 @@ namespace FTProject
 {
     public static class FTProjectUtils
     {
-       public static float GetPointDistance(GameObject goA, GameObject goB)
+
+        public static string path
+        {
+            get
+            {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        return Application.streamingAssetsPath;
+#elif UNITY_IPHONE && !UNITY_EDITOR
+        return "file://" + Application.streamingAssetsPath;
+#elif UNITY_STANDLONE_WIN || UNITY_EDITOR
+              return  "file://" + Application.streamingAssetsPath;
+#else
+        string.Empty;
+#endif
+            }
+        }
+        public static float GetPointDistance(GameObject goA, GameObject goB)
         {
             return Vector2.Distance(new Vector2(goA.transform.position.x, goA.transform.position.z), new Vector2(goB.transform.position.x, goB.transform.position.z));
         }    
@@ -42,6 +60,27 @@ namespace FTProject
         public static void ShowObject(this GameObject gameObject)
         {
             gameObject.SetActive(true);
+        }
+
+        public static void ReadData(string name, Action<JSONNode> action)
+        {
+            Launch.Instance.StartCoroutine(ReadFile(name, action));
+        }
+
+
+        private static IEnumerator  ReadFile(string name, Action<JSONNode> action)
+        {
+            WWW www = new WWW(path + "/json/" + name +".json");
+            yield return www;
+            while (www.isDone == false)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(0.5f);
+            string data = www.text;
+            JSONNode node = JSON.Parse(data);
+            action(node);
+            yield return new WaitForEndOfFrame();
         }
     }
 }

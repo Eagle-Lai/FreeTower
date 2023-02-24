@@ -16,13 +16,13 @@ namespace FTProject
         protected MeshRenderer meshRenderer;
 
         /// <summary>
-        /// Åö×²ÎïÌå
+        /// ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         public GameObject currentTriggerObj;
 
         protected virtual void Awake()
         {
-            
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
         }
         protected virtual void Start()
         {
@@ -30,7 +30,14 @@ namespace FTProject
             meshRenderer = transform.GetComponent<MeshRenderer>();
         }
 
-        protected virtual void Update()
+        public virtual void OnDestroy()
+        {
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
+            EventDispatcher.RemoveEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
+        }
+
+
+        protected virtual void MyUpdate()
         {
             if (currentTriggerObj != null && meshRenderer.material.color != Color.green && PointType == PointType.Normal)
             {

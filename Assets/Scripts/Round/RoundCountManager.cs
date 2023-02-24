@@ -21,8 +21,8 @@ namespace FTProject
 
         public override void OnInit()
         {
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             base.OnInit();
-            TimerManager.Instance.AddTimer(0.02f, -1, Update);
             InitRoundInfo();
         }
 
@@ -36,9 +36,10 @@ namespace FTProject
         public override void OnDestroy()
         {
             base.OnDestroy();
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
         }
 
-        private void Update()
+        private void MyUpdate()
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -57,5 +58,6 @@ namespace FTProject
             _RoundInfoItem.Interval = GlobalConst.EnemyGenerateInterval;
             TimerManager.Instance.AddTimer(_RoundInfoItem.Interval, _RoundInfoItem.Number, GenerateEnemy);
         }
+
     }
 }

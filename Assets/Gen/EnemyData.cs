@@ -21,14 +21,16 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
         { if(!_json["id"].IsNumber) { throw new SerializationException(); }  Id = _json["id"]; }
         { if(!_json["speed"].IsNumber) { throw new SerializationException(); }  Speed = _json["speed"]; }
         { if(!_json["hp"].IsNumber) { throw new SerializationException(); }  Hp = _json["hp"]; }
+        { if(!_json["name"].IsString) { throw new SerializationException(); }  Name = _json["name"]; }
         PostInit();
     }
 
-    public EnemyData(int id, float speed, float hp ) 
+    public EnemyData(int id, float speed, float hp, string name ) 
     {
         this.Id = id;
         this.Speed = speed;
         this.Hp = hp;
+        this.Name = name;
         PostInit();
     }
 
@@ -46,6 +48,10 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
     /// 血量
     /// </summary>
     public float Hp { get; private set; }
+    /// <summary>
+    /// 名字
+    /// </summary>
+    public string Name { get; private set; }
 
     public const int __ID__ = 953306930;
     public override int GetTypeId() => __ID__;
@@ -65,6 +71,7 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "Speed:" + Speed + ","
         + "Hp:" + Hp + ","
+        + "Name:" + Name + ","
         + "}";
     }
     

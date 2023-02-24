@@ -47,7 +47,7 @@ namespace FTProject {
         {
             OnStart();
         }
-        protected void Update()
+        protected void MyUpdate()
         {
             OnUpdate();
         }
@@ -57,6 +57,7 @@ namespace FTProject {
         }
         protected virtual void OnAwake()
         {
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             _currentPositionIndex = 0;
             _speed = GlobalConst.EnemySpeed;
             EnemyState = EnemyState.Idle;
@@ -88,7 +89,7 @@ namespace FTProject {
 
         protected void LookAtCamera()
         {
-            //使用  Vector3.ProjectOnPlane （投影向量，投影平面法向量）用于计算某个向量在某个平面上的投影向量  
+            //使锟斤拷  Vector3.ProjectOnPlane 锟斤拷投影锟斤拷锟斤拷锟斤拷投影平锟芥法锟斤拷锟斤拷锟斤拷锟斤拷锟节硷拷锟斤拷某锟斤拷锟斤拷锟斤拷锟斤拷某锟斤拷平锟斤拷锟较碉拷投影锟斤拷锟斤拷  
             Vector3 lookPoint = Vector3.ProjectOnPlane(this._ArticleBlood.transform.position - Camera.main.transform.position, Camera.main.transform.forward);
             this._ArticleBlood.LookAt(Camera.main.transform.position + lookPoint);
             Quaternion rot = FTProjectUtils.GetRotate(Camera.main.transform.position, _ArticleBlood.position);
@@ -99,7 +100,8 @@ namespace FTProject {
 
         protected virtual void Clear()
         {
-            
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
+            EventDispatcher.RemoveEventListener(EventName.UpdateAStarPath, SetPath);
         }
 
         public virtual void Hit()

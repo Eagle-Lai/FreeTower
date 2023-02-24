@@ -39,6 +39,13 @@ namespace FTProject
             EventDispatcher.AddEventListener(EventName.BuildingTower, BuildingTower);
             EventDispatcher.AddEventListener(EventName.BuildTowerSuccess, BuildTowerSuccess);
         }
+
+        private void OnDestroy()
+        {
+            EventDispatcher.RemoveEventListener(EventName.BuildingTower, BuildingTower);
+            EventDispatcher.RemoveEventListener(EventName.BuildTowerSuccess, BuildTowerSuccess);
+        }
+
         void Update()
         {
 

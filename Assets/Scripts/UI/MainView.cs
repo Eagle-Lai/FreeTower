@@ -59,6 +59,8 @@ namespace FTProject
         public override void OnDestroy()
         {
             base.OnDestroy();
+            EventDispatcher.RemoveEventListener<int>(EventName.PlayerRoundCountChange, RoundCountChange);
+            EventDispatcher.RemoveEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
         }
         
         private void GenerateClick(GameObject go, PointerEventData eventData)

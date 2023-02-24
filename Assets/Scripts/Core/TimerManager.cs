@@ -5,8 +5,6 @@ using System.Linq;
 using UnityEngine;
 namespace FTProject
 {
-
-
     public class TimerManager : BaseManager<TimerManager>
     {
         class TimerItem
@@ -62,6 +60,9 @@ namespace FTProject
        
         private Dictionary<int, TimerItem> _timerDicti;
         public int actionIndex;
+
+        public float checkTimerInterval = 3f;
+
         public TimerManager()
         {
             _timerDicti = new Dictionary<int, TimerItem>();
@@ -102,8 +103,10 @@ namespace FTProject
             return item.id;
         }
 
+        
         public void Update(float intervalTime)
         {
+            //CheckTimerItem();
             for (int i = 0; i < _timerDicti.Count; i++)
             {
                 KeyValuePair<int, TimerItem> item = _timerDicti.ElementAt(i);
@@ -185,6 +188,25 @@ namespace FTProject
         {
             base.OnDestroy();
             _timerDicti.Clear();
+        }
+
+        public void CheckTimerItem()
+        {
+            if(_timerDicti.Count > 5)
+            {
+                for (int i = _timerDicti.Count - 1; i > 0; i++)
+                {
+                    KeyValuePair<int, TimerItem> item = _timerDicti.ElementAt(i);
+                    if (item.Value.isFree)
+                    {
+                        _timerDicti.Remove(item.Key);
+                        if (_timerDicti.Count <= 5)
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ namespace FTProject
         {
             TowerBuildState = TowerBuildState.None;
             parent = transform.parent.GetComponent<Transform>();
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
         }
 
         private void Start()
@@ -28,22 +29,27 @@ namespace FTProject
             EventDispatcher.TriggerEvent(EventName.BuildingTower);
         }
 
-        private void Update()
+        public void OnDestroy()
+        {
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
+        }
+
+        private void MyUpdate()
         {
             if (isBuild == false)
             {
                 cubeScreenPos = Camera.main.WorldToScreenPoint(parent.position);
 
-                //2. ¼ÆËãÆ«ÒÆÁ¿
-                //Êó±êµÄÈýÎ¬×ø±ê
+                //2. ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
                 Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cubeScreenPos.z);
-                //Êó±êÈýÎ¬×ø±ê×ªÎªÊÀ½ç×ø±ê
+                //ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½×ªÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-                //Ä¿Ç°µÄÊó±ê¶þÎ¬×ø±ê×ªÎªÈýÎ¬×ø±ê
+                //Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½×ªÎªï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
                 Vector3 curMousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cubeScreenPos.z);
-                //Ä¿Ç°µÄÊó±êÈýÎ¬×ø±ê×ªÎªÊÀ½ç×ø±ê
+                //Ä¿Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½×ªÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 curMousePos = Camera.main.ScreenToWorldPoint(curMousePos);
-                //ÎïÌåÊÀ½çÎ»ÖÃ
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
                 parent.position = new Vector3(curMousePos.x, GlobalConst.UnbuildYPosition, curMousePos.z);
             }
             if ((Input.GetMouseButtonUp(0)) && isBuild == false && BuildTower())
