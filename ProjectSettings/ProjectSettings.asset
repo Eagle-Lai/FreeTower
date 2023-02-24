@@ -166,6 +166,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.DefaultCompany.FreeTower
     Standalone: com.DefaultCompany.FreeTower
   buildNumber:
     Standalone: 0

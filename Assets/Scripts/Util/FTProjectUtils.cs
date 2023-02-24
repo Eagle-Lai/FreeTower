@@ -67,6 +67,10 @@ namespace FTProject
             Launch.Instance.StartCoroutine(ReadFile(name, action));
         }
 
+        //public static JSONNode ReadData(string name, Func<string, JSONNode> func)
+        //{
+
+        //}
 
         private static IEnumerator  ReadFile(string name, Action<JSONNode> action)
         {
@@ -76,11 +80,16 @@ namespace FTProject
             {
                 yield return new WaitForEndOfFrame();
             }
-            yield return new WaitForSeconds(0.5f);
-            string data = www.text;
-            JSONNode node = JSON.Parse(data);
-            action(node);
             yield return new WaitForEndOfFrame();
+            string data = www.text;
+            JSONNode node = JSONNode.Parse(data);
+            action(node);
         }
+
+        //public static JSONNode Reader(string name)
+        //{
+        //    string = 
+        //    return JSONNode.Parse()
+        //}
     }
 }

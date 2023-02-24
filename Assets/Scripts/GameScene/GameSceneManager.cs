@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using cfg;
 
 
 namespace FTProject
@@ -9,16 +10,27 @@ namespace FTProject
     {
         public RoundCountManager _roundCountManager;
 
+        public SceneInfo _SceneInfo;
+
         public int CurrentIndex = 0;
 
         public override void OnInit()
         {
             base.OnInit();
             _roundCountManager = RoundCountManager.Instance;
+            _SceneInfo = Launch.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
+            _roundCountManager.SetSceneInfo(_SceneInfo);
         }
         public override void OnDestroy()
         {
             base.OnDestroy();
+        }
+
+        public void UpdateSceneInfo()
+        {
+            CurrentIndex++;
+            _SceneInfo = Launch.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
+            _roundCountManager.SetSceneInfo(_SceneInfo);
         }
     }
 }

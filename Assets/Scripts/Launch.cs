@@ -21,6 +21,8 @@ namespace FTProject
           new GameSceneManager(),
         };
 
+        public Tables Tables;
+
         public static Launch Instance;
         public BaseEnemy baseEnemy;
         private void Awake()
@@ -34,15 +36,28 @@ namespace FTProject
             DontDestroyOnLoad(gameObject);
             TimerManager.Instance.Update(Time.fixedDeltaTime);
             //AStarPath.Instance.Start();
-            //Tables t = new Tables(Reader);
+            Tables = new Tables(Reader);
+            Debug.Log(Tables.TBEnemyData.Get(1).Name);
             //Item item = t.TbItem.Get(100010);
             //Debug.Log(item.Desc);
             //Tables table = new Tables(Reader);
             //Equip equip = table.TbEquip.Get(1);
             //Debug.Log(equip.Color);
-            //FTProjectUtils.ReadData("tbenemydata", ())
         }
 
+        private JSONNode reader(string name)
+        {
+            JSONNode node = null;
+            FTProjectUtils.ReadData(name, (jsonNode) => 
+            {
+                node = jsonNode;
+            });
+            while(node != null)
+            {
+                return node;
+            }
+            return node;
+        }
 
 
         private void InitGameInfo()
@@ -56,7 +71,9 @@ namespace FTProject
 
         private JSONNode Reader(string fileName)
         {
-            return JSON.Parse(File.ReadAllText(Application.dataPath + "/../GenerateDatas/json/" + fileName + ".json"));
+            string path = Application.streamingAssetsPath + "/json/" + fileName + ".json";
+            Debug.Log(path);
+            return JSON.Parse(File.ReadAllText(path));
         }
 
         private void Start()

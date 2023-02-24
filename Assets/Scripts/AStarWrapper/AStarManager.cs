@@ -53,7 +53,7 @@ namespace FTProject
             {
                 yield return new WaitForEndOfFrame();
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForEndOfFrame();
             string data = www.text;
             action(data);
             newPath = new List<Point>();
