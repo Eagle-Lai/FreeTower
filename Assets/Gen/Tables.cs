@@ -28,7 +28,7 @@ public sealed partial class Tables
         tables.Add("TBRoundData", TBRoundData);
         TBEnemyList = new TBEnemyList(loader("tbenemylist")); 
         tables.Add("TBEnemyList", TBEnemyList);
-        TBSceneInfo = new TBSceneInfo(loader("tbsceneinfo"));
+        TBSceneInfo = new TBSceneInfo(loader("tbsceneinfo")); 
         tables.Add("TBSceneInfo", TBSceneInfo);
         PostInit();
 

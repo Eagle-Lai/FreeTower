@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+aMMQnUlbDIgUihtrN+XbuzgvcC1m7GI+oNGBuu3NY1Qkmnc9/oan/5Ufd0/wOu7Q845XGw64+J2DY7Vb51fZQ==",
+  "dgSpecHash": "G9cQcy21yJ4xL2nEzLHo0ry38wSBQjGmyLrHNdjD2lABxyLQDq7ZWNoKTVPpmPgTyvJaThh0PF6zZGVlOUGE/A==",
   "success": true,
-  "projectFilePath": "F:\\FreedomTower\\luban_examples\\Projects\\Csharp_CustomTemplate_AsyncLoad\\Csharp_AsyncLoad.csproj",
+  "projectFilePath": "D:\\FreedomTower\\Csharp_CustomTemplate_AsyncLoad\\Csharp_AsyncLoad.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -7,6 +7,7 @@ using System.IO;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 namespace FTProject
 {
@@ -35,30 +36,9 @@ namespace FTProject
             }
             DontDestroyOnLoad(gameObject);
             TimerManager.Instance.Update(Time.fixedDeltaTime);
-            //AStarPath.Instance.Start();
             Tables = new Tables(Reader);
             Debug.Log(Tables.TBEnemyData.Get(1).Name);
-            //Item item = t.TbItem.Get(100010);
-            //Debug.Log(item.Desc);
-            //Tables table = new Tables(Reader);
-            //Equip equip = table.TbEquip.Get(1);
-            //Debug.Log(equip.Color);
         }
-
-        private JSONNode reader(string name)
-        {
-            JSONNode node = null;
-            FTProjectUtils.ReadData(name, (jsonNode) => 
-            {
-                node = jsonNode;
-            });
-            while(node != null)
-            {
-                return node;
-            }
-            return node;
-        }
-
 
         private void InitGameInfo()
         {
@@ -75,7 +55,6 @@ namespace FTProject
             Debug.Log(path);
             return JSON.Parse(File.ReadAllText(path));
         }
-
         private void Start()
         {
             UIManager.Instance.OpenView<MainView>("MainView");

@@ -71,18 +71,18 @@ namespace FTProject
                 {
                     //移动
 
-                    if (Input.touches[0].phase == TouchPhase.Began)
+                    if (Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Began)
                     {
                         // 记录手指触屏的位置  
                         _M_Screenpos = Input.touches[0].position;
 
                     }
                     // 手指移动  
-                    else if (Input.touches[0].phase == TouchPhase.Moved)
+                    else if (Input.touches.Length > 0 && Input.touches[0].phase == TouchPhase.Moved)
                     {
 
                         // 移动摄像机  
-                        Camera.main.transform.Translate(new Vector3(-Input.touches[0].deltaPosition.x * Time.deltaTime * 0.1f, -Input.touches[0].deltaPosition.y * Time.deltaTime * 0.1f, 0));
+                        Camera.main.transform.Translate(new Vector3(-Input.touches[0].deltaPosition.x * Time.deltaTime * 0.2f, -Input.touches[0].deltaPosition.y * Time.deltaTime * 0.2f, 0));
                     }
                 }
             }
@@ -90,9 +90,8 @@ namespace FTProject
             //多点触摸, 放大缩小  
             Touch _NewTouch1 = Input.GetTouch(0);
             Touch _NewTouch2 = Input.GetTouch(1);
-
             //第2点刚开始接触屏幕, 只记录，不做处理  
-            if (_NewTouch2.phase == TouchPhase.Began)
+            if ( _NewTouch2.phase == TouchPhase.Began)
             {
                 _OldTouch2 = _NewTouch2;
                 _OldTouch1 = _NewTouch1;

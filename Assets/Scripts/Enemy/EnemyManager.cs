@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using cfg;
 
 namespace FTProject
 {
@@ -30,6 +31,12 @@ namespace FTProject
             NormalEnemy enemy = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy);
             enemy.EnemyAttack();
             return enemy;
+        }
+
+        public void GenerateEnemyByList()
+        {
+           List<int> list = RoundCountManager.Instance.GetEnemyList();
+
         }
 
         public T CreateEnemy<T>(EnemyType type) where T : BaseEnemy
@@ -69,5 +76,7 @@ namespace FTProject
         {
             baseEnemy.Reset();
         }
+
+
     }
 }

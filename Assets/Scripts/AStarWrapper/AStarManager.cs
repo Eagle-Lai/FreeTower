@@ -67,6 +67,7 @@ namespace FTProject
                     newPath = GetAStarPath();
                 }
             }
+            
             yield return new WaitForEndOfFrame();
         }
 

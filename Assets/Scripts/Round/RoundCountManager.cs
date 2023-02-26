@@ -5,27 +5,16 @@ using cfg;
 
 namespace FTProject
 {
-    public struct RoundInfoItem
-    {
-        public string Name;
-        public string Description;
-        public int Level;
-        public int TotalCount;
-        public int Number;
-        public float Interval;
-    }
 
     public class RoundCountManager : BaseManager<RoundCountManager>
     {
-        public RoundInfoItem _RoundInfoItem;
-
         public SceneInfo _currentSceneInfo;
 
         public int _currentIndex = 0;
 
         public RoundData _roundData;
 
-        public List<int> indexList = new List<int>();
+        public List<int> _EnemyList = new List<int>();
 
         public override void OnInit()
         {
@@ -35,10 +24,7 @@ namespace FTProject
         }
 
         private void InitRoundInfo()
-        {
-            _RoundInfoItem = new RoundInfoItem();
-            _RoundInfoItem.Number = GlobalConst.RoundEnemyNumber;
-            _RoundInfoItem.Interval = GlobalConst.EnemyGenerateInterval;
+        {;
         }
 
         public override void OnDestroy()
@@ -62,22 +48,35 @@ namespace FTProject
 
         public void GenerateEnemyByInfoItem()
         {
-            _RoundInfoItem.Number = GlobalConst.RoundEnemyNumber;
-            _RoundInfoItem.Interval = GlobalConst.EnemyGenerateInterval;
-            TimerManager.Instance.AddTimer(_RoundInfoItem.Interval, _RoundInfoItem.Number, GenerateEnemy);
+            
         }
 
+        /// <summary>
+        /// 设置场景信息
+        /// </summary>
+        /// <param name="info"></param>
         public void SetSceneInfo(SceneInfo info)
         {
             _currentSceneInfo = info;
             UpdateRoundInfo();
         }
-
+        /// <summary>
+        /// 设置轮次信息
+        /// </summary>
         public void UpdateRoundInfo()
         {
             _currentIndex++;
             _roundData = Launch.Instance.Tables.TBRoundData.Get(_currentIndex);
+            _EnemyList = _roundData.EnemyIndexs;
+        }
 
+        public List<int> GetEnemyList()
+        {
+            if(_EnemyList != null)
+            {
+                return _EnemyList;
+            }
+            return null;
         }
     }
 }
