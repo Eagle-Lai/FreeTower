@@ -12,9 +12,13 @@ namespace FTProject
 
         public int _currentIndex = 0;
 
-        public RoundData _roundData;
+        public List<RoundData> _roundData;
 
         public List<int> _EnemyList = new List<int>();
+        public List<int> _IntervalList = new List<int>();
+
+        public List<int> _roundIndexs;
+        public List<int> _intervalList;
 
         public override void OnInit()
         {
@@ -41,10 +45,6 @@ namespace FTProject
             }
         }
 
-        private void GenerateEnemy()
-        {
-            EnemyManager.Instance.GenerateEnemy();
-        }
 
         public void GenerateEnemyByInfoItem()
         {
@@ -66,15 +66,41 @@ namespace FTProject
         public void UpdateRoundInfo()
         {
             _currentIndex++;
-            _roundData = Launch.Instance.Tables.TBRoundData.Get(_currentIndex);
-            _EnemyList = _roundData.EnemyIndexs;
+        }
+
+        public void GenerateEnemyByRoundInfo()
+        {
+            _currentIndex++;
+            _roundIndexs  = Launch.Instance.Tables.TBRoundData.Get(_currentIndex).EnemyIndexs;
+            _intervalList = Launch.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;
+            Debug.Log(_roundIndexs.Count);
+            Debug.Log(_intervalList.Count);
+            int index = 0;
+            for (int i = 0; i < _roundIndexs.Count; i++)
+            {
+                TimerManager.Instance.AddTimer(_intervalList[i] / 1000 + i * 1, 1, () => 
+                {
+                    EnemyManager.Instance.GenerateEnemyByList(_roundIndexs[index]);
+                    index++;
+                }, false);
+            }
         }
 
         public List<int> GetEnemyList()
         {
+            UpdateRoundInfo();
             if(_EnemyList != null)
             {
                 return _EnemyList;
+            }
+            return null;
+        }
+
+        public List<int> GetIntervalList()
+        {
+            if(_IntervalList != null)
+            {
+                return _IntervalList;
             }
             return null;
         }

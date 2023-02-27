@@ -14,11 +14,14 @@ namespace FTProject
 
         public Transform MoveEnemyParent;
 
+        private Dictionary<int, List<EnemyData>> _enemyListDictionary = new Dictionary<int, List<EnemyData>>();
+
         public override void OnInit()
         {
             base.OnInit();
             IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
             MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
+
         }
 
         public override void OnDestroy()
@@ -26,20 +29,34 @@ namespace FTProject
             base.OnDestroy();
         }
 
-        public BaseEnemy GenerateEnemy()
+        public void GenerateEnemyByList(int index)
         {
-            NormalEnemy enemy = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy);
-            enemy.EnemyAttack();
-            return enemy;
+            List<int> list = Launch.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
+            List<int> interval = Launch.Instance.Tables.TBEnemyList.Get(index).Interval;
+            for (int i = 0; i < list.Count; i++)
+            {
+                EnemyData data = Launch.Instance.Tables.TBEnemyData.Get(list[i]);
+                if (data != null)
+                {
+                    switch (data.Type)
+                    {
+                        case 1:
+                            float timer = data.Interval / 1000 + (i * 0.2f);
+                            TimerManager.Instance.AddTimer(timer, 1, () =>
+                                {
+                                    NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
+                                    normal.EnemyAttack();
+                                }, false
+                             );
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
-        public void GenerateEnemyByList()
-        {
-           List<int> list = RoundCountManager.Instance.GetEnemyList();
-
-        }
-
-        public T CreateEnemy<T>(EnemyType type) where T : BaseEnemy
+        public T CreateEnemy<T>(EnemyType type, string name) where T : BaseEnemy
         {
             if (enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
             {
@@ -58,7 +75,7 @@ namespace FTProject
                 MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
             }
             T enemy = null;
-            ResourcesManager.Instance.LoadAndInitGameObject("NormalEnemy", IdleEnemyParent, (go) =>
+            ResourcesManager.Instance.LoadAndInitGameObject(name, IdleEnemyParent, (go) =>
             {
                 enemy = go.AddComponent<T>();
                 enemy.transform.localPosition = new Vector3(0, 1f, 0);

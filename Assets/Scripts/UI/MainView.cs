@@ -75,7 +75,8 @@ namespace FTProject
 
         private void OnClickGenerateEnemyBtn()
         {
-            RoundCountManager.Instance.GenerateEnemyByInfoItem();
+            //RoundCountManager.Instance.GenerateEnemyByInfoItem();
+            RoundCountManager.Instance.GenerateEnemyByRoundInfo();
         }
 
         private void PlayerHpChange(int value)

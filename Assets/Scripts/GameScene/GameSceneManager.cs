@@ -17,9 +17,9 @@ namespace FTProject
         public override void OnInit()
         {
             base.OnInit();
-            _roundCountManager = RoundCountManager.Instance;
-            _SceneInfo = Launch.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
-            _roundCountManager.SetSceneInfo(_SceneInfo);
+            //_roundCountManager = RoundCountManager.Instance;
+            //_SceneInfo = Launch.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
+            //_roundCountManager.SetSceneInfo(_SceneInfo);
         }
         public override void OnDestroy()
         {
