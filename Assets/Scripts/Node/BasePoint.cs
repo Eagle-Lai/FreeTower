@@ -9,9 +9,10 @@ namespace FTProject
     {
         [SerializeField]
         public Point Point;
-        public PointType PointType;
+        public PointType _PointType;
         public bool IsHaveBuild = false;
-       
+
+        public bool isWall = false;
 
         protected MeshRenderer meshRenderer;
 
@@ -27,6 +28,7 @@ namespace FTProject
         protected virtual void Start()
         {
             EventDispatcher.AddEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
+            //EventDispatcher.AddEventListener<>
             meshRenderer = transform.GetComponent<MeshRenderer>();
         }
 
@@ -39,7 +41,7 @@ namespace FTProject
 
         protected virtual void MyUpdate()
         {
-            if (currentTriggerObj != null && meshRenderer.material.color != Color.green && PointType == PointType.Normal)
+            if (currentTriggerObj != null && meshRenderer.material.color != Color.green && _PointType == PointType.Normal)
             {
                 ////float distance = Vector3.Distance(transform.position, currentTriggerObj.transform.position);
                 //float distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentTriggerObj.transform.position.x, currentTriggerObj.transform.position.z));
@@ -93,7 +95,7 @@ namespace FTProject
         protected virtual void OnTriggerExit(Collider other)
         {
             currentTriggerObj = null;
-            if (PointType == PointType.Normal)
+            if (_PointType == PointType.Normal)
             {
                 ChangeColor(Color.black);
                 Point.IsWall = false;
@@ -117,7 +119,17 @@ namespace FTProject
             Point.IsWall = true;
             IsHaveBuild = true;
             ChangeColor(Color.black);
-            PointType = PointType.Obstacle;
+            _PointType = PointType.Obstacle;
+            isWall = true;
+        }
+
+        public void ResetPoint()
+        {
+            Point.IsWall = false;
+            IsHaveBuild = false;
+            ChangeColor(Color.black);
+            _PointType = PointType.Normal;
+            isWall = false;
         }
 
         public void DestroyTower()
@@ -125,7 +137,7 @@ namespace FTProject
             Point.IsWall = false;
             IsHaveBuild = false;
             ChangeColor(Color.black);
-            PointType = PointType.Normal;
+            _PointType = PointType.Normal;
         }
     }
 }

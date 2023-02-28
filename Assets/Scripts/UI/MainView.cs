@@ -48,7 +48,10 @@ namespace FTProject
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
             _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshProUGUI>();
             _countTxt = _gameObject.transform.Find("Count").GetComponent<TextMeshProUGUI>();
-            UIEventListener.Get(normalTowerBtn.gameObject).onPointerDown = GenerateClick;
+
+            UIEventListener.Get(normalTowerBtn.gameObject).onPointerDown = DownEvent;
+            UIEventListener.Get(normalTowerBtn.gameObject).onPointerUp = UpEvent;
+
             _hp = GlobalConst.PlayerHp;
             _count = GlobalConst.RoundCount;
             _countTxt.text = _count.ToString();
@@ -63,9 +66,15 @@ namespace FTProject
             EventDispatcher.RemoveEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
         }
         
-        private void GenerateClick(GameObject go, PointerEventData eventData)
+        private void DownEvent(GameObject go, PointerEventData eventData)
         {
+            EventDispatcher.TriggerEvent(EventName.OperateDown);
             TowerManager.Instance.GetTower<NormalTower>(TowerType.Normal);
+        }
+
+        private void UpEvent(GameObject go, PointerEventData eventData)
+        {
+            EventDispatcher.TriggerEvent(EventName.OperateUp);
         }
 
         private void OnClickBtn()

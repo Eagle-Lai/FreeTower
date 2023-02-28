@@ -172,7 +172,7 @@ namespace FTProject
                     if (action == null)
                     {
                         //throw new EventException(string.Format("TriggerEvent {0} error: types of parameters are not match.", eventType));
-                        Debug.LogError("something error here");
+                        Debug.LogError("something error here " + eventType);
                     }
                     try
                     {
@@ -198,7 +198,7 @@ namespace FTProject
                     if (action == null)
                     {
                         //throw new EventException(string.Format("TriggerEvent {0} error: types of parameters are not match.", eventType));
-                        Debug.LogError("something error here");
+                        Debug.LogError("something error here " + eventType);
                     }
                     try
                     {

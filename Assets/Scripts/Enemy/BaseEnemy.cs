@@ -61,11 +61,18 @@ namespace FTProject {
             _currentPositionIndex = 0;
             _speed = GlobalConst.EnemySpeed;
             EnemyState = EnemyState.Idle;
+
             EventDispatcher.AddEventListener(EventName.UpdateAStarPath, SetPath);
+            EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
+
             _CurrentHp = GlobalConst.EnemyHp;
             _TotalHp = GlobalConst.EnemyHp;
         }
          
+        private void DestroyTower(BaseTower baseTower)
+        {
+            SetPath();
+        }
 
         protected virtual void OnStart()
         {
@@ -102,6 +109,7 @@ namespace FTProject {
         {
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.RemoveEventListener(EventName.UpdateAStarPath, SetPath);
+            EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
         }
 
         public virtual void Hit()

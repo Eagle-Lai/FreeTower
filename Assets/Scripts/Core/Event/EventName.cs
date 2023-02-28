@@ -12,6 +12,12 @@ namespace FTProject
         /// 创建普通防御塔
         /// </summary>
         public const string BuildNormalTower = "BuildNormalTower";
+
+        /// <summary>
+        /// 按下事件
+        /// </summary>
+        public const string OperateDown = "OperateDown";
+
         /// <summary>
         /// 抬起事件
         /// </summary>
@@ -49,5 +55,15 @@ namespace FTProject
         /// 正在创建防御塔开始事件
         /// </summary>
         public const string BuildingTower = "BuildingTower";
+
+        /// <summary>
+        /// 销毁防御塔事件
+        /// </summary>
+        public const string DestroyTower = "DestroyTower";
+
+        /// <summary>
+        /// 刷新路径事件
+        /// </summary>
+        public const string RefreshPathEvent = "RefreshPathEvent";
     }
 }

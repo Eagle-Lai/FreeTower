@@ -36,14 +36,14 @@ namespace FTProject
             //记录开始摄像机的Position
             _OldPosition = Camera.main.transform.position;
             this.orginPosition = transform.position;
-            EventDispatcher.AddEventListener(EventName.BuildingTower, BuildingTower);
-            EventDispatcher.AddEventListener(EventName.BuildTowerSuccess, BuildTowerSuccess);
+            EventDispatcher.AddEventListener(EventName.OperateDown, OperateDown);
+            EventDispatcher.AddEventListener(EventName.OperateUp, OperateUp);
         }
 
         private void OnDestroy()
         {
-            EventDispatcher.RemoveEventListener(EventName.BuildingTower, BuildingTower);
-            EventDispatcher.RemoveEventListener(EventName.BuildTowerSuccess, BuildTowerSuccess);
+            EventDispatcher.RemoveEventListener(EventName.OperateDown, OperateDown);
+            EventDispatcher.RemoveEventListener(EventName.OperateUp, OperateUp);
         }
 
         void Update()
@@ -143,18 +143,22 @@ namespace FTProject
                 bool isHit = Physics.Raycast(ray, out RaycastHit hit, 100, 3, QueryTriggerInteraction.Ignore);
                 if (isHit && hit.collider.gameObject.name.Contains("Tower"))
                 {
+                    BaseTower tower = hit.collider.GetComponent<BaseTower>();
+                    EventDispatcher.TriggerEvent(EventName.DestroyTower, tower);
                     GameObject.Destroy(hit.collider.gameObject);
+                    EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
                 }
             }
 #endif
         }
 
-        private void BuildingTower()
+
+        private void OperateDown()
         {
             isBuildingTower = true;
         }
 
-        private void BuildTowerSuccess()
+        private void OperateUp()
         {
             isBuildingTower = false;
         }

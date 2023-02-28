@@ -17,11 +17,26 @@ namespace FTProject
         public List<BasePoint> enterNodeList = new List<BasePoint>();
         public bool isBuild = false;
         public TowerBuildState TowerBuildState;
+
+        public BasePoint _BasePoint;
+
         private void Awake()
         {
             TowerBuildState = TowerBuildState.None;
             parent = transform.parent.GetComponent<Transform>();
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
+            EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
+        }
+
+        private void DestroyTower(BaseTower baseTower)
+        {
+            if(baseTower == parent.GetComponent<BaseTower>())
+            {
+                if (_BasePoint != null)
+                {
+                    _BasePoint.ResetPoint();
+                }
+            }
         }
 
         private void Start()
@@ -58,6 +73,7 @@ namespace FTProject
                 TowerBuildState = TowerBuildState.Build;
                 isBuild = true;
                 EventDispatcher.TriggerEvent(EventName.UpdateAStarPath);
+                EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
             }
         }
 
@@ -90,7 +106,7 @@ namespace FTProject
                         enterNodeList.Clear();
                         BasePoint node = point.transform.GetComponent<BasePoint>();
                         node.BuildSuccess();
-                        BuildSuccess();
+                        _BasePoint = node;
                         return true;
                     }
                 }
@@ -103,11 +119,6 @@ namespace FTProject
         {
             EventDispatcher.TriggerEvent(EventName.BuildNormalTower, enterNodeList);
             Destroy(parent.gameObject);
-        }
-
-        private void BuildSuccess()
-        {
-            EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
         }
 
         private void OnTriggerEnter(Collider other)
