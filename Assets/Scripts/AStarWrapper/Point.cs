@@ -6,6 +6,7 @@ namespace AStar
     /// <summary>
     /// AStar 中点的定义
     /// </summary>
+    [System.Serializable]
     public class Point
     {
         // 父亲节点
@@ -21,7 +22,7 @@ namespace AStar
         public int Y { get; set; }
 
         // 是否是障碍物（例如墙）
-        public bool IsWall { get; set; }
+        public bool IsWall;
 
         /// <summary>
         /// /// 该点的游戏物体（根据需要可不用可删除）

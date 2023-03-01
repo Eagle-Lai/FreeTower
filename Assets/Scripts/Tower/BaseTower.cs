@@ -19,7 +19,7 @@ namespace FTProject
 
         protected Transform _head;
 
-        protected TowerPosition _towerPosition;
+        public TowerPosition TowerPosition;
 
         protected Targetter _targetter;
 
@@ -45,7 +45,13 @@ namespace FTProject
 
         protected float _fireTimer;
 
-        
+        public int Level;
+
+        public string TowerName;
+
+        public TowerType TowerType;
+
+        public TowerJsonData TowerJsonData;
 
         private void Awake()
         {
@@ -68,7 +74,9 @@ namespace FTProject
         {
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             this._searchRate = GlobalConst.SearchRate;
-            
+            _head = transform.Find("Head");
+            _bulletPoint = transform.Find("Cube/BulletPoint");
+            TowerPosition = transform.GetComponentInChildren<TowerPosition>();
             _targetter = transform.Find("Targetter").GetComponent<Targetter>();
             if (_targetter == null)
             {
@@ -81,9 +89,7 @@ namespace FTProject
         protected virtual void OnStart()
         {
 
-            _head = transform.Find("Head");
-            _bulletPoint = transform.Find("Cube/BulletPoint");
-            _towerPosition = transform.GetComponentInChildren<TowerPosition>();
+           
         }
 
 
@@ -108,7 +114,7 @@ namespace FTProject
 
         protected virtual bool IsCanFire()
         {
-            return currentTargetGameObject != null && _fireTimer <= 0 && _towerPosition.TowerBuildState == TowerBuildState.Build;
+            return currentTargetGameObject != null && _fireTimer <= 0 && TowerPosition.TowerBuildState == TowerBuildState.Build;
         }
 
         protected virtual void TowerAttack()
@@ -119,6 +125,20 @@ namespace FTProject
         protected virtual void Clear()
         {
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
+        }
+
+        public void SetTowerJsonData(TowerJsonData JsonData)
+        {
+            TowerJsonData = JsonData;
+            UpdateTowerByData();
+        }
+
+        public void UpdateTowerByData()
+        {
+            if(TowerJsonData != null)
+            {
+                Debug.LogError("##########################");
+            }
         }
     }
 }

@@ -47,7 +47,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: -0.5623, z: 0}
 --- !u!1 &4064404929000889888
 GameObject:
@@ -77,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 4064404929000889888}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.879, z: 0}
-  m_LocalScale: {x: 0.19999999, y: 0.5, z: 0.19999999}
+  m_LocalScale: {x: 0.19999999, y: 0.80235, z: 0.19999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1719558033154475228}
@@ -291,7 +291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5348539806194722781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.665, z: 0}
   m_LocalScale: {x: 1, y: 0.19999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -389,9 +389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb6c0e724249744dad5e10a4199bd05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  BaseTower: {fileID: 0}
   enterNodeList: []
   isBuild: 0
   TowerBuildState: 0
+  _BasePoint: {fileID: 0}
 --- !u!1 &7426452404509264692
 GameObject:
   m_ObjectHideFlags: 0

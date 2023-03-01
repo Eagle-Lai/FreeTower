@@ -9,7 +9,7 @@ namespace FTProject
     public static class FTProjectUtils
     {
 
-        public static string path
+        public static string Path
         {
             get
             {
@@ -74,7 +74,7 @@ namespace FTProject
 
         private static IEnumerator  ReadFile(string name, Action<JSONNode> action)
         {
-            WWW www = new WWW(path + "/json/" + name +".json");
+            WWW www = new WWW(Path + "/json/" + name +".json");
             yield return www;
             while (www.isDone == false)
             {

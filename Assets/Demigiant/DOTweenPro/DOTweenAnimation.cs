@@ -850,7 +850,7 @@ namespace DG.Tweening
             return targetIsSelf || !tweenTargetIsTargetGO ? this.gameObject : targetGO;
         }
 
-        // Re-evaluate relative position of path
+        // Re-evaluate relative position of Path
         void ReEvaluateRelativeTween()
         {
             GameObject tweenGO = GetTweenGO();

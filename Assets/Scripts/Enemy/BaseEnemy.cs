@@ -63,6 +63,7 @@ namespace FTProject {
             EnemyState = EnemyState.Idle;
 
             EventDispatcher.AddEventListener(EventName.UpdateAStarPath, SetPath);
+            EventDispatcher.AddEventListener(EventName.BuildTowerSuccess, SetPath);
             EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
 
             _CurrentHp = GlobalConst.EnemyHp;
@@ -100,8 +101,6 @@ namespace FTProject {
             Vector3 lookPoint = Vector3.ProjectOnPlane(this._ArticleBlood.transform.position - Camera.main.transform.position, Camera.main.transform.forward);
             this._ArticleBlood.LookAt(Camera.main.transform.position + lookPoint);
             Quaternion rot = FTProjectUtils.GetRotate(Camera.main.transform.position, _ArticleBlood.position);
-            //_ArticleBlood.rotation = Quaternion.Slerp(_ArticleBlood.rotation, rot, _rotateSpeed * Time.deltaTime);
-            //_HpTxt.transform.rotation = Quaternion.Slerp(_HpTxt.transform.rotation, rot * Quaternion.identity, _rotateSpeed * Time.deltaTime);
         }
 
 
@@ -109,6 +108,7 @@ namespace FTProject {
         {
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.RemoveEventListener(EventName.UpdateAStarPath, SetPath);
+            EventDispatcher.RemoveEventListener(EventName.BuildTowerSuccess, SetPath);
             EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
         }
 
@@ -169,7 +169,7 @@ namespace FTProject {
 
         public void SetPath()
         {
-            List<Point> path = AStarManager.Instance.GetAStarPath();
+            List<Point> path = AStarManager.Instance.GetPath();
             path.Reverse();
             path.Add(AStarManager.Instance.GetEndPoint());
             _pathPosition = new Vector3[path.Count];

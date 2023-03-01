@@ -340,3 +340,4 @@ F:\FreedomTower\FreedomTower\Temp\Bin\Debug\UnityEditor.iOS.Extensions.Common.pd
 F:\FreedomTower\FreedomTower\Temp\Bin\Debug\UnityEngine.AutoStreamingModule.xml
 F:\FreedomTower\FreedomTower\Temp\Bin\Debug\WinPlayerBuildProgram.Data.pdb
 F:\FreedomTower\FreedomTower\obj\Debug\Unity.Timeline.csprojAssemblyReference.cache
+F:\FreedomTower\FreedomTower\Temp\Bin\Debug\LitJson.dll

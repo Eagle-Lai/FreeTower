@@ -20,6 +20,7 @@ namespace FTProject
           new BulletManager(),
           new RoundCountManager(),
           new GameSceneManager(),
+          new JsonDataManager(),
         };
 
         public Tables Tables;

@@ -1,4 +1,5 @@
 using AStar;
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,12 @@ namespace FTProject
 
         protected MeshRenderer meshRenderer;
 
+        public BaseTower BaseTower;
+
+        public JsonData _jsonData;
+
+        public int column, row;
+
         /// <summary>
         /// ��ײ����
         /// </summary>
@@ -23,12 +30,13 @@ namespace FTProject
 
         protected virtual void Awake()
         {
-            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
+           
+
         }
         protected virtual void Start()
         {
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.AddEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
-            //EventDispatcher.AddEventListener<>
             meshRenderer = transform.GetComponent<MeshRenderer>();
         }
 
@@ -43,17 +51,8 @@ namespace FTProject
         {
             if (currentTriggerObj != null && meshRenderer.material.color != Color.green && _PointType == PointType.Normal)
             {
-                ////float distance = Vector3.Distance(transform.position, currentTriggerObj.transform.position);
-                //float distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(currentTriggerObj.transform.position.x, currentTriggerObj.transform.position.z));
                 float distance = FTProjectUtils.GetPointDistance(this.gameObject, currentTriggerObj);
-                //node.MarkAsObstacle();
-                //List<Node> nodes = GridManager.Instance.GetPath();
-                //if (nodes == null)
-                //{
-                //    node.MarkAsObstacle(false);
-                //    ChangeColor(Color.red);
-                //    return;
-                //}
+
                 Point.IsWall = true;
                 bool isFind = AStarManager.Instance.IsFindPath();
                 if (!isFind)
@@ -66,7 +65,7 @@ namespace FTProject
                 {
                     ChangeColor(Color.red);
                 }
-                if (Mathf.Max(0.1f, distance) < 0.6f )
+                if (Mathf.Max(0.1f, distance) < 0.6f)
                 {
                     ChangeColor(Color.green);
                 }
@@ -77,13 +76,12 @@ namespace FTProject
         {
             for (int i = 0; i < points.Count; i++)
             {
-                if(points[i] == this)
+                if (points[i] == this)
                 {
                     ChangeColor(Color.black);
                 }
             }
         }
-
         protected virtual void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.name.Contains("TowerBase"))
@@ -95,15 +93,18 @@ namespace FTProject
         protected virtual void OnTriggerExit(Collider other)
         {
             currentTriggerObj = null;
-            if (_PointType == PointType.Normal)
+            if (_PointType == PointType.Normal && other.gameObject.name.Contains("Tower"))
             {
+                Debug.Log(other.gameObject.name);
+                Debug.Log(gameObject.name);
                 ChangeColor(Color.black);
                 Point.IsWall = false;
+                isWall = false;
             }
         }
         public virtual void ChangeColor(Color color)
         {
-            if(meshRenderer != null)
+            if (meshRenderer != null)
             {
                 meshRenderer.material.color = color;
             }
@@ -132,12 +133,77 @@ namespace FTProject
             isWall = false;
         }
 
-        public void DestroyTower()
+        public void SetColumnAndRow(int col, int r)
         {
-            Point.IsWall = false;
-            IsHaveBuild = false;
-            ChangeColor(Color.black);
-            _PointType = PointType.Normal;
+            column = col;
+            row = r;
+        }
+
+        public void InitPoint()
+        {
+            StartCoroutine(JsonDataManager.Instance.Read(column + row.ToString() + gameObject.name, (data) =>
+             {
+                 if (data != null)
+                 {
+                     _jsonData = data;
+                     InitTowerInfo(data);
+                 }
+             }));
+        }
+
+        public void InitTowerInfo(JsonData data)
+        {
+            if (data != null && data.Keys.Count > 0)
+            {
+                //foreach (JsonData item in data)
+                {
+                    if (BaseTower == null)
+                    {
+                        bool temp = int.TryParse(data["Type"].ToString(), out int value);
+                        if (temp)
+                        {
+                            TowerType towerType = (TowerType)value;
+                            TowerJsonData towerJsonData = new TowerJsonData();
+                            switch (towerType)
+                            {
+                                case TowerType.Normal:
+                                    BaseTower = TowerManager.Instance.GetTower<NormalTower>(TowerType.Normal);
+                                    BaseTower.transform.SetObjParent(transform, GlobalConst.BuildYVector3, GlobalConst.BuildScale, Quaternion.identity);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            BaseTower.TowerPosition.SetBuildSuccess();
+                            BaseTower.TowerType = towerType;
+                            string TowerName = "";
+                            if (data["TowerName"]!= null)
+                            {
+                                TowerName = data["TowerName"].ToString();
+                                BaseTower.TowerName = TowerName;
+                            }
+                            temp = int.TryParse(data["Level"].ToString(), out int result);
+                            if (temp)
+                            {
+                                towerJsonData.TowerName = TowerName;
+                                towerJsonData.Level = result;
+                                towerJsonData.Type = (int)towerType;
+                                ChangeColor(Color.black);
+
+                                IsHaveBuild = true;
+                                Point.IsWall = true;
+                                isWall = true;
+                                currentTriggerObj = null;
+                                AStarManager.Instance.SetPointAsWall(column, row);
+                                EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("something errors +  " + gameObject.name);
+                        }
+                    }
+                }
+            }
         }
     }
 }

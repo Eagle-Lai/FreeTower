@@ -12,7 +12,9 @@ namespace FTProject
 
         private float yPos = 1.6f;
 
-        Transform parent;
+        public Transform parent;
+
+        public BaseTower BaseTower;
 
         public List<BasePoint> enterNodeList = new List<BasePoint>();
         public bool isBuild = false;
@@ -23,6 +25,7 @@ namespace FTProject
         private void Awake()
         {
             TowerBuildState = TowerBuildState.None;
+            BaseTower = transform.parent.GetComponent<BaseTower>();
             parent = transform.parent.GetComponent<Transform>();
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
@@ -35,6 +38,7 @@ namespace FTProject
                 if (_BasePoint != null)
                 {
                     _BasePoint.ResetPoint();
+                    _BasePoint = null;
                 }
             }
         }
@@ -53,7 +57,7 @@ namespace FTProject
         {
             if (isBuild == false)
             {
-                cubeScreenPos = Camera.main.WorldToScreenPoint(parent.position);
+                cubeScreenPos = Camera.main.WorldToScreenPoint(parent.transform.position);
 
                 //2. ����ƫ����
                 //������ά����
@@ -65,16 +69,27 @@ namespace FTProject
                 //Ŀǰ�������ά����תΪ��������
                 curMousePos = Camera.main.ScreenToWorldPoint(curMousePos);
                 //��������λ��
-                parent.position = new Vector3(curMousePos.x, GlobalConst.UnbuildYPosition, curMousePos.z);
+                parent.transform.position = new Vector3(curMousePos.x, GlobalConst.UnbuildYPosition, curMousePos.z);
             }
             if ((Input.GetMouseButtonUp(0)) && isBuild == false && BuildTower())
             {
-                this.transform.localPosition = new Vector3(0, -1.5f, 0);
-                TowerBuildState = TowerBuildState.Build;
-                isBuild = true;
-                EventDispatcher.TriggerEvent(EventName.UpdateAStarPath);
-                EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
+                SetBuildSuccess();
             }
+        }
+
+        public void SetBuildSuccess()
+        {
+            isBuild = true;
+            this.transform.localPosition = new Vector3(0, -1.5f, 0);
+            TowerBuildState = TowerBuildState.Build;
+            if (_BasePoint != null)
+            {
+                parent.transform.SetObjParent(_BasePoint.transform, GlobalConst.BuildYVector3, GlobalConst.BuildScale, Quaternion.identity);
+                SetTowerJsonData(_BasePoint);
+            }
+
+            EventDispatcher.TriggerEvent(EventName.UpdateAStarPath);
+            EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
         }
 
         public bool BuildTower()
@@ -102,17 +117,27 @@ namespace FTProject
                             BuildFail();
                             return false;
                         }
-                        parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
+                        //parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
                         enterNodeList.Clear();
                         BasePoint node = point.transform.GetComponent<BasePoint>();
                         node.BuildSuccess();
                         _BasePoint = node;
+                        node.BaseTower = parent.GetComponent<BaseTower>();
                         return true;
                     }
                 }
             }
             BuildFail();
             return false;
+        }
+
+        public void SetTowerJsonData(BasePoint basePoint)
+        {
+            TowerJsonData towerJsonData = new TowerJsonData();
+            towerJsonData.Level = 1;
+            towerJsonData.Type = (int)TowerType.Normal;
+            towerJsonData.TowerName = parent.gameObject.name;
+            JsonDataManager.Instance.Write(basePoint.column + basePoint.row.ToString() + basePoint.gameObject.name, towerJsonData);
         }
 
         private void BuildFail()

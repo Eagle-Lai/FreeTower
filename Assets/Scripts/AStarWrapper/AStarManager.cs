@@ -88,7 +88,7 @@ namespace FTProject
                 if (isFind == true)
                 {
 
-                    newPath = GetAStarPath();
+                    newPath = GetPath();
                 }
             }
             
@@ -197,10 +197,20 @@ namespace FTProject
                     pointObj.Point = tempPoint;
                     map[i, j] = tempPoint;
                     tempPoint.gameObject = pointObj.gameObject;
+                    pointObj.SetColumnAndRow(i, j);
+                    pointObj.InitPoint();
+
                 }
             }
+
+            UpdateStarPath();
         }
 
+
+        public void SetPointAsWall(int column, int row, bool isWall = true)
+        {
+            map[column, row].IsWall = isWall;
+        }
 
         public bool IsFindPath()
         {
@@ -231,14 +241,15 @@ namespace FTProject
             return null;
         }
 
-        public List<Point> GetAStarPath()
+        public List<Point> GetPath()
         {
+            AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
             return GetAStarPath(startPoint, targetPoint);
         }
 
         public Vector3[] GetPathPosition()
         {
-            List<Point> points = GetAStarPath();
+            List<Point> points = GetPath();
             
             if (points != null && points.Count > 0)
             {
@@ -275,24 +286,27 @@ namespace FTProject
                 if (isFind == true)
                 {
 
-                    newPath = GetAStarPath();
+                    vector3Path = GetPathPosition();
                 }
-                if (newPath == null)
+                if (vector3Path == null)
                     return;
 
-                if (newPath.Count > 0)
+                if (vector3Path.Length > 0)
                 {
                     int index = 1;
-                    foreach (Point node in newPath)
+                    DrawLine();
+                    foreach (Vector3 node in vector3Path)
                     {
                         if (index < newPath.Count)
                         {
-                            Point nextNode = newPath[index];
-                            Debug.DrawLine(node.position + new Vector3(0, 10, 0), nextNode.position + new Vector3(0, 10, 0), Color.white);
+                            Vector3 nextNode = vector3Path[index];
+                            Debug.DrawLine(node + new Vector3(0, 10, 0), nextNode + new Vector3(0, 10, 0), Color.white);
                             index++;
                         }
                     };
                 }
+
+                
             }
 #endif
         }
