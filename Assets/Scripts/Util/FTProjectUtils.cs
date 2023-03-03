@@ -3,13 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 namespace FTProject
 {
     public static class FTProjectUtils
     {
 
-        public static string Path
+        public static string StreamingAssetsPathPath
         {
             get
             {
@@ -24,6 +25,15 @@ namespace FTProject
 #endif
             }
         }
+
+        public static string PersistentDataPathJsonPath
+        {
+            get
+            {
+              return Path.Combine(Application.persistentDataPath, "MyJson/");
+            }
+        }
+
         public static float GetPointDistance(GameObject goA, GameObject goB)
         {
             return Vector2.Distance(new Vector2(goA.transform.position.x, goA.transform.position.z), new Vector2(goB.transform.position.x, goB.transform.position.z));
@@ -74,7 +84,7 @@ namespace FTProject
 
         private static IEnumerator  ReadFile(string name, Action<JSONNode> action)
         {
-            WWW www = new WWW(Path + "/json/" + name +".json");
+            WWW www = new WWW(StreamingAssetsPathPath + "/json/" + name +".json");
             yield return www;
             while (www.isDone == false)
             {

@@ -71,9 +71,9 @@ namespace FTProject
         public void GenerateEnemyByRoundInfo()
         {
             _currentIndex++;
-            if(_currentIndex >= Launch.Instance.Tables.TBRoundData.DataList.Count)
+            if(_currentIndex >= Launch.Instance.Tables.TBRoundData.DataList.Count - 1)
             {
-                _currentIndex = 0;
+                _currentIndex = 1;
             }
             _roundIndexs  = Launch.Instance.Tables.TBRoundData.Get(_currentIndex).EnemyIndexs;
             _intervalList = Launch.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;

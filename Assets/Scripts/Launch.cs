@@ -73,10 +73,5 @@ namespace FTProject
             EventDispatcher.TriggerEvent(EventName.UpdateEvent);
         }
 
-        private void FixedUpdate()
-        {
-
-        }
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,9 @@
     <UnityVersion>2021.3.18f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenProShortcuts.cs" />
     <Compile Include="Assets\Scripts\Util\FTProjectUtils.cs" />
@@ -89,8 +92,10 @@
     <Compile Include="Assets\Scripts\Node\NormalPoint.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Gen\TBEnemyList.cs" />
+    <Compile Include="Assets\Scripts\Json\PointJsonData.cs" />
     <Compile Include="Assets\Scripts\Core\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\Config\TowerCofig.cs" />
+    <Compile Include="Assets\Scripts\Json\TowerJsonData.cs" />
     <Compile Include="Assets\Scripts\Core\Event\EventName.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Reporter\ReporterMessageReceiver.cs" />
@@ -177,8 +182,6 @@
     <Compile Include="Assets\Scripts\Core\ResourcesManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Obstacle\NormalObstacle.cs" />
-    <Compile Include="Assets\Scripts\Json\PointJsonData.cs" />
-    <Compile Include="Assets\Scripts\Json\TowerJsonData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

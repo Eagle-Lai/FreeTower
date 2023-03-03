@@ -9,6 +9,12 @@ namespace FTProject
         protected override void OnAwake()
         {
             base.OnAwake();
+            
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
             _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
         }
 

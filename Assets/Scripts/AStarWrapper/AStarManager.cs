@@ -207,11 +207,6 @@ namespace FTProject
         }
 
 
-        public void SetPointAsWall(int column, int row, bool isWall = true)
-        {
-            map[column, row].IsWall = isWall;
-        }
-
         public bool IsFindPath()
         {
             return AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
@@ -294,7 +289,7 @@ namespace FTProject
                 if (vector3Path.Length > 0)
                 {
                     int index = 1;
-                    DrawLine();
+                    //DrawLine();
                     foreach (Vector3 node in vector3Path)
                     {
                         if (index < newPath.Count)

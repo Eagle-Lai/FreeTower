@@ -22,12 +22,9 @@ namespace FTProject
             base.OnInit();
         }
 
-        public void Write(string name, object data)
+        public string Write(string name, object data)
         {
-            string path
-#if UNITY_EDITOR
-             = Path.Combine(Application.dataPath, "MyJson");
-#endif
+            string path = FTProjectUtils.PersistentDataPathJsonPath;
 
             Debug.Log(path);
             bool isExit = !Directory.Exists(path);
@@ -36,24 +33,22 @@ namespace FTProject
                 Directory.CreateDirectory(path);
             }
             string array = JsonMapper.ToJson(data);
-            string file = path + "/" + name + ".json";
-            Debug.Log(file);
+            string file = path + name + ".json";
             if (!File.Exists(file))
             {
                 File.Create(file).Dispose();
             }
             File.WriteAllText(file, array);
+            Debug.Log(file);
 #if UNITY_EDITOR
             AssetDatabase.Refresh();
 #endif
+            return file;
         }
 
         public IEnumerator Read(string name, Action<JsonData> action)
         {
-            string path =
-#if UNITY_EDITOR
-             Application.dataPath + "/MyJson/" + name + ".json";
-#endif
+            string path = FTProjectUtils.PersistentDataPathJsonPath + name + ".json";
             WWW www = new WWW(path);
             yield return www;
             while (www.isDone == false)
@@ -79,7 +74,7 @@ namespace FTProject
 
         //private static IEnumerator ReadFile(string name, Action<JSONNode> action)
         //{
-        //    WWW www = new WWW(Path + "/json/" + name + ".json");
+        //    WWW www = new WWW(StreamingAssetsPathPath + "/json/" + name + ".json");
         //    yield return www;
         //    while (www.isDone == false)
         //    {

@@ -21,7 +21,7 @@ namespace FTProject
         {
             EventDispatcher.AddEventListener<BaseEnemy>(EventName.EnemyResetEvent, EnemyReset);
             _sphereCollider = transform.GetComponent<SphereCollider>();
-            if(_sphereCollider == null)
+            if (_sphereCollider == null)
             {
                 _sphereCollider = gameObject.AddComponent<SphereCollider>();
             }
@@ -31,7 +31,7 @@ namespace FTProject
 
         private void Start()
         {
-            
+           
         }
 
         private void EnemyReset(BaseEnemy baseEnemy)

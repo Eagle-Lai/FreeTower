@@ -10,5 +10,6 @@ namespace FTProject
         public string TowerName;
         public int Level;
         public int Type;
+        public string SavePath;
     }
 }

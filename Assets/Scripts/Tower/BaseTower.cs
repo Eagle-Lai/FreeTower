@@ -72,24 +72,24 @@ namespace FTProject
 
         protected virtual void OnAwake()
         {
-            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
-            this._searchRate = GlobalConst.SearchRate;
-            _head = transform.Find("Head");
-            _bulletPoint = transform.Find("Cube/BulletPoint");
             TowerPosition = transform.GetComponentInChildren<TowerPosition>();
+
             _targetter = transform.Find("Targetter").GetComponent<Targetter>();
-            if (_targetter == null)
-            {
-                _targetter = transform.Find("Targetter").gameObject.AddComponent<Targetter>();
-            }
-            _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
         }
 
 
         protected virtual void OnStart()
         {
-
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
+            this._searchRate = GlobalConst.SearchRate;
+            _head = transform.Find("Head");
+            _bulletPoint = transform.Find("Cube/BulletPoint");
            
+            if (_targetter == null)
+            {
+                _targetter = transform.Find("Targetter").gameObject.AddComponent<Targetter>();
+            }
+            _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
         }
 
 
@@ -114,7 +114,8 @@ namespace FTProject
 
         protected virtual bool IsCanFire()
         {
-            return currentTargetGameObject != null && _fireTimer <= 0 && TowerPosition.TowerBuildState == TowerBuildState.Build;
+            bool isFire = currentTargetGameObject != null && _fireTimer <= 0 && TowerPosition.TowerBuildState == TowerBuildState.Build;
+            return isFire;
         }
 
         protected virtual void TowerAttack()
@@ -139,6 +140,11 @@ namespace FTProject
             {
                 Debug.LogError("##########################");
             }
+        }
+
+        public void SetBuildSuccess()
+        {
+            TowerPosition.SetBuildSuccess();
         }
     }
 }

@@ -128,18 +128,18 @@ namespace DG.Tweening
             return s;
         }
 
-        /// <summary>Tweens a Rigidbody's position through the given Path waypoints, using the chosen Path algorithm.
+        /// <summary>Tweens a Rigidbody's position through the given StreamingAssetsPathPath waypoints, using the chosen StreamingAssetsPathPath algorithm.
         /// Also stores the Rigidbody as the tween's target so it can be used for filtered operations.
         /// <para>NOTE: to tween a rigidbody correctly it should be set to kinematic at least while being tweened.</para>
         /// <para>BEWARE: doesn't work on Windows Phone store (waiting for Unity to fix their own bug).
         /// If you plan to publish there you should use a regular transform.DOPath.</para></summary>
         /// <param name="path">The waypoints to go through</param>
         /// <param name="duration">The duration of the tween</param>
-        /// <param name="pathType">The type of Path: Linear (straight Path), CatmullRom (curved CatmullRom Path) or CubicBezier (curved with control points)</param>
-        /// <param name="pathMode">The Path mode: 3D, side-scroller 2D, top-down 2D</param>
-        /// <param name="resolution">The resolution of the Path (useless in case of Linear paths): higher resolutions make for more detailed curved paths but are more expensive.
+        /// <param name="pathType">The type of StreamingAssetsPathPath: Linear (straight StreamingAssetsPathPath), CatmullRom (curved CatmullRom StreamingAssetsPathPath) or CubicBezier (curved with control points)</param>
+        /// <param name="pathMode">The StreamingAssetsPathPath mode: 3D, side-scroller 2D, top-down 2D</param>
+        /// <param name="resolution">The resolution of the StreamingAssetsPathPath (useless in case of Linear paths): higher resolutions make for more detailed curved paths but are more expensive.
         /// Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints</param>
-        /// <param name="gizmoColor">The color of the Path (shown when gizmos are active in the Play panel and the tween is running)</param>
+        /// <param name="gizmoColor">The color of the StreamingAssetsPathPath (shown when gizmos are active in the Play panel and the tween is running)</param>
         public static TweenerCore<Vector3, Path, PathOptions> DOPath(
             this Rigidbody target, Vector3[] path, float duration, PathType pathType = PathType.Linear,
             PathMode pathMode = PathMode.Full3D, int resolution = 10, Color? gizmoColor = null
@@ -153,18 +153,18 @@ namespace DG.Tweening
             t.plugOptions.mode = pathMode;
             return t;
         }
-        /// <summary>Tweens a Rigidbody's localPosition through the given Path waypoints, using the chosen Path algorithm.
+        /// <summary>Tweens a Rigidbody's localPosition through the given StreamingAssetsPathPath waypoints, using the chosen StreamingAssetsPathPath algorithm.
         /// Also stores the Rigidbody as the tween's target so it can be used for filtered operations
         /// <para>NOTE: to tween a rigidbody correctly it should be set to kinematic at least while being tweened.</para>
         /// <para>BEWARE: doesn't work on Windows Phone store (waiting for Unity to fix their own bug).
         /// If you plan to publish there you should use a regular transform.DOLocalPath.</para></summary>
         /// <param name="path">The waypoint to go through</param>
         /// <param name="duration">The duration of the tween</param>
-        /// <param name="pathType">The type of Path: Linear (straight Path), CatmullRom (curved CatmullRom Path) or CubicBezier (curved with control points)</param>
-        /// <param name="pathMode">The Path mode: 3D, side-scroller 2D, top-down 2D</param>
-        /// <param name="resolution">The resolution of the Path: higher resolutions make for more detailed curved paths but are more expensive.
+        /// <param name="pathType">The type of StreamingAssetsPathPath: Linear (straight StreamingAssetsPathPath), CatmullRom (curved CatmullRom StreamingAssetsPathPath) or CubicBezier (curved with control points)</param>
+        /// <param name="pathMode">The StreamingAssetsPathPath mode: 3D, side-scroller 2D, top-down 2D</param>
+        /// <param name="resolution">The resolution of the StreamingAssetsPathPath: higher resolutions make for more detailed curved paths but are more expensive.
         /// Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints</param>
-        /// <param name="gizmoColor">The color of the Path (shown when gizmos are active in the Play panel and the tween is running)</param>
+        /// <param name="gizmoColor">The color of the StreamingAssetsPathPath (shown when gizmos are active in the Play panel and the tween is running)</param>
         public static TweenerCore<Vector3, Path, PathOptions> DOLocalPath(
             this Rigidbody target, Vector3[] path, float duration, PathType pathType = PathType.Linear,
             PathMode pathMode = PathMode.Full3D, int resolution = 10, Color? gizmoColor = null
@@ -180,7 +180,7 @@ namespace DG.Tweening
             t.plugOptions.useLocalPosition = true;
             return t;
         }
-        // Used by Path editor when creating the actual tween, so it can pass a pre-compiled Path
+        // Used by StreamingAssetsPathPath editor when creating the actual tween, so it can pass a pre-compiled StreamingAssetsPathPath
         internal static TweenerCore<Vector3, Path, PathOptions> DOPath(
             this Rigidbody target, Path path, float duration, PathMode pathMode = PathMode.Full3D
         )

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace FTProject
@@ -22,35 +23,40 @@ namespace FTProject
 
         public BasePoint _BasePoint;
 
+        public string _savePath;
+
         private void Awake()
         {
-            TowerBuildState = TowerBuildState.None;
-            BaseTower = transform.parent.GetComponent<BaseTower>();
-            parent = transform.parent.GetComponent<Transform>();
-            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
-            EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
+           
         }
 
-        private void DestroyTower(BaseTower baseTower)
+        public void DestroyTower(BaseTower baseTower)
         {
-            if(baseTower == parent.GetComponent<BaseTower>())
+            if (baseTower == BaseTower)
             {
-                if (_BasePoint != null)
+                if (File.Exists(_savePath))
                 {
-                    _BasePoint.ResetPoint();
-                    _BasePoint = null;
+                    File.Delete(_savePath);
                 }
             }
+
         }
 
         private void Start()
         {
+            TowerBuildState = TowerBuildState.None;
+            parent = transform.parent.GetComponent<Transform>();
+            BaseTower = parent.GetComponent<BaseTower>();
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
+            EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
+
             EventDispatcher.TriggerEvent(EventName.BuildingTower);
         }
 
         public void OnDestroy()
         {
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
+            EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
         }
 
         private void MyUpdate()
@@ -87,8 +93,7 @@ namespace FTProject
                 parent.transform.SetObjParent(_BasePoint.transform, GlobalConst.BuildYVector3, GlobalConst.BuildScale, Quaternion.identity);
                 SetTowerJsonData(_BasePoint);
             }
-
-            EventDispatcher.TriggerEvent(EventName.UpdateAStarPath);
+            EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
             EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
         }
 
@@ -120,7 +125,7 @@ namespace FTProject
                         //parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
                         enterNodeList.Clear();
                         BasePoint node = point.transform.GetComponent<BasePoint>();
-                        node.BuildSuccess();
+                        node.BuildSuccess(BaseTower);
                         _BasePoint = node;
                         node.BaseTower = parent.GetComponent<BaseTower>();
                         return true;
@@ -137,7 +142,11 @@ namespace FTProject
             towerJsonData.Level = 1;
             towerJsonData.Type = (int)TowerType.Normal;
             towerJsonData.TowerName = parent.gameObject.name;
-            JsonDataManager.Instance.Write(basePoint.column + basePoint.row.ToString() + basePoint.gameObject.name, towerJsonData);
+            string temp = basePoint.column + basePoint.row.ToString() + basePoint.gameObject.name;
+            _savePath = FTProjectUtils.PersistentDataPathJsonPath + temp + ".json";
+            towerJsonData.SavePath = _savePath;
+            JsonDataManager.Instance.Write(temp, towerJsonData);
+            
         }
 
         private void BuildFail()

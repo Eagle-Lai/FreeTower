@@ -13,8 +13,6 @@ namespace FTProject
         public PointType _PointType;
         public bool IsHaveBuild = false;
 
-        public bool isWall = false;
-
         protected MeshRenderer meshRenderer;
 
         public BaseTower BaseTower;
@@ -38,14 +36,24 @@ namespace FTProject
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.AddEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
             meshRenderer = transform.GetComponent<MeshRenderer>();
+            EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
         }
 
         public virtual void OnDestroy()
         {
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.RemoveEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
+            EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
         }
 
+        public void DestroyTower(BaseTower baseTower)
+        {
+            if(BaseTower == baseTower)
+            {
+                ResetPoint();
+                
+            }
+        }
 
         protected virtual void MyUpdate()
         {
@@ -95,11 +103,8 @@ namespace FTProject
             currentTriggerObj = null;
             if (_PointType == PointType.Normal && other.gameObject.name.Contains("Tower"))
             {
-                Debug.Log(other.gameObject.name);
-                Debug.Log(gameObject.name);
                 ChangeColor(Color.black);
                 Point.IsWall = false;
-                isWall = false;
             }
         }
         public virtual void ChangeColor(Color color)
@@ -115,13 +120,13 @@ namespace FTProject
             return meshRenderer.material.color;
         }
 
-        public void BuildSuccess()
+        public void BuildSuccess(BaseTower baseTower)
         {
             Point.IsWall = true;
             IsHaveBuild = true;
             ChangeColor(Color.black);
             _PointType = PointType.Obstacle;
-            isWall = true;
+            BaseTower = baseTower;
         }
 
         public void ResetPoint()
@@ -130,7 +135,7 @@ namespace FTProject
             IsHaveBuild = false;
             ChangeColor(Color.black);
             _PointType = PointType.Normal;
-            isWall = false;
+            BaseTower = null;
         }
 
         public void SetColumnAndRow(int col, int r)
@@ -173,13 +178,14 @@ namespace FTProject
                                 default:
                                     break;
                             }
-                            BaseTower.TowerPosition.SetBuildSuccess();
+                            BaseTower.SetBuildSuccess();
                             BaseTower.TowerType = towerType;
                             string TowerName = "";
                             if (data["TowerName"]!= null)
                             {
                                 TowerName = data["TowerName"].ToString();
                                 BaseTower.TowerName = TowerName;
+                                BaseTower.TowerPosition._savePath = data["SavePath"].ToString();
                             }
                             temp = int.TryParse(data["Level"].ToString(), out int result);
                             if (temp)
@@ -189,13 +195,10 @@ namespace FTProject
                                 towerJsonData.Type = (int)towerType;
                                 ChangeColor(Color.black);
 
-                                IsHaveBuild = true;
-                                Point.IsWall = true;
-                                isWall = true;
-                                currentTriggerObj = null;
-                                AStarManager.Instance.SetPointAsWall(column, row);
-                                EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
+                                 BuildSuccess(BaseTower);
+                                 currentTriggerObj = null;
                             }
+                            EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
                         }
                         else
                         {
@@ -203,6 +206,7 @@ namespace FTProject
                         }
                     }
                 }
+                
             }
         }
     }

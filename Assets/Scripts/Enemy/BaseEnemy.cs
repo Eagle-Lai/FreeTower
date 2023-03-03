@@ -62,7 +62,7 @@ namespace FTProject {
             _speed = GlobalConst.EnemySpeed;
             EnemyState = EnemyState.Idle;
 
-            EventDispatcher.AddEventListener(EventName.UpdateAStarPath, SetPath);
+            EventDispatcher.AddEventListener(EventName.RefreshPathEvent, SetPath);
             EventDispatcher.AddEventListener(EventName.BuildTowerSuccess, SetPath);
             EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
 
@@ -107,7 +107,7 @@ namespace FTProject {
         protected virtual void Clear()
         {
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
-            EventDispatcher.RemoveEventListener(EventName.UpdateAStarPath, SetPath);
+            EventDispatcher.RemoveEventListener(EventName.RefreshPathEvent, SetPath);
             EventDispatcher.RemoveEventListener(EventName.BuildTowerSuccess, SetPath);
             EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
         }
