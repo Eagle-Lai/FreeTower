@@ -10,6 +10,11 @@ namespace FTProject
 {
     public class GlobalConst
     {
+
+        /// <summary>
+        /// 玩家血量
+        /// </summary>
+        public const int PlayerHp = 10;
         /// <summary>
         /// 寻找间隔
         /// </summary>
@@ -74,10 +79,6 @@ namespace FTProject
         /// </summary>
         public const int EnemyHp = 6;
 
-        /// <summary>
-        /// 玩家血量
-        /// </summary>
-        public const int PlayerHp = 10;
         
         /// <summary>
         /// 回合数
@@ -93,5 +94,10 @@ namespace FTProject
         /// 一次生成的敌人数量
         /// </summary>
         public const int RoundEnemyNumber = 10;
+
+        /// <summary>
+        /// 玩家的金币
+        /// </summary>
+        public const int GoldCoin = 100;
     }
 }

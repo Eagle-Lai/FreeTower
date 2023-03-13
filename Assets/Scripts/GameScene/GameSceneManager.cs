@@ -18,7 +18,7 @@ namespace FTProject
         {
             base.OnInit();
             //_roundCountManager = RoundCountManager.Instance;
-            //_SceneInfo = Launch.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
+            //_SceneInfo = Launcher.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
             //_roundCountManager.SetSceneInfo(_SceneInfo);
         }
         public override void OnDestroy()
@@ -29,7 +29,7 @@ namespace FTProject
         public void UpdateSceneInfo()
         {
             CurrentIndex++;
-            _SceneInfo = Launch.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
+            _SceneInfo = Launcher.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
             _roundCountManager.SetSceneInfo(_SceneInfo);
         }
     }

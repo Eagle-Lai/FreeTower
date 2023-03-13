@@ -19,11 +19,15 @@ namespace FTProject
 
         private TextMeshProUGUI _countTxt;
 
+        private TextMeshProUGUI _GoldCoinTxt;
+
         private int _hp;
 
         private int _count;
 
         private int _TotalCount;
+
+        private int _GoldCoin;
 
         public override void OnInit()
         {
@@ -47,15 +51,20 @@ namespace FTProject
            // normalTowerBtn.onClick.AddListener(OnClickBtn);
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
             _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshProUGUI>();
-            _countTxt = _gameObject.transform.Find("Count").GetComponent<TextMeshProUGUI>();
+            _countTxt = _gameObject.transform.Find("RoundCount").GetComponent<TextMeshProUGUI>();
+            _GoldCoinTxt = _gameObject.transform.Find("GoldCoin").GetComponent<TextMeshProUGUI>();
 
             UIEventListener.Get(normalTowerBtn.gameObject).onPointerDown = DownEvent;
             UIEventListener.Get(normalTowerBtn.gameObject).onPointerUp = UpEvent;
 
             _hp = GlobalConst.PlayerHp;
             _count = GlobalConst.RoundCount;
+            _GoldCoin = GlobalConst.GoldCoin;
+
             _countTxt.text = _count.ToString();
             _hpTxt.text = _hp.ToString();
+            _GoldCoinTxt.text = _GoldCoin.ToString();
+
             _TotalCount = GlobalConst.RoundCount;
             
         }

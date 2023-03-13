@@ -24,7 +24,7 @@ namespace FTProject
         public override void OnInit()
         {
             base.OnInit();
-            _BulletParent = GameObject.Find("BulletParent").transform;
+            //_BulletParent = GameObject.Find("BulletParent").transform;
         }
 
         public override void OnDestroy()

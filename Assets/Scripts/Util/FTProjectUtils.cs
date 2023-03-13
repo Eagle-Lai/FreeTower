@@ -74,7 +74,7 @@ namespace FTProject
 
         public static void ReadData(string name, Action<JSONNode> action)
         {
-            Launch.Instance.StartCoroutine(ReadFile(name, action));
+            Launcher.Instance.StartCoroutine(ReadFile(name, action));
         }
 
         //public static JSONNode ReadData(string name, Func<string, JSONNode> func)

@@ -28,7 +28,7 @@ namespace FTProject
         /// </summary>
         public virtual void OnShow()
         {
-
+            _gameObject.ShowObject();
         }
         /// <summary>
         /// 界面隐藏的时候调用的方法(会有多次调用的情况)
@@ -68,6 +68,11 @@ namespace FTProject
         public void ResetActiveTime()
         {
             activeTime = ACTIVETIME;
+        }
+
+        public void CloseSelf()
+        {
+            _gameObject.HideObject();
         }
     }
 }

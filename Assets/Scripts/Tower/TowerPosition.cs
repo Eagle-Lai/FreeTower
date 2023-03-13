@@ -15,7 +15,7 @@ namespace FTProject
 
         public Transform parent;
 
-        public BaseTower BaseTower;
+        public BaseTower _ParentTower;
 
         public List<BasePoint> enterNodeList = new List<BasePoint>();
         public bool isBuild = false;
@@ -32,7 +32,7 @@ namespace FTProject
 
         public void DestroyTower(BaseTower baseTower)
         {
-            if (baseTower == BaseTower)
+            if (baseTower == _ParentTower)
             {
                 if (File.Exists(_savePath))
                 {
@@ -44,9 +44,8 @@ namespace FTProject
 
         private void Start()
         {
-            TowerBuildState = TowerBuildState.None;
             parent = transform.parent.GetComponent<Transform>();
-            BaseTower = parent.GetComponent<BaseTower>();
+            _ParentTower = parent.GetComponent<BaseTower>();
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
 
@@ -107,25 +106,21 @@ namespace FTProject
                     if (color == Color.green && !enterNodeList[i].IsHaveBuild)
                     {
                         BasePoint point = enterNodeList[i];
-                        //node.node.MarkAsObstacle(false);
-                        //List<Node> nodes = GridManager.Instance.GetPath();
-                        //if (nodes == null)
-                        //{
-                        //    node.node.MarkAsObstacle();
-                        //    return false;
-                        //}
                         point.Point.IsWall = true;
                         bool isFind = AStarManager.Instance.IsFindPath();
-                        if (!isFind)
+                        if (!isFind)//判断这个点能不能建造
                         {
                             point.Point.IsWall = false;
                             BuildFail();
                             return false;
                         }
-                        //parent.transform.position = enterNodeList[i].transform.position + new Vector3(0, GlobalConst.BuildYPosition, 0);
+                        if(isCanBuild() == false) //是不是符合建造条件
+                        {
+                            return false;
+                        }
                         enterNodeList.Clear();
                         BasePoint node = point.transform.GetComponent<BasePoint>();
-                        node.BuildSuccess(BaseTower);
+                        node.BuildSuccess(_ParentTower);
                         _BasePoint = node;
                         node.BaseTower = parent.GetComponent<BaseTower>();
                         return true;
@@ -134,6 +129,12 @@ namespace FTProject
             }
             BuildFail();
             return false;
+        }
+
+        public bool isCanBuild()
+        {
+            bool result = true;
+            return result;
         }
 
         public void SetTowerJsonData(BasePoint basePoint)

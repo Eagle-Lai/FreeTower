@@ -18,6 +18,7 @@ public sealed partial class Tables
     public TBRoundData TBRoundData {get; }
     public TBEnemyList TBEnemyList {get; }
     public TBSceneInfo TBSceneInfo {get; }
+    public TBTowerInfo TBTowerInfo {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -30,12 +31,15 @@ public sealed partial class Tables
         tables.Add("TBEnemyList", TBEnemyList);
         TBSceneInfo = new TBSceneInfo(loader("tbsceneinfo")); 
         tables.Add("TBSceneInfo", TBSceneInfo);
+        TBTowerInfo = new TBTowerInfo(loader("tbtowerinfo")); 
+        tables.Add("TBTowerInfo", TBTowerInfo);
         PostInit();
 
         TBEnemyData.Resolve(tables); 
         TBRoundData.Resolve(tables); 
         TBEnemyList.Resolve(tables); 
         TBSceneInfo.Resolve(tables); 
+        TBTowerInfo.Resolve(tables); 
         PostResolve();
     }
 
@@ -45,6 +49,7 @@ public sealed partial class Tables
         TBRoundData.TranslateText(translator); 
         TBEnemyList.TranslateText(translator); 
         TBSceneInfo.TranslateText(translator); 
+        TBTowerInfo.TranslateText(translator); 
     }
     
     partial void PostInit();

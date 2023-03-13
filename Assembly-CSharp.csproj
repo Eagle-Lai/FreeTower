@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,9 +53,6 @@
     <UnityVersion>2021.3.18f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenProShortcuts.cs" />
     <Compile Include="Assets\Scripts\Util\FTProjectUtils.cs" />
@@ -71,11 +68,13 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\SuperScrollView\Scripts\ListView\LoopListViewItem2.cs" />
     <Compile Include="Assets\Gen\EnemyData.cs" />
     <Compile Include="Assets\Scripts\GameScene\GameSceneManager.cs" />
     <Compile Include="Assets\Scripts\UI\MainView.cs" />
-    <Compile Include="Assets\Reporter\MultiKeyDictionary.cs" />
+    <Compile Include="Assets\SuperScrollView\Scripts\ListView\LoopListItemPool.cs" />
     <Compile Include="Assets\LubanLib\ByteBuf.cs" />
+    <Compile Include="Assets\Reporter\MultiKeyDictionary.cs" />
     <Compile Include="Assets\Scripts\Core\Manager\BaseManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\NormalEnemy.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONDotNetTypes.cs" />
@@ -83,14 +82,17 @@
     <Compile Include="Assets\LubanLib\ITypeId.cs" />
     <Compile Include="Assets\Gen\EquipPosition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\SuperScrollView\Scripts\Common\ItemPosMgr.cs" />
     <Compile Include="Assets\Scripts\Node\StartPoint.cs" />
     <Compile Include="Assets\Scripts\Bullet\BulletManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Gen\item\EQuality.cs" />
+    <Compile Include="Assets\Scripts\UI\StartView.cs" />
     <Compile Include="Assets\Scripts\Core\Enum\EnumFile.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
-    <Compile Include="Assets\Scripts\Node\NormalPoint.cs" />
+    <Compile Include="Assets\SuperScrollView\Scripts\ListView\LoopListView2.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Scripts\Node\NormalPoint.cs" />
     <Compile Include="Assets\Gen\TBEnemyList.cs" />
     <Compile Include="Assets\Scripts\Json\PointJsonData.cs" />
     <Compile Include="Assets\Scripts\Core\Event\EventDispatcher.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Assets\Scripts\Core\UI\BaseView.cs" />
     <Compile Include="Assets\Scripts\Tower\NormalTower.cs" />
     <Compile Include="Assets\Reporter\Test\TestReporter.cs" />
+    <Compile Include="Assets\SuperScrollView\Scripts\Common\CommonDefine.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONBinary.cs" />
@@ -134,12 +137,15 @@
     <Compile Include="Assets\Scripts\Core\UIEventListener.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\LubanLib\SimpleJSON\SimpleJSONUnity.cs" />
+    <Compile Include="Assets\SuperScrollView\Scripts\Common\ClickEventListener.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Tower\SlowTower.cs" />
     <Compile Include="Assets\Scripts\Data\AssetData.cs" />
+    <Compile Include="Assets\Gen\TBTowerInfo.cs" />
     <Compile Include="Assets\Scripts\Core\TimerManager.cs" />
+    <Compile Include="Assets\Gen\TowerInfo.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
@@ -147,9 +153,10 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
-    <Compile Include="Assets\Scripts\Launch.cs" />
+    <Compile Include="Assets\Scripts\Launcher.cs" />
     <Compile Include="Assets\Scripts\Round\RoundCountManager.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerPosition.cs" />
+    <Compile Include="Assets\Scripts\UI\SelectView.cs" />
     <Compile Include="Assets\Gen\Tables.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenDeAudio.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -479,11 +486,17 @@
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.1\Plugins\websocket-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
@@ -880,6 +893,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{B588FD1E-DC34-2E9E-E4BF-25902BAA2998}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Updater.csproj">
       <Project>{766AEBB1-5841-309E-3C1E-DC4C40F3E8CE}</Project>
       <Name>Unity.AI.Navigation.Updater</Name>
@@ -960,17 +977,33 @@
       <Project>{2DC3F190-BB98-B4ED-790D-494A98571DCF}</Project>
       <Name>Unity.2D.Tilemap.Extras.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.csproj">
+      <Project>{889BFD50-C35A-FE3A-77A9-7EBB12FBA5D5}</Project>
+      <Name>Unity.Services.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.csproj">
       <Project>{D9755A60-6551-5B5D-6DEE-517E7B3A8076}</Project>
       <Name>Unity.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Authentication.csproj">
+      <Project>{E0DD35BE-CE62-DCC7-99AA-A92F1DB72E25}</Project>
+      <Name>Unity.Services.Authentication</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.IK.Runtime.csproj">
       <Project>{E800F59E-B1FF-B73B-7783-DCBE6290F2EB}</Project>
       <Name>Unity.2D.IK.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
+      <Project>{94B31FFF-37DE-6DCE-FAD0-F94B1298BB75}</Project>
+      <Name>Unity.Services.Core.Analytics</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Burst.csproj">
       <Project>{EB2619AE-3983-3FD2-DF8C-C4DD3FD19AB0}</Project>
       <Name>Unity.Burst</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
+      <Project>{C2F2BBE2-4915-2300-CAF0-AA4AC9844BBF}</Project>
+      <Name>Unity.Services.Core.Environments</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Animation.Runtime.csproj">
       <Project>{CB58B5AA-DFA8-74C4-5D97-0B1D3BDED603}</Project>

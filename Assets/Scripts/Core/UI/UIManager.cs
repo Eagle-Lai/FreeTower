@@ -14,10 +14,6 @@ namespace FTProject
 {
     public class UIManager : BaseManager<UIManager>
     {
-
-
-       
-
        
         private Dictionary<UILayout, RectTransform> layoutDicitonary = new Dictionary<UILayout, RectTransform>();
 
@@ -102,13 +98,13 @@ namespace FTProject
                 else
                 {
                     RectTransform parent = GetPanelLayoutParent(item.UILayout);
-                    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject(item.name, parent, (go) => 
+                    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject(item.name, parent, (obj) => 
                     {
-                        if (go != null)
+                        if (obj != null)
                         {
                             t = new T();
                             t.OnInit();
-                            t.SetGameObject(go);
+                            t.SetGameObject(obj);
                             t.SetUIItem(item);
                             t.SetParent(parent.transform);
                             t.SetData(data);
@@ -129,7 +125,17 @@ namespace FTProject
             {
                 baseView.OnHide();
                 baseView.isShow = false;
+                baseView.CloseSelf();
             }
+        }
+
+        public T GetView<T>(string viewName) where T : BaseView
+        {
+            if (panelDictionary.TryGetValue(viewName, out BaseView baseView))
+            {
+                return baseView as T;
+            }
+            return null;
         }
     }
 }

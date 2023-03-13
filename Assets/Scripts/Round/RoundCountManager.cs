@@ -71,12 +71,12 @@ namespace FTProject
         public void GenerateEnemyByRoundInfo()
         {
             _currentIndex++;
-            if(_currentIndex >= Launch.Instance.Tables.TBRoundData.DataList.Count - 1)
+            if(_currentIndex >= Launcher.Instance.Tables.TBRoundData.DataList.Count - 1)
             {
                 _currentIndex = 1;
             }
-            _roundIndexs  = Launch.Instance.Tables.TBRoundData.Get(_currentIndex).EnemyIndexs;
-            _intervalList = Launch.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;
+            _roundIndexs  = Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).EnemyIndexs;
+            _intervalList = Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;
             int index = 0;
             for (int i = 0; i < _roundIndexs.Count; i++)
             {

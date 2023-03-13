@@ -19,8 +19,8 @@ namespace FTProject
         public override void OnInit()
         {
             base.OnInit();
-            IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
-            MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
+            //IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
+            //MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
 
         }
 
@@ -31,11 +31,11 @@ namespace FTProject
 
         public void GenerateEnemyByList(int index)
         {
-            List<int> list = Launch.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
-            List<int> interval = Launch.Instance.Tables.TBEnemyList.Get(index).Interval;
+            List<int> list = Launcher.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
+            List<int> interval = Launcher.Instance.Tables.TBEnemyList.Get(index).Interval;
             for (int i = 0; i < list.Count; i++)
             {
-                EnemyData data = Launch.Instance.Tables.TBEnemyData.Get(list[i]);
+                EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(list[i]);
                 if (data != null)
                 {
                     switch (data.Type)

@@ -52,7 +52,6 @@ namespace FTProject {
             if (AssetData.AssetDictionary.TryGetValue(name, out AssetData.AssetItemData item))
             {
                 GameObject obj = Resources.Load<GameObject>(item.path);
-                
                 if (obj != null)
                 {
                     GameObject go = GameObject.Instantiate(obj);
@@ -67,6 +66,14 @@ namespace FTProject {
                     }
                     return go;
                 }
+                else
+                {
+                    Debug.LogError("can't find prefab in path " + item.path);
+                }
+            }
+            else
+            {
+                Debug.LogError("can't find " + name);
             }
             return null;
         }

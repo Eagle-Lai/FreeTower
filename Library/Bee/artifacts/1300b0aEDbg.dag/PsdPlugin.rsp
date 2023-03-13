@@ -351,6 +351,8 @@
 -r:"F:/FreedomTower/FreedomTower/Library/PackageCache/com.unity.collab-proxy@2.0.0/Lib/Editor/PlasticSCM/Unity.Plastic.Newtonsoft.Json.dll"
 -r:"F:/FreedomTower/FreedomTower/Library/PackageCache/com.unity.collab-proxy@2.0.0/Lib/Editor/PlasticSCM/unityplastic.dll"
 -r:"F:/FreedomTower/FreedomTower/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll"
+-r:"F:/FreedomTower/FreedomTower/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll"
+-r:"F:/FreedomTower/FreedomTower/Library/PackageCache/com.unity.services.wire@1.1.1/Plugins/websocket-sharp.dll"
 -r:"Library/Bee/artifacts/1300b0aEDbg.dag/Unity.Burst.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aEDbg.dag/UnityEditor.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aEDbg.dag/UnityEditor.UI.ref.dll"
