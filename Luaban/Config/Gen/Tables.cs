@@ -14,22 +14,42 @@ namespace cfg
    
 public sealed partial class Tables
 {
-    public item.TbItem TbItem {get; }
+    public TBEnemyData TBEnemyData {get; }
+    public TBRoundData TBRoundData {get; }
+    public TBEnemyList TBEnemyList {get; }
+    public TBSceneInfo TBSceneInfo {get; }
+    public TBTowerInfo TBTowerInfo {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         var tables = new System.Collections.Generic.Dictionary<string, object>();
-        TbItem = new item.TbItem(loader("item_tbitem")); 
-        tables.Add("item.TbItem", TbItem);
+        TBEnemyData = new TBEnemyData(loader("tbenemydata")); 
+        tables.Add("TBEnemyData", TBEnemyData);
+        TBRoundData = new TBRoundData(loader("tbrounddata")); 
+        tables.Add("TBRoundData", TBRoundData);
+        TBEnemyList = new TBEnemyList(loader("tbenemylist")); 
+        tables.Add("TBEnemyList", TBEnemyList);
+        TBSceneInfo = new TBSceneInfo(loader("tbsceneinfo")); 
+        tables.Add("TBSceneInfo", TBSceneInfo);
+        TBTowerInfo = new TBTowerInfo(loader("tbtowerinfo")); 
+        tables.Add("TBTowerInfo", TBTowerInfo);
         PostInit();
 
-        TbItem.Resolve(tables); 
+        TBEnemyData.Resolve(tables); 
+        TBRoundData.Resolve(tables); 
+        TBEnemyList.Resolve(tables); 
+        TBSceneInfo.Resolve(tables); 
+        TBTowerInfo.Resolve(tables); 
         PostResolve();
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
     {
-        TbItem.TranslateText(translator); 
+        TBEnemyData.TranslateText(translator); 
+        TBRoundData.TranslateText(translator); 
+        TBEnemyList.TranslateText(translator); 
+        TBSceneInfo.TranslateText(translator); 
+        TBTowerInfo.TranslateText(translator); 
     }
     
     partial void PostInit();
