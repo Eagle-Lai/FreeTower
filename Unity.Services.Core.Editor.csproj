@@ -87,8 +87,8 @@
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\UserRoleManagement\UserRole.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\UiHelpers\SettingsCommonHeaderUiHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\UiHelpers\SliderToggleUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\DefaultCdnConfiguredEndpoint.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\EditorGameServiceSettingsProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\DefaultCdnConfiguredEndpoint.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\UiHelpers\AccessTokenErrorUiHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\EditorGameServiceDashboardHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\IEditorGameServiceIdentifier.cs" />
@@ -113,10 +113,10 @@
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\Networking\InvalidJwtException.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\ProjectBindRedirect\ProjectBindRedirectUiConstants.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\EditorGameServiceRemoteConfiguration.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\Networking\ITokenExchangeUrls.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\ProjectBindRedirect\ProjectBindRedirectPopupUI.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\Telemetry\PackageConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\EditorGameService\EditorGameServiceRemoteConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.services.core@1.7.0\Editor\Core\UiHelpers\UXML\ExceptionVisual.uxml" />

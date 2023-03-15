@@ -1,22 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using cfg;
 
 
 namespace FTProject
 {
-    public class BaseGameScene : MonoBehaviour
+    public class BaseGameScene
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
+        public SceneInfo _SceneInfo;
 
-        // Update is called once per frame
-        void Update()
+        public BaseGameScene(SceneInfo sceneInfo)
         {
-            
+            _SceneInfo = sceneInfo;
         }
     }
 }

@@ -95,8 +95,8 @@
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Tooltip.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\inspectors\TimelineInspectorUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Manipulators\Sequence\SelectAndMoveItem.cs" />
-    <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Items\ItemsGroup.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Utilities\Scopes\LabelWidthScope.cs" />
+    <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Items\ItemsGroup.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\CurveEditUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\TimelineUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Window\TimelineNavigator.cs" />
@@ -193,9 +193,9 @@
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Manipulators\Utils\ManipulatorsUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Window\TimelineWindow_ActiveTimeline.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Extensions\AnimationTrackExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Window\WindowConstants.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\treeview\Snapping\ISnappable.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Manipulators\EditMode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Window\WindowConstants.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Attributes\TimelineShortcutAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\treeview\Drawers\Layers\ClipsLayer.cs" />
     <Compile Include="Library\PackageCache\com.unity.timeline@1.7.2\Editor\Manipulators\TimeIndicator.cs" />

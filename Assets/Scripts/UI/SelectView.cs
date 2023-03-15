@@ -10,6 +10,7 @@ namespace FTProject
     {
         LoopListView2 _LoopListView2;
         Button _BackBtn;
+        List<BaseGameScene> _data;
         public override void OnInit()
         {
             base.OnInit();
@@ -29,7 +30,8 @@ namespace FTProject
         {
             base.InitComponent();
             _LoopListView2 = _gameObject.transform.Find("ScrollView").GetComponent<LoopListView2>();
-            _LoopListView2.InitListView(100, OnGetItemByIndex);
+            _data = GameSceneManager.Instance.AllScene;
+            _LoopListView2.InitListView(_data.Count, OnGetItemByIndex);
             _BackBtn = _gameObject.transform.Find("Back").GetComponent<Button>();
             _BackBtn.onClick.AddListener(OnClickBack);
         }
@@ -40,16 +42,10 @@ namespace FTProject
 
         LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
         {
-            //if (index < 0 || index >= DataSourceMgr.Get.TotalItemCount)
-            //{
-            //    return null;
-            //}
-
-            //ItemData itemData = DataSourceMgr.Get.GetItemDataByIndex(index);
-            //if (itemData == null)
-            //{
-            //    return null;
-            //}
+            if (index < 0 || index >= _data.Count)
+            {
+                return null;
+            }
             //get a new item. Every item can use a different prefab, the parameter of the NewListViewItem is the prefab¡¯name. 
             //And all the prefabs should be listed in ItemPrefabList in LoopListView2 Inspector Setting
             LoopListViewItem2 item = listView.NewListViewItem("SelectViewItem");
@@ -59,7 +55,7 @@ namespace FTProject
                 item.IsInitHandlerCalled = true;
                 itemScript.Init();
             }
-            itemScript.SetItemData();
+            itemScript.SetItemData(_data[index]);
             return item;
         }
 
@@ -77,9 +73,14 @@ namespace FTProject
                 LoopListViewItem2 item = _LoopListView2.GetShownItemByIndex(i);
                 SelectViewItem itemScript = item.GetComponent<SelectViewItem>();
                 float scale = 1 - Mathf.Abs(item.DistanceWithViewPortSnapCenter) / 700f;
-                scale = Mathf.Clamp(scale, 0.4f, 1);
-                //itemScript.mContentRootObj.GetComponent<CanvasGroup>().alpha = scale;
-                //itemScript.mContentRootObj.transform.localScale = new Vector3(scale, scale, 1);
+                scale = Mathf.Clamp(scale, 0.3f, 1);
+                CanvasGroup canvas = itemScript.GetComponent<CanvasGroup>();
+                if(canvas == null)
+                {
+                    canvas = itemScript.gameObject.AddComponent<CanvasGroup>();
+                }
+                canvas.alpha = scale;
+                itemScript.transform.localScale = new Vector3(scale, scale, 1);
             }
         }
 

@@ -54,9 +54,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Reporter\Editor\ReporterEditor.cs" />
+    <Compile Include="Assets\SuperScrollView\Editor\LoopListViewEditor2.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenAnimationInspector.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\Editor\DOTweenPreviewManager.cs" />
-    <Compile Include="Assets\SuperScrollView\Editor\LoopListViewEditor2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Demigiant\DemiLib\Core\Editor\DemiEditor.dll" />

@@ -10,7 +10,21 @@ namespace FTProject
     {
         public RoundCountManager _roundCountManager;
 
-        public SceneInfo _SceneInfo;
+        private List<BaseGameScene> _AllGameScene;
+            
+        public List<BaseGameScene> AllScene
+        {
+            get
+            {
+                if(_AllGameScene == null)
+                {
+                    _AllGameScene = new List<BaseGameScene>();
+                }
+                _AllGameScene.Clear();
+                UpdateAllSceneInfo();
+                return _AllGameScene;
+            }
+        }
 
         public int CurrentIndex = 0;
 
@@ -26,11 +40,15 @@ namespace FTProject
             base.OnDestroy();
         }
 
-        public void UpdateSceneInfo()
+        public void UpdateAllSceneInfo()
         {
-            CurrentIndex++;
-            _SceneInfo = Launcher.Instance.Tables.TBSceneInfo.Get(CurrentIndex);
-            _roundCountManager.SetSceneInfo(_SceneInfo);
+            List<SceneInfo> list = Launcher.Instance.Tables.TBSceneInfo.DataList;
+            for (int i = 0; i < list.Count; i++)
+            {
+                SceneInfo info = list[i];
+                BaseGameScene scene = new BaseGameScene(info);
+                _AllGameScene.Add(scene);
+            }
         }
     }
 }

@@ -93,8 +93,8 @@
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\EditablePath\IUndoObject.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\Selection\SerializableSelection.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\EditablePath\IEditablePathController.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\Selection\ISelector.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\EditorTool\GenericScriptablePath.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\Selection\ISelector.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\Selection\IndexedSelection.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\IMGUI\GUIFramework\CommandAction.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.path@5.0.2\Editor\EditablePath\EditablePathExtensions.cs" />
