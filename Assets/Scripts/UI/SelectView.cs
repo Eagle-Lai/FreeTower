@@ -14,6 +14,7 @@ namespace FTProject
         public override void OnInit()
         {
             base.OnInit();
+            EventDispatcher.AddEventListener(EventName.UpdateEvent, LateUpdate);
         }
 
         public override void OnShow()
@@ -55,6 +56,14 @@ namespace FTProject
                 item.IsInitHandlerCalled = true;
                 itemScript.Init();
             }
+            if(index == 0 || index == _data.Count - 1)
+            {
+                itemScript.gameObject.HideObject();
+            }
+            else
+            {
+                itemScript.gameObject.ShowObject();
+            }
             itemScript.SetItemData(_data[index]);
             return item;
         }
@@ -73,7 +82,7 @@ namespace FTProject
                 LoopListViewItem2 item = _LoopListView2.GetShownItemByIndex(i);
                 SelectViewItem itemScript = item.GetComponent<SelectViewItem>();
                 float scale = 1 - Mathf.Abs(item.DistanceWithViewPortSnapCenter) / 700f;
-                scale = Mathf.Clamp(scale, 0.3f, 1);
+                scale = Mathf.Clamp(scale, 0.6f, 1);
                 CanvasGroup canvas = itemScript.GetComponent<CanvasGroup>();
                 if(canvas == null)
                 {
@@ -86,6 +95,7 @@ namespace FTProject
 
         public override void OnDestroy()
         {
+            EventDispatcher.RemoveEventListener(EventName.UpdateEvent, LateUpdate);
         }
 
     }
