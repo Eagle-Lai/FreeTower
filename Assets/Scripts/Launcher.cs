@@ -62,12 +62,6 @@ namespace FTProject
             UIManager.Instance.OpenView<StartView>("StartView");
         }
 
-
-
-        private void OnDrawGizmos()
-        {
-
-        }
         private void Update()
         {
             TimerManager.Instance.Update(Time.deltaTime);

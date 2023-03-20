@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace FTProject
 {
@@ -12,6 +13,8 @@ namespace FTProject
         public TextMeshProUGUI _indexTxt;
         public Button btn;
         public TextMeshProUGUI _btnTxt;
+
+        public BaseGameScene _currentInfo;
 
         public bool isInit;
         private void Awake()
@@ -34,7 +37,10 @@ namespace FTProject
 
         private void OnClickButton()
         {
-
+            GameSceneManager.Instance.SetCurrentSceneInfo(_currentInfo);
+            UIManager.Instance.CloseView("SelectView");
+            SceneManager.LoadScene("Main");
+            UIManager.Instance.OpenView<MainView>("MainView");
         }
 
         public void Init()
@@ -44,6 +50,7 @@ namespace FTProject
 
         public void SetItemData(BaseGameScene info)
         {
+            _currentInfo = info;
             if(_indexTxt == null)
             {
                 Start();

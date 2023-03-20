@@ -26,6 +26,8 @@ namespace FTProject
             }
         }
 
+        private BaseGameScene _CurrentSceneInfo;
+
         public int CurrentIndex = 0;
 
         public override void OnInit()
@@ -49,6 +51,21 @@ namespace FTProject
                 BaseGameScene scene = new BaseGameScene(info);
                 _AllGameScene.Add(scene);
             }
+        }
+
+        public void SetCurrentSceneInfo(BaseGameScene sceneInfo)
+        {
+            _CurrentSceneInfo = sceneInfo;
+        }
+
+        public BaseGameScene GetCurrentSceneInfo()
+        {
+            if(_CurrentSceneInfo != null)
+            {
+                return _CurrentSceneInfo;
+            }
+            Debug.LogError("something error in here");
+            return null;
         }
     }
 }

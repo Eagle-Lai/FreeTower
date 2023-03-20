@@ -65,5 +65,10 @@ namespace FTProject
         /// 刷新路径事件
         /// </summary>
         public const string RefreshPathEvent = "RefreshPathEvent";
+
+        /// <summary>
+        /// 敌人生成事件
+        /// </summary>
+        public const string GenerateEnemyEvent = "GenerateEnemyEvent";
     }
 }

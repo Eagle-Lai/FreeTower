@@ -7,7 +7,12 @@ namespace FTProject
 {
     public class EventManager : BaseManager<EnemyManager>
     {
-       
+
+        public override void OnInit()
+        {
+            base.OnInit();
+            
+        }
 
         private Dictionary<string, Delegate> actionDictionary = new Dictionary<string, Delegate>();
         public void TriggerEvent(string name)

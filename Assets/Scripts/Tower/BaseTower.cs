@@ -146,5 +146,22 @@ namespace FTProject
         {
             TowerPosition.SetBuildSuccess();
         }
+
+        public void DestroyTower()
+        {
+            ResetBullet();
+        }
+
+        public void ResetBullet()
+        {
+            if (_bulletPoint.childCount > 0)
+            {
+                BaseBullet[] bullets = _bulletPoint.transform.GetComponentsInChildren<BaseBullet>();
+                for (int i = 0; i < bullets.Length; i++)
+                {
+                    bullets[i].Reset();
+                }
+            }
+        }
     }
 }

@@ -50,6 +50,7 @@ namespace FTProject
             generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
            // normalTowerBtn.onClick.AddListener(OnClickBtn);
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
+            //generateEnemyBtn.onClick.RemoveAllListeners
             _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshProUGUI>();
             _countTxt = _gameObject.transform.Find("RoundCount").GetComponent<TextMeshProUGUI>();
             _GoldCoinTxt = _gameObject.transform.Find("GoldCoin").GetComponent<TextMeshProUGUI>();
@@ -94,7 +95,8 @@ namespace FTProject
         private void OnClickGenerateEnemyBtn()
         {
             //RoundCountManager.Instance.GenerateEnemyByInfoItem();
-            RoundCountManager.Instance.GenerateEnemyByRoundInfo();
+            //RoundCountManager.Instance.GenerateEnemyByRoundInfo();
+            EnemyManager.Instance.GenerateEnemy();
         }
 
         private void PlayerHpChange(int value)

@@ -96,6 +96,16 @@ namespace FTProject
             action(node);
         }
 
+        public static void LogList(IList list, string extDesc = "")
+        {
+            string result = extDesc + " \n ";
+            for (int i = 0; i < list.Count; i++)
+            {
+                result += list[i].ToString() + "  ";
+            }
+            Debug.Log(result);
+        }
+
         //public static JSONNode Reader(string name)
         //{
         //    string = 

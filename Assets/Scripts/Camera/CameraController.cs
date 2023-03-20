@@ -144,6 +144,7 @@ namespace FTProject
                 if (isHit && hit.collider.gameObject.name.Contains("Tower"))
                 {
                     BaseTower tower = hit.collider.GetComponent<BaseTower>();
+                    tower.DestroyTower();
                     GameObject.Destroy(hit.collider.gameObject);
                     EventDispatcher.TriggerEvent(EventName.DestroyTower, tower);
                     EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
