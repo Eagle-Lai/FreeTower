@@ -7,6 +7,7 @@ namespace FTProject
     public class BaseDisplayObject
     {
         protected GameObject _gameObject;
+        protected Transform _transform;
 
         public object[] datas;
         public bool IsActive
@@ -43,6 +44,7 @@ namespace FTProject
         public virtual void SetGameObject(GameObject gameObject)
         {
             this._gameObject = gameObject;
+            _transform = gameObject.transform;
         }
 
         public void SetData(object[] datas)

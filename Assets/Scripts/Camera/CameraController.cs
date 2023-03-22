@@ -137,18 +137,21 @@ namespace FTProject
                 this.transform.position = orginPosition;
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 bool isHit = Physics.Raycast(ray, out RaycastHit hit, 100, 3, QueryTriggerInteraction.Ignore);
                 if (isHit && hit.collider.gameObject.name.Contains("Tower"))
                 {
+                    
                     BaseTower tower = hit.collider.GetComponent<BaseTower>();
-                    tower.DestroyTower();
-                    GameObject.Destroy(hit.collider.gameObject);
-                    EventDispatcher.TriggerEvent(EventName.DestroyTower, tower);
-                    EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
-                }
+                    //tower.DestroyTower();
+                    ////GameObject.Destroy(hit.collider.gameObject);
+                    ////EventDispatcher.TriggerEvent(EventName.DestroyTower, tower);
+                    ////EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
+                    TowerInfoView view = UIManager.Instance.OpenView<TowerInfoView>("TowerInfoView");
+                    view.SetTowerInfo(tower);
+                }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
             }
 #endif
         }

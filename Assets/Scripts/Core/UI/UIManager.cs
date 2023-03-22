@@ -92,7 +92,7 @@ namespace FTProject
 
                     BaseView baseView = panelDictionary[ViewName];
                     baseView.OnShow();
-                    t.isShow = false;
+                    baseView.isShow = false;
                     return baseView as T;
                 }
                 else

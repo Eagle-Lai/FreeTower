@@ -49,6 +49,7 @@ namespace FTProject
             Screen.autorotateToPortraitUpsideDown = false;
             Screen.autorotateToLandscapeLeft = true;
             Screen.autorotateToLandscapeRight = true;
+            
         }
 
         private JSONNode Reader(string fileName)
