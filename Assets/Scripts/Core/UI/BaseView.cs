@@ -72,6 +72,7 @@ namespace FTProject
 
         public void CloseSelf()
         {
+            OnHide();
             _gameObject.HideObject();
         }
     }

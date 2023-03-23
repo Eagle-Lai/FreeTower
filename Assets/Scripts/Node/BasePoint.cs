@@ -146,7 +146,8 @@ namespace FTProject
 
         public void InitPoint()
         {
-            StartCoroutine(JsonDataManager.Instance.Read(column + row.ToString() + gameObject.name, (data) =>
+            int mapIndex = GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.Id;
+            StartCoroutine(JsonDataManager.Instance.Read(column + row.ToString() + gameObject.name + mapIndex, (data) =>
              {
                  if (data != null)
                  {

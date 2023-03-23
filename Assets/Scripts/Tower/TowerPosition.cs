@@ -144,8 +144,10 @@ namespace FTProject
             towerJsonData.Type = (int)TowerType.Normal;
             towerJsonData.TowerName = parent.gameObject.name;
             string temp = basePoint.column + basePoint.row.ToString() + basePoint.gameObject.name;
-            _savePath = FTProjectUtils.PersistentDataPathJsonPath + temp + ".json";
+            int mapIndex = GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.Id;
+            _savePath = FTProjectUtils.PersistentDataPathJsonPath + temp + mapIndex + ".json";
             towerJsonData.SavePath = _savePath;
+            //这里的这个 temp 变量不要改
             JsonDataManager.Instance.Write(temp, towerJsonData);
             
         }

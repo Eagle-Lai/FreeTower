@@ -25,15 +25,14 @@ namespace FTProject
         public string Write(string name, object data)
         {
             string path = FTProjectUtils.PersistentDataPathJsonPath;
-
-            Debug.Log(path);
             bool isExit = !Directory.Exists(path);
             if (isExit)
             {
                 Directory.CreateDirectory(path);
             }
             string array = JsonMapper.ToJson(data);
-            string file = path + name + ".json";
+            int mapIndex = GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.Id;
+            string file = path + name + mapIndex + ".json";
             if (!File.Exists(file))
             {
                 File.Create(file).Dispose();

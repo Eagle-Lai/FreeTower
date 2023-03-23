@@ -8,6 +8,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace FTProject
 {
@@ -60,6 +61,7 @@ namespace FTProject
         private void Start()
         {
             //UIManager.Instance.OpenView<MainView>("MainView");
+            SceneManager.LoadScene("Start");
             UIManager.Instance.OpenView<StartView>("StartView");
         }
 

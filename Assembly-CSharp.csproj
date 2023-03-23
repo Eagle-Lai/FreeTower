@@ -73,6 +73,7 @@
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ListItem15.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\GridViewSampleDemo.cs" />
+    <Compile Include="Assets\PopMain.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\DataSourceMgr.cs" />
     <Compile Include="Assets\Gen\EnemyData.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\TopToBottomDemoScript.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ResManager.cs" />
     <Compile Include="Assets\Scripts\Obstacle\BaseObstacle.cs" />
+    <Compile Include="Assets\Scripts\UI\TowerInfoView.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ListItem8.cs" />
     <Compile Include="Assets\Scripts\Tower\BaseTower.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -234,14 +236,14 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ListItem12.cs" />
     <Compile Include="Assets\Scripts\Obstacle\NormalObstacle.cs" />
-    <Compile Include="Assets\Scripts\UI\TowerInfoView.cs" />
-    <Compile Include="Assets\PopMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\StreamingAssets\Map\Map3.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\StreamingAssets\Map.txt" />
+    <None Include="Assets\StreamingAssets\Map\Map1.txt" />
+    <None Include="Assets\StreamingAssets\Map\Map5.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -251,6 +253,7 @@
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.dll" />
     <None Include="Assets\LubanLib\SimpleJSON\Changelog.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\StreamingAssets\Map\Map4.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -263,6 +266,7 @@
     <None Include="Assets\Demigiant\DOTweenPro\DOTweenPro.dll" />
     <None Include="Assets\Demigiant\DOTweenPro\readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\StreamingAssets\Map\Map2.txt" />
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.xml" />
     <None Include="Assets\Demigiant\DOTweenPro\DOTweenPro.XML" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />

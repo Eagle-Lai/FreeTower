@@ -32,16 +32,20 @@ namespace FTProject
 
         private bool isInitMap = false;
 
+        private string MapName;
+
         void Awake()
         {
+            MapName = "/Map/Map" + (GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.Id) + ".txt";
+            Debug.Log(MapName);
             Instance = this;
           path =
 #if UNITY_ANDROID && !UNITY_EDITOR
-        Application.streamingAssetsPath + "/Map.txt";
+        Application.streamingAssetsPath + MapName;
 #elif UNITY_IPHONE && !UNITY_EDITOR
-        "file://" + Application.streamingAssetsPath + "/Map.txt";
+        "file://" + Application.streamingAssetsPath + MapName;
 #elif UNITY_STANDLONE_WIN || UNITY_EDITOR
-        "file://" + Application.streamingAssetsPath + "/Map.txt";
+        "file://" + Application.streamingAssetsPath + MapName;
 #else
         string.Empty;
 #endif
@@ -94,7 +98,7 @@ namespace FTProject
             
             yield return new WaitForEndOfFrame();
             isInitMap = true;
-            DrawLine();
+            
         }
 
         // Start is called before the first frame update
@@ -142,6 +146,7 @@ namespace FTProject
         {
             Transform parent = ResourcesManager.Instance.LoadAndInitGameObject("PointParent").transform;
             GameObject go;
+            Debug.Log(valueStr);
             string[] infos = valueStr.Split("\r\n");
             Debug.Log(infos.Length);
             for (int i = 0; i < infos.Length; i++)
@@ -161,12 +166,6 @@ namespace FTProject
                     tempPoint.position = new Vector3(i * 2, 0, j * 2);
                     switch (temp[j])
                     {
-                        case '-':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
-                            pointObj = go.AddComponent<NormalPoint>();
-                            pointObj._PointType = PointType.Normal;
-                            break;
-
                         case '*':
                             go = ResourcesManager.Instance.LoadAndInitGameObject("StartPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<StartPoint>();
@@ -180,7 +179,13 @@ namespace FTProject
                             pointObj._PointType = PointType.End;
                             targetPoint = tempPoint;
                             break;
-                                   
+
+                        case '-':
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            pointObj = go.AddComponent<NormalPoint>();
+                            pointObj._PointType = PointType.Normal;
+                            break;
+
                         case '#':
                             go = ResourcesManager.Instance.LoadAndInitGameObject("NormalObstacle", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<NormalObstacle>();
@@ -204,6 +209,7 @@ namespace FTProject
             }
 
             UpdateStarPath();
+            DrawLine();
         }
 
 
@@ -228,7 +234,8 @@ namespace FTProject
                     if (temp != null)
                     {
                         result.Add(temp);
-                    }
+                    } 
+                    
                     temp = temp.Parent;
                 }
                 return result;
@@ -238,7 +245,7 @@ namespace FTProject
 
         public List<Point> GetPath()
         {
-            AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
+            bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
             return GetAStarPath(startPoint, targetPoint);
         }
 
@@ -248,8 +255,8 @@ namespace FTProject
             
             if (points != null && points.Count > 0)
             {
-                points.Reverse();
-                points.Add(targetPoint);
+                //points.Reverse();
+                //points.Add(targetPoint);
                 Vector3[] result = new Vector3[points.Count];
                 for (int i = 0; i < points.Count; i++)
                 {

@@ -77,7 +77,7 @@ namespace FTProject
         {
             List<int> list = Launcher.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
             int interval = Launcher.Instance.Tables.TBEnemyList.Get(index).Interval;
-            FTProjectUtils.LogList(list, "敌人列表数据");
+            //FTProjectUtils.LogList(list, "敌人列表数据");
             for (int i = 0; i < list.Count; i++)
             {
                 EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(list[i]);

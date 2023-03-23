@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace FTProject
 {
@@ -14,6 +15,8 @@ namespace FTProject
         private Button normalTowerBtn;
 
         private Button generateEnemyBtn;
+
+        private Button BtnReturn;
 
         private TextMeshProUGUI _hpTxt;
 
@@ -48,8 +51,10 @@ namespace FTProject
             base.InitComponent();
             normalTowerBtn = _gameObject.transform.Find("Button").GetComponent<Button>();
             generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
-           // normalTowerBtn.onClick.AddListener(OnClickBtn);
+            BtnReturn = _transform.Find("BtnReturn").GetComponent<Button>();
+            // normalTowerBtn.onClick.AddListener(OnClickBtn);
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
+            BtnReturn.onClick.AddListener(OnClickBtnReturn);
             //generateEnemyBtn.onClick.RemoveAllListeners
             _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshProUGUI>();
             _countTxt = _gameObject.transform.Find("RoundCount").GetComponent<TextMeshProUGUI>();
@@ -74,6 +79,13 @@ namespace FTProject
             base.OnDestroy();
             EventDispatcher.RemoveEventListener<int>(EventName.PlayerRoundCountChange, RoundCountChange);
             EventDispatcher.RemoveEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
+        }
+
+        private void OnClickBtnReturn()
+        {
+            CloseSelf();
+            SceneManager.LoadScene("Start");
+            UIManager.Instance.OpenView<StartView>("StartView");
         }
         
         private void DownEvent(GameObject go, PointerEventData eventData)

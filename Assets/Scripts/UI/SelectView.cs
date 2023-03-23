@@ -20,6 +20,7 @@ namespace FTProject
         public override void OnShow()
         {
             base.OnShow();
+            
         }
 
         public override void OnStart()
@@ -35,10 +36,12 @@ namespace FTProject
             _LoopListView2.InitListView(_data.Count, OnGetItemByIndex);
             _BackBtn = _gameObject.transform.Find("Back").GetComponent<Button>();
             _BackBtn.onClick.AddListener(OnClickBack);
+
         }
         public override void OnHide()
         {
             base.OnHide();
+            //_LoopListView2.c
         }
 
         LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
@@ -75,21 +78,24 @@ namespace FTProject
         }
         void LateUpdate()
         {
-            _LoopListView2.UpdateAllShownItemSnapData();
-            int count = _LoopListView2.ShownItemCount;
-            for (int i = 0; i < count; ++i)
+            if (_LoopListView2 != null)
             {
-                LoopListViewItem2 item = _LoopListView2.GetShownItemByIndex(i);
-                SelectViewItem itemScript = item.GetComponent<SelectViewItem>();
-                float scale = 1 - Mathf.Abs(item.DistanceWithViewPortSnapCenter) / 700f;
-                scale = Mathf.Clamp(scale, 0.6f, 1);
-                CanvasGroup canvas = itemScript.GetComponent<CanvasGroup>();
-                if(canvas == null)
+                _LoopListView2.UpdateAllShownItemSnapData();
+                int count = _LoopListView2.ShownItemCount;
+                for (int i = 0; i < count; ++i)
                 {
-                    canvas = itemScript.gameObject.AddComponent<CanvasGroup>();
+                    LoopListViewItem2 item = _LoopListView2.GetShownItemByIndex(i);
+                    SelectViewItem itemScript = item.GetComponent<SelectViewItem>();
+                    float scale = 1 - Mathf.Abs(item.DistanceWithViewPortSnapCenter) / 700f;
+                    scale = Mathf.Clamp(scale, 0.6f, 1);
+                    CanvasGroup canvas = itemScript.GetComponent<CanvasGroup>();
+                    if (canvas == null)
+                    {
+                        canvas = itemScript.gameObject.AddComponent<CanvasGroup>();
+                    }
+                    canvas.alpha = scale;
+                    itemScript.transform.localScale = new Vector3(scale, scale, 1);
                 }
-                canvas.alpha = scale;
-                itemScript.transform.localScale = new Vector3(scale, scale, 1);
             }
         }
 
