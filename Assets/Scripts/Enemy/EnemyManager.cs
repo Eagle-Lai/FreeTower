@@ -20,6 +20,11 @@ namespace FTProject
         /// 场次的序号
         /// </summary>
         private int _roundIndex = 0;
+
+        public int RoundIndex
+        {
+            get { return _roundIndex; }
+        }
         /// <summary>
         /// 每一场次敌人列表的序号,每场开始都会归零
         /// </summary>
@@ -77,12 +82,12 @@ namespace FTProject
         {
             List<int> list = Launcher.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
             int interval = Launcher.Instance.Tables.TBEnemyList.Get(index).Interval;
-            //FTProjectUtils.LogList(list, "敌人列表数据");
+            FTProjectUtils.LogList(list, "敌人列表数据");
             for (int i = 0; i < list.Count; i++)
             {
                 EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(list[i]);
                 if (data != null)
-                {
+                {                                                                           
                     switch (data.Type)
                     {
                         case 1:

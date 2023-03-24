@@ -30,6 +30,7 @@ namespace FTProject
 
         private void Awake()
         {
+            Debug.Log("========");
             DontDestroyOnLoad(gameObject);
             Instance = this;
             InitGameInfo();
@@ -61,6 +62,7 @@ namespace FTProject
         private void Start()
         {
             //UIManager.Instance.OpenView<MainView>("MainView");
+            Debug.Log("========");
             SceneManager.LoadScene("Start");
             UIManager.Instance.OpenView<StartView>("StartView");
         }

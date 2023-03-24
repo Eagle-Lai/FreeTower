@@ -57,7 +57,7 @@ namespace FTProject
 
         public virtual void InitComponent()
         {
-
+            //Debug.LogError("))))))))))))))))))))))))))");
         }
 
         public void SetUIItem(AssetData.AssetItemData data)

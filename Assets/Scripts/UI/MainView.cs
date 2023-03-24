@@ -35,13 +35,14 @@ namespace FTProject
         public override void OnInit()
         {
             base.OnInit();
-            EventDispatcher.AddEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
-            EventDispatcher.AddEventListener<int>(EventName.PlayerRoundCountChange, RoundCountChange);
+            //EventDispatcher.AddEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
+            //EventDispatcher.AddEventListener<int>(EventName.PlayerRoundCountChange, RoundCountChange);
         }
 
         public override void OnShow()
         {
             base.OnShow();
+            ShowRoundInfo();
         }
 
 
@@ -49,13 +50,16 @@ namespace FTProject
         public override void InitComponent()
         {
             base.InitComponent();
-            normalTowerBtn = _gameObject.transform.Find("Button").GetComponent<Button>();
+            normalTowerBtn = _gameObject.transform.Find("BtnTower").GetComponent<Button>();
+            normalTowerBtn.onClick.RemoveAllListeners();
             generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
+
             BtnReturn = _transform.Find("BtnReturn").GetComponent<Button>();
-            // normalTowerBtn.onClick.AddListener(OnClickBtn);
+
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
+
             BtnReturn.onClick.AddListener(OnClickBtnReturn);
-            //generateEnemyBtn.onClick.RemoveAllListeners
+
             _hpTxt = _gameObject.transform.Find("Hp").GetComponent<TextMeshProUGUI>();
             _countTxt = _gameObject.transform.Find("RoundCount").GetComponent<TextMeshProUGUI>();
             _GoldCoinTxt = _gameObject.transform.Find("GoldCoin").GetComponent<TextMeshProUGUI>();
@@ -77,8 +81,8 @@ namespace FTProject
         public override void OnDestroy()
         {
             base.OnDestroy();
-            EventDispatcher.RemoveEventListener<int>(EventName.PlayerRoundCountChange, RoundCountChange);
-            EventDispatcher.RemoveEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
+            //EventDispatcher.RemoveEventListener<int>(EventName.PlayerRoundCountChange, RoundCountChange);
+            //EventDispatcher.RemoveEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
         }
 
         private void OnClickBtnReturn()
@@ -109,6 +113,7 @@ namespace FTProject
             //RoundCountManager.Instance.GenerateEnemyByInfoItem();
             //RoundCountManager.Instance.GenerateEnemyByRoundInfo();
             EnemyManager.Instance.GenerateEnemy();
+            ShowRoundInfo();
         }
 
         private void PlayerHpChange(int value)
@@ -117,10 +122,15 @@ namespace FTProject
             _hpTxt.text = _hp.ToString();
         }
 
-        private void RoundCountChange(int value)
+        /// <summary>
+        /// 展示场次信息
+        /// </summary>
+        private void ShowRoundInfo()
         {
-            _count += value;
+            _TotalCount = GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.RoundList.Count;
+            _count = EnemyManager.Instance.RoundIndex;
             _countTxt.text = string.Format("{0}/{1}", _count, _TotalCount);
         }
+
     }
 }
