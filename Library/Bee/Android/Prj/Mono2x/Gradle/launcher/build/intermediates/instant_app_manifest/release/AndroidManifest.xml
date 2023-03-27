@@ -40,7 +40,7 @@
         android:label="@string/app_name" >
         <meta-data
             android:name="unity.builder"
-            android:value="\33260821732471" />
+            android:value="\" />
 
         <activity
             android:name="com.unity3d.player.UnityPlayerActivity"
