@@ -73,5 +73,13 @@ namespace FTProject
             EventDispatcher.TriggerEvent(EventName.UpdateEvent);
         }
 
+        private void OnDestroy()
+        {
+            for (int i = 0; i < managerList.Count; i++)
+            {
+                managerList[i].OnDestroy();
+            }
+        }
+
     }
 }

@@ -57,7 +57,10 @@ namespace FTProject
 
         private void OnTriggerExit(Collider other)
         {
-            _enemyList.Remove(other.gameObject);
+            if (_enemyList.Count > 0)
+            {
+                _enemyList.Remove(other.gameObject);
+            }
         }
 
         public GameObject GetNearsetTarget()

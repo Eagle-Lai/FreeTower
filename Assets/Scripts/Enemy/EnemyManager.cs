@@ -95,7 +95,7 @@ namespace FTProject
                             TimerManager.Instance.AddTimer(timer, 1, () =>
                                 {
                                     NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
-                                    normal.EnemyAttack();
+                                    normal.EnemyStartMove();
                                 }, false
                              );
                             break;
@@ -134,7 +134,7 @@ namespace FTProject
             {
                 enemyDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
             }
-            enemy.EnemyAttack();
+            enemy.EnemyStartMove();
             enemyDictionary[EnemyType.NormalEnemy].Add(enemy);
             return enemy;
         }

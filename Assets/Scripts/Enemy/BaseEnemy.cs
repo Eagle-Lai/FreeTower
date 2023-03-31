@@ -39,6 +39,8 @@ namespace FTProject {
 
         private TweenCallback _tweenCallback;
 
+        private Rigidbody _rigidbody;
+
         private void Awake()
         {
             this.OnAwake();
@@ -52,8 +54,8 @@ namespace FTProject {
             OnUpdate();
         }
         private void OnDestroy()
-        {
-            Clear();
+        {                                               
+            Clear();    
         }
         protected virtual void OnAwake()
         {
@@ -82,6 +84,8 @@ namespace FTProject {
             _HpTransform = transform.Find("HpParent/Bg/Hp");
             _HpTxt = transform.Find("HpParent/EnemyHpTxt").GetComponent<TextMeshPro>();
             _HpTxt.gameObject.SetActive(false);
+            _rigidbody = transform.GetComponent<Rigidbody>();
+            _rigidbody.useGravity = false;
         }
 
 
@@ -153,7 +157,8 @@ namespace FTProject {
                 {
                     Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex], transform.position);
                     transform.rotation = Quaternion.Slerp(transform.rotation, rot, 120.0f * Time.deltaTime);
-                    transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+                    //transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+                    _rigidbody.AddForce(transform.rotation * Vector3.forward);
                     float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex], transform.position);
                     if (distance < 0.1f)
                     {
@@ -180,7 +185,7 @@ namespace FTProject {
             
         }
 
-        public virtual void EnemyAttack()
+        public virtual void EnemyStartMove()
         {
             EnemyState = EnemyState.Move;
             this.gameObject.SetActive(true);

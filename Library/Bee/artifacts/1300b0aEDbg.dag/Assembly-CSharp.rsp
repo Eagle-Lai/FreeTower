@@ -527,6 +527,7 @@
 "Assets/SuperScrollView/Scripts/ItemPosMgr.cs"
 "Assets/SuperScrollView/Scripts/LoopListView2.cs"
 "Assets/SuperScrollView/Scripts/LoopListViewItem2.cs"
+"Assets/TestTileMap.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs"

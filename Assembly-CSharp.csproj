@@ -69,6 +69,7 @@
     <Compile Include="Assets\Gen\TBEnemyData.cs" />
     <Compile Include="Assets\Reporter\ReporterGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\TestTileMap.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ListItem15.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
