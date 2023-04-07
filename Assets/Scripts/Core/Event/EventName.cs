@@ -27,11 +27,6 @@ namespace FTProject
         /// </summary>
         public const string EnemyResetEvent = "EnemyResetEvent";
         /// <summary>
-        /// 更新寻路路径事件
-        /// </summary>
-        public const string UpdateAStarPath = "UpdateAStarPath";
-
-        /// <summary>
         /// 玩家HP改变事件
         /// </summary>
         public const string PlayerHpChangeEvent = "PlayerHpChangeEvent";
@@ -70,5 +65,10 @@ namespace FTProject
         /// 敌人生成事件
         /// </summary>
         public const string GenerateEnemyEvent = "GenerateEnemyEvent";
+
+        /// <summary>
+        /// 地图创建完成事件
+        /// </summary>
+        public const string MapInitFinish = "MapInitFinish";
     }
 }

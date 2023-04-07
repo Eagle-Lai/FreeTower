@@ -123,6 +123,8 @@ namespace FTProject
             {
                 IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
                 MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
+                SceneInfo temp = GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo;
+                MoveEnemyParent.transform.position = temp.EenemyPosition;
             }
             T enemy = null;
             ResourcesManager.Instance.LoadAndInitGameObject(name, IdleEnemyParent, (go) =>

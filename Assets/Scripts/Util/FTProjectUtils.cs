@@ -28,9 +28,30 @@ namespace FTProject
 
         public static string PersistentDataPathJsonPath
         {
+            //get
+            //{
+            //  //return Path.Combine(Application.persistentDataPath, "MyJson/");
+
+            //}
             get
             {
-              return Path.Combine(Application.persistentDataPath, "MyJson/");
+                // return Path.Combine(Application.persistentDataPath, "MyJson/");
+                string path = "";
+#if UNITY_ANDROID && !UNITY_EDITOR
+        path = Application.persistentDataPath;
+#elif UNITY_IPHONE && !UNITY_EDITOR
+        path = "file://" + Application.persistentDataPath;
+#elif UNITY_STANDLONE_WIN || UNITY_EDITOR
+                path = "file://" + Application.persistentDataPath;
+#else
+        string.Empty;
+#endif
+#if UNITY_EDITOR
+                return Path.Combine(Application.persistentDataPath, "MyJson/");
+#else
+        return Path.Combine(path, "MyJson/");
+#endif
+
             }
         }
 
@@ -50,7 +71,12 @@ namespace FTProject
 
         public static Quaternion GetRotate(Vector3 pos1, Vector3 pos2)
         {
-            return Quaternion.LookRotation(new Vector3(pos1.x - pos2.x, 0, pos1.z - pos2.z));
+            Vector3 temp = new Vector3(pos1.x - pos2.x, 0, pos1.z - pos2.z);
+            if (temp != Vector3.zero)
+            {
+                return Quaternion.LookRotation(temp);
+            }
+            return Quaternion.identity;
         }
            
 

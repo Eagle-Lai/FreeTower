@@ -99,6 +99,8 @@ namespace FTProject {
             LookAtCamera();
         }
 
+
+
         protected void LookAtCamera()
         {
             //ʹ��  Vector3.ProjectOnPlane ��ͶӰ������ͶӰƽ�淨���������ڼ���ĳ��������ĳ��ƽ���ϵ�ͶӰ����  
@@ -157,10 +159,9 @@ namespace FTProject {
                 {
                     Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex], transform.position);
                     transform.rotation = Quaternion.Slerp(transform.rotation, rot, 120.0f * Time.deltaTime);
-                    //transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-                    _rigidbody.AddForce(transform.rotation * Vector3.forward);
+                    transform.Translate(Vector3.forward * _speed * Time.deltaTime);
                     float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex], transform.position);
-                    if (distance < 0.1f)
+                    if (distance < 0.1f)             
                     {
                         _currentPositionIndex++;
                     }
@@ -171,6 +172,11 @@ namespace FTProject {
                 }
             }
         }
+
+        //private void FixedUpdate()
+        //{
+        //    _rigidbody.velocity = transform.rotation * Vector3.forward * 10;
+        //}
 
         public void SetPath()
         {

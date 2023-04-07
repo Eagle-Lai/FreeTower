@@ -22,6 +22,7 @@ namespace FTProject
           new RoundCountManager(),
           new GameSceneManager(),
           new JsonDataManager(),
+          new AStarManager(),
         };
 
         public Tables Tables;

@@ -21,14 +21,22 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
         { if(!_json["id"].IsNumber) { throw new SerializationException(); }  Id = _json["id"]; }
         { var __json0 = _json["RoundList"]; if(!__json0.IsArray) { throw new SerializationException(); } RoundList = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  RoundList.Add(__v0); }   }
         { var _json2 = _json["CameraPosition"]; if(!_json2.IsObject) { throw new SerializationException(); } float __x; { if(!_json2["x"].IsNumber) { throw new SerializationException(); }  __x = _json2["x"]; } float __y; { if(!_json2["y"].IsNumber) { throw new SerializationException(); }  __y = _json2["y"]; } float __z; { if(!_json2["z"].IsNumber) { throw new SerializationException(); }  __z = _json2["z"]; }  CameraPosition = new UnityEngine.Vector3(__x, __y,__z); }
+        { var _json2 = _json["CameraRotration"]; if(!_json2.IsObject) { throw new SerializationException(); } float __x; { if(!_json2["x"].IsNumber) { throw new SerializationException(); }  __x = _json2["x"]; } float __y; { if(!_json2["y"].IsNumber) { throw new SerializationException(); }  __y = _json2["y"]; } float __z; { if(!_json2["z"].IsNumber) { throw new SerializationException(); }  __z = _json2["z"]; }  CameraRotration = new UnityEngine.Vector3(__x, __y,__z); }
+        { if(!_json["MapName"].IsString) { throw new SerializationException(); }  MapName = _json["MapName"]; }
+        { var _json2 = _json["EenemyPosition"]; if(!_json2.IsObject) { throw new SerializationException(); } float __x; { if(!_json2["x"].IsNumber) { throw new SerializationException(); }  __x = _json2["x"]; } float __y; { if(!_json2["y"].IsNumber) { throw new SerializationException(); }  __y = _json2["y"]; } float __z; { if(!_json2["z"].IsNumber) { throw new SerializationException(); }  __z = _json2["z"]; }  EenemyPosition = new UnityEngine.Vector3(__x, __y,__z); }
+        { var _json2 = _json["MapPosition"]; if(!_json2.IsObject) { throw new SerializationException(); } float __x; { if(!_json2["x"].IsNumber) { throw new SerializationException(); }  __x = _json2["x"]; } float __y; { if(!_json2["y"].IsNumber) { throw new SerializationException(); }  __y = _json2["y"]; } float __z; { if(!_json2["z"].IsNumber) { throw new SerializationException(); }  __z = _json2["z"]; }  MapPosition = new UnityEngine.Vector3(__x, __y,__z); }
         PostInit();
     }
 
-    public SceneInfo(int id, System.Collections.Generic.List<int> RoundList, UnityEngine.Vector3 CameraPosition ) 
+    public SceneInfo(int id, System.Collections.Generic.List<int> RoundList, UnityEngine.Vector3 CameraPosition, UnityEngine.Vector3 CameraRotration, string MapName, UnityEngine.Vector3 EenemyPosition, UnityEngine.Vector3 MapPosition ) 
     {
         this.Id = id;
         this.RoundList = RoundList;
         this.CameraPosition = CameraPosition;
+        this.CameraRotration = CameraRotration;
+        this.MapName = MapName;
+        this.EenemyPosition = EenemyPosition;
+        this.MapPosition = MapPosition;
         PostInit();
     }
 
@@ -46,6 +54,22 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
     /// 摄像机位置
     /// </summary>
     public UnityEngine.Vector3 CameraPosition { get; private set; }
+    /// <summary>
+    /// 摄像机旋转
+    /// </summary>
+    public UnityEngine.Vector3 CameraRotration { get; private set; }
+    /// <summary>
+    /// 地图名字
+    /// </summary>
+    public string MapName { get; private set; }
+    /// <summary>
+    /// 敌人生成位置
+    /// </summary>
+    public UnityEngine.Vector3 EenemyPosition { get; private set; }
+    /// <summary>
+    /// 地图位置
+    /// </summary>
+    public UnityEngine.Vector3 MapPosition { get; private set; }
 
     public const int __ID__ = -561976518;
     public override int GetTypeId() => __ID__;
@@ -65,6 +89,10 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "RoundList:" + Bright.Common.StringUtil.CollectionToString(RoundList) + ","
         + "CameraPosition:" + CameraPosition + ","
+        + "CameraRotration:" + CameraRotration + ","
+        + "MapName:" + MapName + ","
+        + "EenemyPosition:" + EenemyPosition + ","
+        + "MapPosition:" + MapPosition + ","
         + "}";
     }
     

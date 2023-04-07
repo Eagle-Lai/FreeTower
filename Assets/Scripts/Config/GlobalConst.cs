@@ -22,11 +22,11 @@ namespace FTProject
         /// <summary>
         /// 子弹速度
         /// </summary>
-        public const float BulletSpeed = 20f;                                                                
+        public const float BulletSpeed = 25f;                                                                
         /// <summary>
         /// 敌人行走速度
         /// </summary>
-        public const float EnemySpeed = 15f;
+        public const float EnemySpeed = 12f;
         /// <summary>
         /// 防御塔攻击间隔
         /// </summary>

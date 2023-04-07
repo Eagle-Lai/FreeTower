@@ -36,7 +36,9 @@ namespace FTProject
             { "NormalObstacle", new AssetItemData(){ name = "NormalObstacle", path = "Obstacle/NormalObstacle"} },
             {"NormalEnemy", new AssetItemData(){name = "NormalEnemy", path = "Enemy/NormalEnemy"} },
             {"NormalBullet", new AssetItemData(){name = "NormalBullet", path = "Bullet/NormalBullet"} },
-
+            {"MapModel1", new AssetItemData(){name = "MapModel1", path = "MapModel/MapModel1"} },
+            {"MapModel2", new AssetItemData(){name = "MapModel2", path = "MapModel/MapModel2"} },
+            {"LineRender", new AssetItemData(){name = "LineRender", path = "LineRender/LineRender"} },
         };
     }
 }

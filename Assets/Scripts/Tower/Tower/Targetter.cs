@@ -20,11 +20,11 @@ namespace FTProject
         private void Awake()
         {
             EventDispatcher.AddEventListener<BaseEnemy>(EventName.EnemyResetEvent, EnemyReset);
-            _sphereCollider = transform.GetComponent<SphereCollider>();
-            if (_sphereCollider == null)
-            {
-                _sphereCollider = gameObject.AddComponent<SphereCollider>();
-            }
+            //_sphereCollider = transform.GetComponent<SphereCollider>();
+            //if (_sphereCollider == null)
+            //{
+            //    _sphereCollider = gameObject.AddComponent<SphereCollider>();
+            //}
             _sphereCollider.isTrigger = true;
             _sphereCollider.radius = TowerCofig.Radius;
         }
@@ -47,21 +47,21 @@ namespace FTProject
             EventDispatcher.RemoveEventListener<BaseEnemy>(EventName.EnemyResetEvent, EnemyReset);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.name.Contains("Enemy"))
-            {
-                _enemyList.Add(other.gameObject);
-            }
-        }
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if (other.gameObject.name.Contains("Enemy"))
+        //    {
+        //        _enemyList.Add(other.gameObject);
+        //    }
+        //}
 
-        private void OnTriggerExit(Collider other)
-        {
-            if (_enemyList.Count > 0)
-            {
-                _enemyList.Remove(other.gameObject);
-            }
-        }
+        //private void OnTriggerExit(Collider other)
+        //{
+        //    if (_enemyList.Count > 0)
+        //    {
+        //        _enemyList.Remove(other.gameObject);
+        //    }
+        //}
 
         public GameObject GetNearsetTarget()
         {

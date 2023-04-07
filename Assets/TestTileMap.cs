@@ -40,6 +40,9 @@ namespace FTProject
                             case "Obstacles":
                                 result += "#";
                                 break;
+                            case "Hide":
+                                result += "@";
+                                break;
                             default:
                                 break;
                         }

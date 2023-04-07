@@ -10,7 +10,10 @@ namespace AStar
     public class Point
     {
         // 父亲节点
+        public string name;
         public Point Parent { get; set; }
+
+        public Transform transform;
 
         // F G H 值
         public float F { get; set; }

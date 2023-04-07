@@ -8,12 +8,12 @@ using UnityEngine;
 
 namespace FTProject
 {
-    public class AStarManager : MonoBehaviour
+    public class AStarManager : BaseManager<AStarManager>
     {
 
         public LineRenderer _LineRenderer;
 
-        private Action<string> callback; 
+        private Action<string> callback;
 
         public int mapWidth;
         public int mapHeight;
@@ -24,9 +24,10 @@ namespace FTProject
 
         public List<Point> newPath = null;
 
+        private Transform PointParent;
+
 
         string path;
-        public static AStarManager Instance;
 
         private Vector3[] vector3Path;
 
@@ -34,12 +35,16 @@ namespace FTProject
 
         private string MapName;
 
-        void Awake()
+        public override void OnInit()
+        {
+            base.OnInit();
+        }
+
+        public void OnInitMapData()
         {
             MapName = "/Map/Map" + (GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.Id) + ".txt";
             Debug.Log(MapName);
-            Instance = this;
-          path =
+            path =
 #if UNITY_ANDROID && !UNITY_EDITOR
         Application.streamingAssetsPath + MapName;
 #elif UNITY_IPHONE && !UNITY_EDITOR
@@ -52,8 +57,8 @@ namespace FTProject
             EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, UpdatePath);
             EventDispatcher.AddEventListener(EventName.BuildTowerSuccess, UpdateStarPath);
             EventDispatcher.AddEventListener(EventName.RefreshPathEvent, UpdateStarPath);
+            Launcher.Instance.StartCoroutine(ReadData(path, (value) => { Debug.Log(value); InitMap(value); }));
         }
-
 
         private void UpdatePath(BaseTower baseTower)
         {
@@ -84,51 +89,32 @@ namespace FTProject
             yield return new WaitForEndOfFrame();
             string data = www.text;
             action(data);
-            newPath = new List<Point>();
+            //newPath = new List<Point>();
 
-            if (startPoint != null && targetPoint != null)
-            {
-                bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
-                if (isFind == true)
-                {
+            //if (startPoint != null && targetPoint != null)
+            //{
+            //    bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
+            //    if (isFind == true)
+            //    {
 
-                    newPath = GetPath();
-                }
-            }
+            //        newPath = GetPath();
+            //    }
+            //}
             
             yield return new WaitForEndOfFrame();
-            isInitMap = true;
+           
             
         }
 
         // Start is called before the first frame update
-        void Start()
-        {
-            Init();
-            StartCoroutine(ReadData(path, (value) => { Debug.Log(value); InitMap(value);  }));
-        }
 
-        private void OnDestroy()
+        public override void OnDestroy()
         {
+            base.OnDestroy();
             EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, UpdatePath);
             EventDispatcher.RemoveEventListener(EventName.BuildTowerSuccess, UpdateStarPath);
             EventDispatcher.RemoveEventListener(EventName.RefreshPathEvent, UpdateStarPath);
         }
-
-        void Init()
-        {
-           
-          
-        }
-
-        private void Update()
-        {
-            if (isInitMap)
-            {
-                //DrawLine();
-            }
-        }
-
         private void DrawLine()
         {
             vector3Path = GetPathPosition();
@@ -136,19 +122,28 @@ namespace FTProject
             {
                 if (vector3Path.Length > 0)
                 {
+                    if(_LineRenderer == null)
+                    {
+                        GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("LineRender", startPoint.transform);
+                        _LineRenderer = go.GetComponent<LineRenderer>();
+                        _LineRenderer.transform.localPosition = Vector3.zero;
+                    }
                     _LineRenderer.positionCount = vector3Path.Length;
                     _LineRenderer.SetPositions(vector3Path);
                 }
             }
         }
 
+        public void SetPointParentPosition(Vector3 position)
+        {
+            PointParent.transform.position = position;
+        }
+
         void InitMap(string valueStr)
         {
-            Transform parent = ResourcesManager.Instance.LoadAndInitGameObject("PointParent").transform;
+            PointParent = ResourcesManager.Instance.LoadAndInitGameObject("PointParent").transform;
             GameObject go;
-            Debug.Log(valueStr);
             string[] infos = valueStr.Split("\r\n");
-            Debug.Log(infos.Length);
             for (int i = 0; i < infos.Length; i++)
             {
                 //Debug.Log(infos[i]);
@@ -160,6 +155,8 @@ namespace FTProject
                         mapWidth =  temp.Length;
                         mapHeight = infos.Length;
                         map = new Point[mapHeight + 1, mapWidth + 1];
+                        Debug.LogError("map width : " + mapWidth);
+                        Debug.LogError("map height : " + mapHeight);
                     }
                     BasePoint pointObj = null;
                     Point tempPoint = new Point(i, j);
@@ -167,33 +164,33 @@ namespace FTProject
                     switch (temp[j])
                     {
                         case '*':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("StartPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("StartPoint", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<StartPoint>();
                             pointObj._PointType = PointType.Start;
                             startPoint = tempPoint;
                             break;
 
                         case '&':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("EndPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("EndPoint", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<EndPoint>();
                             pointObj._PointType = PointType.End;
                             targetPoint = tempPoint;
                             break;
 
                         case '-':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<NormalPoint>();
                             pointObj._PointType = PointType.Normal;
                             break;
 
                         case '#':
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalObstacle", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalObstacle", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<NormalObstacle>();
                             pointObj._PointType = PointType.Obstacle;
                             tempPoint.IsWall = true;
                             break;
                         default:
-                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", parent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<BasePoint>();
                             break;
                     }
@@ -204,12 +201,14 @@ namespace FTProject
                     tempPoint.gameObject = pointObj.gameObject;
                     pointObj.SetColumnAndRow(i, j);
                     pointObj.InitPoint();
-
+                    tempPoint.name = pointObj.name;
+                    tempPoint.transform = pointObj.transform;
                 }
             }
 
             UpdateStarPath();
-            DrawLine();
+            isInitMap = true;
+            EventDispatcher.TriggerEvent(EventName.MapInitFinish);
         }
 
 
@@ -246,6 +245,12 @@ namespace FTProject
         public List<Point> GetPath()
         {
             bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
+            return GetAStarPath(startPoint, targetPoint);
+        }
+
+        public List<Point> CalculateEnemyPath(Point point)
+        {
+            AStarWrapper.Instance.FindPath(point, targetPoint, map, mapWidth, mapHeight);
             return GetAStarPath(startPoint, targetPoint);
         }
 

@@ -67,5 +67,13 @@ namespace FTProject
             Debug.LogError("something error in here");
             return null;
         }
+
+        public void StartGame()
+        {
+            if(_CurrentSceneInfo != null)
+            {
+
+            }
+        }
     }
 }
