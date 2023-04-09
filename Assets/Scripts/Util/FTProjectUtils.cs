@@ -80,9 +80,9 @@ namespace FTProject
         }
            
 
-        public static void SetObjParent(this Transform transform, Transform parent, Vector3 position = default, Vector3 scale = default, Quaternion quaternion = default)
+        public static void SetObjParent(this Transform transform, Transform parent, Vector3 position = default, Vector3 scale = default, Quaternion quaternion = default, bool isWorldPositionStays = true)
         {
-            transform.transform.SetParent(parent);
+            transform.transform.SetParent(parent, isWorldPositionStays);
             transform.transform.localPosition = position;
             transform.transform.localScale = scale;
             transform.transform.localRotation = quaternion;           

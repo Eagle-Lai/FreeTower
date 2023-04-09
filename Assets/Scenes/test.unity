@@ -2069,7 +2069,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6249850932790854548, guid: f27e985ccfb86bd4e982f22f1da58779, type: 3}
       propertyPath: m_Name
-      value: Tilemap
+      value: Map2
       objectReference: {fileID: 0}
     - target: {fileID: 6249850932790854549, guid: f27e985ccfb86bd4e982f22f1da58779, type: 3}
       propertyPath: m_RootOrder

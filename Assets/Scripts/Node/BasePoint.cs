@@ -197,6 +197,7 @@ namespace FTProject
                                 ChangeColor(Color.black);
 
                                  BuildSuccess(BaseTower);
+                                BaseTower.ResetTowerScale(transform);
                                  currentTriggerObj = null;
                             }
                             EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
@@ -209,6 +210,13 @@ namespace FTProject
                 }
                 
             }
+        }
+
+        public void SetPointScale(int scale)
+        {
+            transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(scale, 0.3f, scale);
+            
         }
     }
 }

@@ -31,6 +31,8 @@ namespace FTProject
 
             { "NormalPoint", new AssetItemData(){ name = "NormalPoint", path = "Point/NormalPoint"} },
 
+            { "EmptyPoint", new AssetItemData(){ name = "EmptyPoint", path = "Point/EmptyPoint"} },
+
             { "PointParent", new AssetItemData(){ name = "PointParent", path = "Point/PointParent"} },
 
             { "NormalObstacle", new AssetItemData(){ name = "NormalObstacle", path = "Obstacle/NormalObstacle"} },

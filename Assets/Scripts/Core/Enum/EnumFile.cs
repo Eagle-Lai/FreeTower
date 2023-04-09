@@ -32,6 +32,10 @@ namespace FTProject
         /// ÕÏ°­Îï
         /// </summary>
         Obstacle,
+        /// <summary>
+        /// ¿Õ½Úµã
+        /// </summary>
+        Empty,
     }
 
     public enum BulletType

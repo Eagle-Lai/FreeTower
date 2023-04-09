@@ -25,10 +25,11 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
         { if(!_json["MapName"].IsString) { throw new SerializationException(); }  MapName = _json["MapName"]; }
         { var _json2 = _json["EenemyPosition"]; if(!_json2.IsObject) { throw new SerializationException(); } float __x; { if(!_json2["x"].IsNumber) { throw new SerializationException(); }  __x = _json2["x"]; } float __y; { if(!_json2["y"].IsNumber) { throw new SerializationException(); }  __y = _json2["y"]; } float __z; { if(!_json2["z"].IsNumber) { throw new SerializationException(); }  __z = _json2["z"]; }  EenemyPosition = new UnityEngine.Vector3(__x, __y,__z); }
         { var _json2 = _json["MapPosition"]; if(!_json2.IsObject) { throw new SerializationException(); } float __x; { if(!_json2["x"].IsNumber) { throw new SerializationException(); }  __x = _json2["x"]; } float __y; { if(!_json2["y"].IsNumber) { throw new SerializationException(); }  __y = _json2["y"]; } float __z; { if(!_json2["z"].IsNumber) { throw new SerializationException(); }  __z = _json2["z"]; }  MapPosition = new UnityEngine.Vector3(__x, __y,__z); }
+        { if(!_json["PointScale"].IsNumber) { throw new SerializationException(); }  PointScale = _json["PointScale"]; }
         PostInit();
     }
 
-    public SceneInfo(int id, System.Collections.Generic.List<int> RoundList, UnityEngine.Vector3 CameraPosition, UnityEngine.Vector3 CameraRotration, string MapName, UnityEngine.Vector3 EenemyPosition, UnityEngine.Vector3 MapPosition ) 
+    public SceneInfo(int id, System.Collections.Generic.List<int> RoundList, UnityEngine.Vector3 CameraPosition, UnityEngine.Vector3 CameraRotration, string MapName, UnityEngine.Vector3 EenemyPosition, UnityEngine.Vector3 MapPosition, int PointScale ) 
     {
         this.Id = id;
         this.RoundList = RoundList;
@@ -37,6 +38,7 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
         this.MapName = MapName;
         this.EenemyPosition = EenemyPosition;
         this.MapPosition = MapPosition;
+        this.PointScale = PointScale;
         PostInit();
     }
 
@@ -70,6 +72,10 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
     /// 地图位置
     /// </summary>
     public UnityEngine.Vector3 MapPosition { get; private set; }
+    /// <summary>
+    /// 地图坐标点的缩放
+    /// </summary>
+    public int PointScale { get; private set; }
 
     public const int __ID__ = -561976518;
     public override int GetTypeId() => __ID__;
@@ -93,6 +99,7 @@ public sealed partial class SceneInfo :  Bright.Config.BeanBase
         + "MapName:" + MapName + ","
         + "EenemyPosition:" + EenemyPosition + ","
         + "MapPosition:" + MapPosition + ","
+        + "PointScale:" + PointScale + ","
         + "}";
     }
     

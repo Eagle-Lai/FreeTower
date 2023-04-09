@@ -29,7 +29,7 @@ namespace FTProject {
 
         protected int _currentPositionIndex;
 
-        protected Vector3[] _pathPosition;
+        protected List<Point> _pathPosition;
 
         private float _rotateSpeed = 180.0f;
 
@@ -40,6 +40,8 @@ namespace FTProject {
         private TweenCallback _tweenCallback;
 
         private Rigidbody _rigidbody;
+
+        public bool isRestart = false;
 
         private void Awake()
         {
@@ -79,7 +81,7 @@ namespace FTProject {
 
         protected virtual void OnStart()
         {
-            SetPath();
+            StartMovePath();
             _ArticleBlood = transform.Find("HpParent");
             _HpTransform = transform.Find("HpParent/Bg/Hp");
             _HpTxt = transform.Find("HpParent/EnemyHpTxt").GetComponent<TextMeshPro>();
@@ -153,14 +155,14 @@ namespace FTProject {
 
         public void MoveToGoal(Action callback = null)
         {
-            if (_pathPosition != null && _pathPosition.Length > 0)
+            if (_pathPosition != null && _pathPosition.Count > 0)
             {
-                if (_currentPositionIndex < _pathPosition.Length)
+                if (_currentPositionIndex < _pathPosition.Count)
                 {
-                    Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex], transform.position);
+                    Quaternion rot = FTProjectUtils.GetRotate(_pathPosition[_currentPositionIndex].position, transform.position);
                     transform.rotation = Quaternion.Slerp(transform.rotation, rot, 120.0f * Time.deltaTime);
                     transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-                    float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex], transform.position);
+                    float distance = FTProjectUtils.GetPointDistance(_pathPosition[_currentPositionIndex].position, transform.position);
                     if (distance < 0.1f)             
                     {
                         _currentPositionIndex++;
@@ -180,22 +182,35 @@ namespace FTProject {
 
         public void SetPath()
         {
+            UpdatePath();
+        }
+        public void UpdatePath()
+        {
+            
+            List<Point> path = AStarManager.Instance.UpdatePathByEnemyPoint(_pathPosition[_currentPositionIndex]);
+            path.Reverse();
+            path.Add(AStarManager.Instance.GetEndPoint());
+            _currentPositionIndex = 0;
+            _pathPosition = path;
+        }
+        /// <summary>
+        /// 每次重置敌人后寻找的路线
+        /// </summary>
+        public void StartMovePath()
+        {
             List<Point> path = AStarManager.Instance.GetPath();
             path.Reverse();
             path.Add(AStarManager.Instance.GetEndPoint());
-            _pathPosition = new Vector3[path.Count];
-            for (int i = 0; i < path.Count; i++)
-            {
-                _pathPosition[i] = path[i].position;
-            }
-            
+            _pathPosition = path;
         }
 
         public virtual void EnemyStartMove()
         {
             EnemyState = EnemyState.Move;
             this.gameObject.SetActive(true);
+            StartMovePath();
             transform.SetObjParent(EnemyManager.Instance.MoveEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);
+            
         }
 
         public virtual void Reset()

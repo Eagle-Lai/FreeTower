@@ -16,6 +16,7 @@ namespace FTProject
 
         private Dictionary<int, List<EnemyData>> _enemyListDictionary = new Dictionary<int, List<EnemyData>>();
 
+
         /// <summary>
         /// 场次的序号
         /// </summary>
@@ -25,6 +26,7 @@ namespace FTProject
         {
             get { return _roundIndex; }
         }
+
         /// <summary>
         /// 每一场次敌人列表的序号,每场开始都会归零
         /// </summary>

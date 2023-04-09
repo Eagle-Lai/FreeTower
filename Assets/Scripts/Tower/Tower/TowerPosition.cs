@@ -83,8 +83,15 @@ namespace FTProject
             TowerBuildState = TowerBuildState.Build;
             if (_BasePoint != null)
             {
-                parent.transform.SetObjParent(_BasePoint.transform, GlobalConst.BuildYVector3, GlobalConst.BuildScale, Quaternion.identity);
+                parent.transform.SetObjParent(_BasePoint.transform, GlobalConst.BuildYVector3, GlobalConst.BuildScale, Quaternion.identity, false);
                 SetTowerJsonData(_BasePoint);
+                
+                parent.transform.SetParent(null);
+                parent.transform.localScale = Vector3.one;
+                if(_ParentTower == null)
+                {
+                    _ParentTower = parent.GetComponent<BaseTower>();
+                }
             }
             EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
             EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
@@ -117,6 +124,7 @@ namespace FTProject
                         node.BuildSuccess(_ParentTower);
                         _BasePoint = node;
                         node.BaseTower = parent.GetComponent<BaseTower>();
+                        _ParentTower = parent.GetComponent<BaseTower>();
                         return true;
                     }
                 }

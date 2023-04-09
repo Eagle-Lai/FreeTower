@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 
@@ -35,6 +34,8 @@ namespace FTProject
 
         private string MapName;
 
+        BaseGameScene _BaseGameScene;
+
         public override void OnInit()
         {
             base.OnInit();
@@ -42,7 +43,8 @@ namespace FTProject
 
         public void OnInitMapData()
         {
-            MapName = "/Map/Map" + (GameSceneManager.Instance.GetCurrentSceneInfo()._SceneInfo.Id) + ".txt";
+            _BaseGameScene = GameSceneManager.Instance.GetCurrentSceneInfo();
+            MapName = "/Map/Map" + _BaseGameScene._SceneInfo.Id + ".txt";
             Debug.Log(MapName);
             path =
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -143,7 +145,8 @@ namespace FTProject
         {
             PointParent = ResourcesManager.Instance.LoadAndInitGameObject("PointParent").transform;
             GameObject go;
-            string[] infos = valueStr.Split("\r\n");
+            int pointScale = _BaseGameScene._SceneInfo.PointScale;
+            string[] infos = valueStr.Split("\n");
             for (int i = 0; i < infos.Length; i++)
             {
                 //Debug.Log(infos[i]);
@@ -160,7 +163,8 @@ namespace FTProject
                     }
                     BasePoint pointObj = null;
                     Point tempPoint = new Point(i, j);
-                    tempPoint.position = new Vector3(i * 2, 0, j * 2);
+                    tempPoint.position = new Vector3(i * pointScale, 0, j * pointScale);
+                    
                     switch (temp[j])
                     {
                         case '*':
@@ -189,6 +193,12 @@ namespace FTProject
                             pointObj._PointType = PointType.Obstacle;
                             tempPoint.IsWall = true;
                             break;
+                        case '@':
+                            go = ResourcesManager.Instance.LoadAndInitGameObject("EmptyPoint", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
+                            pointObj = go.AddComponent<EmptyPoint>();
+                            pointObj._PointType = PointType.Empty;
+                            tempPoint.IsWall = true;
+                            break;
                         default:
                             go = ResourcesManager.Instance.LoadAndInitGameObject("NormalPoint", PointParent.transform, null, Vector3.zero, GlobalConst.PointScale);
                             pointObj = go.AddComponent<BasePoint>();
@@ -197,12 +207,16 @@ namespace FTProject
                     pointObj.name += string.Format("({0},{1})", i, j);
                     pointObj.transform.position = tempPoint.position;
                     pointObj.Point = tempPoint;
-                    map[i, j] = tempPoint;
-                    tempPoint.gameObject = pointObj.gameObject;
                     pointObj.SetColumnAndRow(i, j);
                     pointObj.InitPoint();
+                    pointObj.SetPointScale(pointScale);
+
+
+                    tempPoint.gameObject = pointObj.gameObject;
                     tempPoint.name = pointObj.name;
                     tempPoint.transform = pointObj.transform;
+
+                    map[i, j] = tempPoint;
                 }
             }
 
@@ -248,10 +262,10 @@ namespace FTProject
             return GetAStarPath(startPoint, targetPoint);
         }
 
-        public List<Point> CalculateEnemyPath(Point point)
+        public List<Point> UpdatePathByEnemyPoint(Point point)
         {
             AStarWrapper.Instance.FindPath(point, targetPoint, map, mapWidth, mapHeight);
-            return GetAStarPath(startPoint, targetPoint);
+            return GetAStarPath(point, targetPoint);
         }
 
         public Vector3[] GetPathPosition()
@@ -278,44 +292,44 @@ namespace FTProject
             return targetPoint;
         }
 
-        private void SetCubeColor(int x, int y, Color c)
+        private void SetCubeColor(int x, int y, UnityEngine.Color c)
         {
             map[x, y].gameObject.GetComponent<Renderer>().material.color = c;
         }
 
-        void OnDrawGizmos()
-        {
+//#if UNITY_EDITOR
+//        void OnDrawGizmos()
+//        {
+//            if (Application.isPlaying && startPoint != null && targetPoint != null && map != null)
+//            {
+//                bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
+//                if (isFind == true)
+//                {
 
-#if UNITY_EDITOR
-            if (Application.isPlaying && startPoint != null && targetPoint != null && map != null)
-            {
-                bool isFind = AStarWrapper.Instance.FindPath(startPoint, targetPoint, map, mapWidth, mapHeight);
-                if (isFind == true)
-                {
+//                    vector3Path = GetPathPosition();
+//                }
+//                if (vector3Path == null)
+//                    return;
 
-                    vector3Path = GetPathPosition();
-                }
-                if (vector3Path == null)
-                    return;
-
-                if (vector3Path.Length > 0)
-                {
-                    int index = 1;
-                    //DrawLine();
-                    foreach (Vector3 node in vector3Path)
-                    {
-                        if (index < newPath.Count)
-                        {
-                            Vector3 nextNode = vector3Path[index];
-                            Debug.DrawLine(node + new Vector3(0, 10, 0), nextNode + new Vector3(0, 10, 0), Color.white);
-                            index++;
-                        }
-                    };
-                }
+//                if (vector3Path.Length > 0)
+//                {
+//                    int index = 1;
+//                    //DrawLine();
+//                    foreach (Vector3 node in vector3Path)
+//                    {
+//                        if (index < newPath.Count)
+//                        {
+//                            Vector3 nextNode = vector3Path[index];
+//                            Debug.DrawLine(node + new Vector3(0, 10, 0), nextNode + new Vector3(0, 10, 0), UnityEngine.Color.white);
+//                            index++;
+//                        }
+//                    };
+//                }
 
                 
-            }
-#endif
-        }
+//            }
+
+//        }
+//#endif
     }
 }

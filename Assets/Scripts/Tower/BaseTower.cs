@@ -163,5 +163,14 @@ namespace FTProject
                 }
             }
         }
+
+        public void ResetTowerScale(Transform parent)
+        {
+            transform.SetParent(null);
+            transform.localScale = Vector3.one;
+            
+            transform.SetParent(parent);
+            transform.localPosition = new Vector3(0, 6.5f, 0);
+        }
     }
 }
