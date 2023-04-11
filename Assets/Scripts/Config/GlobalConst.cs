@@ -48,12 +48,12 @@ namespace FTProject
         /// <summary>
         /// 点的坐标
         /// </summary>
-        public static Vector3 PointVector3 = new Vector3(0, 0.5f, 0);
+        public static Vector3 PointVector3 = new Vector3(0, 0f, 0);
 
         /// <summary>
         /// 点的缩放
         /// </summary>
-        public static Vector3 PointScale = new Vector3(2.0f, 0.2f, 2.0f);
+        public static Vector3 PointScale = new Vector3(1, 1, 1);
 
         /// <summary>
         /// 未建造的时候Y点的坐标
@@ -61,18 +61,13 @@ namespace FTProject
         public const float UnbuildYPosition = 1.8f;
 
         /// <summary>
-        /// 建造后Y点的坐标
-        /// </summary>
-        public const float BuildYPosition = 1.75f;
-
-        /// <summary>
         /// 建造后的位置坐标
         /// </summary>
-        public static Vector3 BuildYVector3 = new Vector3(0, 10.2f, 0);
+        public static Vector3 BuildYVector3 = new Vector3(0, 1.95f, 0);
         /// <summary>
         /// 建造后的模型缩放
         /// </summary>
-        public static Vector3 BuildScale = new Vector3(0.6f, 6, 0.6f);
+        public static Vector3 BuildScale = new Vector3(1, 1, 1);
 
         /// <summary>
         /// 敌人血量

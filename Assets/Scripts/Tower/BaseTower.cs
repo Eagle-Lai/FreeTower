@@ -83,13 +83,13 @@ namespace FTProject
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             this._searchRate = GlobalConst.SearchRate;
             _head = transform.Find("Head");
-            _bulletPoint = transform.Find("Cube/BulletPoint");
+            _bulletPoint = transform.Find("Head/BulletPoint");
            
             if (_targetter == null)
             {
                 _targetter = transform.Find("Targetter").gameObject.AddComponent<Targetter>();
             }
-            _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
+            _bulletPoint = transform.Find("Head/BulletPoint").transform;
         }
 
 

@@ -15,7 +15,7 @@ namespace FTProject
         protected override void OnStart()
         {
             base.OnStart();
-            _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
+            _bulletPoint = transform.Find("Head/BulletPoint").transform;
         }
 
         protected override void TowerAttack()
@@ -23,7 +23,7 @@ namespace FTProject
             NormalBullet bullet = BulletManager.Instance.AttackEnemy<NormalBullet>(BulletType.NormalBullet);
             if (_bulletPoint == null)
             {
-                _bulletPoint = transform.Find("Head/Cube/BulletPoint").transform;
+                _bulletPoint = transform.Find("Head/BulletPoint").transform;
             }
             bullet.BulletAttack();
             bullet.transform.SetObjParent(_bulletPoint.transform, Vector3.zero, Vector3.one * GlobalConst.BulletScale);

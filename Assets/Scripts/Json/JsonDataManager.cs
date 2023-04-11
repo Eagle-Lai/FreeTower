@@ -50,6 +50,7 @@ namespace FTProject
         {
             string path = FTProjectUtils.PersistentDataPathJsonPath + name + ".json";
             WWW www = new WWW(path);
+            Debug.Log(path);
             yield return www;
             while (www.isDone == false)
             {

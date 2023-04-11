@@ -212,6 +212,10 @@ namespace FTProject
             }
         }
 
+        /// <summary>
+        /// 设置点的缩放
+        /// </summary>
+        /// <param name="scale"></param>
         public void SetPointScale(int scale)
         {
             transform.localScale = Vector3.one;
