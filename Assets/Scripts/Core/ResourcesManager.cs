@@ -20,6 +20,8 @@ namespace FTProject {
             }
         }
 
+
+        private Dictionary<string, GameObject> _goDictionary = new Dictionary<string, GameObject>();
         public GameObject LoadAndInitGameObject(string name)
         {
             return LoadAndInitGameObject(name, null, null, Vector3.zero, Vector3.one,Quaternion.identity);
@@ -51,24 +53,42 @@ namespace FTProject {
         { 
             if (AssetData.AssetDictionary.TryGetValue(name, out AssetData.AssetItemData item))
             {
-                GameObject obj = Resources.Load<GameObject>(item.path);
-                if (obj != null)
+                if (_goDictionary.TryGetValue(name, out GameObject obj))
                 {
-                    GameObject go = GameObject.Instantiate(obj);
-                    go.name = go.name.Replace("(Clone)", "");
-                    go.transform.SetParent(parent);
-                    go.transform.localPosition = position;
-                    go.transform.localScale = scale;
-                    go.transform.rotation = rot;
-                    if (callback != null)
+                    //GameObject obj = Resources.Load<GameObject>(item.path);
+                    if (obj != null)
                     {
-                        callback(go);
+                        GameObject go = GameObject.Instantiate(obj);
+                        go.name = go.name.Replace("(Clone)", "");
+                        go.transform.SetParent(parent);
+                        go.transform.localPosition = position;
+                        go.transform.localScale = scale;
+                        go.transform.rotation = rot;
+                        if (callback != null)
+                        {
+                            callback(go);
+                        }
+                        return go;
                     }
-                    return go;
                 }
                 else
                 {
-                    Debug.LogError("can't find prefab in path " + item.path);
+                    GameObject temp = Resources.Load<GameObject>(item.path);
+                    _goDictionary.Add(name, temp);
+                    if (temp != null)
+                    {
+                        GameObject go = GameObject.Instantiate(temp);
+                        go.name = go.name.Replace("(Clone)", "");
+                        go.transform.SetParent(parent);
+                        go.transform.localPosition = position;
+                        go.transform.localScale = scale;
+                        go.transform.rotation = rot;
+                        if (callback != null)
+                        {
+                            callback(go);
+                        }
+                        return go;
+                    }
                 }
             }
             else

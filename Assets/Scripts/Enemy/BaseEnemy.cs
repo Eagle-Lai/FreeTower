@@ -215,6 +215,7 @@ namespace FTProject {
 
         public virtual void Reset()
         {
+
             EnemyState = EnemyState.Idle;
             _currentPositionIndex = 0;
             transform.SetObjParent(EnemyManager.Instance.IdleEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);

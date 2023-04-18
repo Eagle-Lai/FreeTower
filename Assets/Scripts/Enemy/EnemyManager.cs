@@ -117,7 +117,7 @@ namespace FTProject
                     var item = list[i];
                     if(item.EnemyState == EnemyState.Idle)
                     {
-                        return item as T;
+                        return item as T;      
                     }
                 }
             }

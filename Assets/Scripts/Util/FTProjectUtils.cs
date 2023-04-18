@@ -129,7 +129,7 @@ namespace FTProject
             {
                 result += list[i].ToString() + "  ";
             }
-            Debug.Log(result);
+            //Debug.Log(result);
         }
 
         //public static JSONNode Reader(string name)
