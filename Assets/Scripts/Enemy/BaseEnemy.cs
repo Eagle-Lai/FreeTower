@@ -43,6 +43,8 @@ namespace FTProject {
 
         public bool isRestart = false;
 
+        public EnemyType _EnemyType;
+
         private void Awake()
         {
             this.OnAwake();
@@ -82,6 +84,7 @@ namespace FTProject {
         protected virtual void OnStart()
         {
             StartMovePath();
+            _EnemyType = EnemyType.NormalEnemy;
             _ArticleBlood = transform.Find("HpParent");
             _HpTransform = transform.Find("HpParent/Bg/Hp");
             _HpTxt = transform.Find("HpParent/EnemyHpTxt").GetComponent<TextMeshPro>();
@@ -215,7 +218,7 @@ namespace FTProject {
 
         public virtual void Reset()
         {
-
+            EnemyManager.Instance.RecycleEnemy(_EnemyType, this);
             EnemyState = EnemyState.Idle;
             _currentPositionIndex = 0;
             transform.SetObjParent(EnemyManager.Instance.IdleEnemyParent, new Vector3(0, 1f, 0), Vector3.one * GlobalConst.EnemyScale);

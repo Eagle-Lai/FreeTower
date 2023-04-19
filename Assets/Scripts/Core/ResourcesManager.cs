@@ -53,42 +53,28 @@ namespace FTProject {
         { 
             if (AssetData.AssetDictionary.TryGetValue(name, out AssetData.AssetItemData item))
             {
-                if (_goDictionary.TryGetValue(name, out GameObject obj))
+                GameObject obj = null;
+                if (_goDictionary.ContainsKey(name))
                 {
-                    //GameObject obj = Resources.Load<GameObject>(item.path);
-                    if (obj != null)
-                    {
-                        GameObject go = GameObject.Instantiate(obj);
-                        go.name = go.name.Replace("(Clone)", "");
-                        go.transform.SetParent(parent);
-                        go.transform.localPosition = position;
-                        go.transform.localScale = scale;
-                        go.transform.rotation = rot;
-                        if (callback != null)
-                        {
-                            callback(go);
-                        }
-                        return go;
-                    }
+                    obj = _goDictionary[name];            
                 }
                 else
                 {
-                    GameObject temp = Resources.Load<GameObject>(item.path);
-                    _goDictionary.Add(name, temp);
-                    if (temp != null)
+                    obj = Resources.Load<GameObject>(item.path);
+                }
+                if (obj != null)
+                {
+                    GameObject go = GameObject.Instantiate(obj);
+                    go.name = go.name.Replace("(Clone)", "");
+                    go.transform.SetParent(parent);
+                    go.transform.localPosition = position;
+                    go.transform.localScale = scale;
+                    go.transform.rotation = rot;
+                    if (callback != null)
                     {
-                        GameObject go = GameObject.Instantiate(temp);
-                        go.name = go.name.Replace("(Clone)", "");
-                        go.transform.SetParent(parent);
-                        go.transform.localPosition = position;
-                        go.transform.localScale = scale;
-                        go.transform.rotation = rot;
-                        if (callback != null)
-                        {
-                            callback(go);
-                        }
-                        return go;
+                        callback(go);
                     }
+                    return go;
                 }
             }
             else

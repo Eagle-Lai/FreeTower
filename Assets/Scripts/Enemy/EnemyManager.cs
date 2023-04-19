@@ -8,13 +8,13 @@ namespace FTProject
 
     public class EnemyManager : BaseManager<EnemyManager>
     {
-        public Dictionary<EnemyType, List<BaseEnemy>> enemyDictionary = new Dictionary<EnemyType, List<BaseEnemy>>();
+        public Dictionary<EnemyType, List<BaseEnemy>> enemyMoveDictionary = new Dictionary<EnemyType, List<BaseEnemy>>();
+        public Dictionary<EnemyType, List<BaseEnemy>> enemyIdleDictionary = new Dictionary<EnemyType, List<BaseEnemy>>();
 
         public Transform IdleEnemyParent;
 
         public Transform MoveEnemyParent;
 
-        private Dictionary<int, List<EnemyData>> _enemyListDictionary = new Dictionary<int, List<EnemyData>>();
 
 
         /// <summary>
@@ -93,9 +93,10 @@ namespace FTProject
                     switch (data.Type)
                     {
                         case 1:
-                            float timer = data.Interval / 1000 + (i * 0.2f);
+                            float timer = data.Interval / 100 + (i * 0.2f);
                             TimerManager.Instance.AddTimer(timer, 1, () =>
                                 {
+                                    Debug.LogError(timer);
                                     NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
                                     normal.EnemyStartMove();
                                 }, false
@@ -110,15 +111,15 @@ namespace FTProject
 
         public T CreateEnemy<T>(EnemyType type, string name) where T : BaseEnemy
         {
-            if (enemyDictionary.TryGetValue(type, out List<BaseEnemy> list))
+            if (enemyIdleDictionary.TryGetValue(type, out List<BaseEnemy> list))
             {
-                for (int i = 0; i < list.Count; i++)
+                if(list.Count > 0)
                 {
-                    var item = list[i];
-                    if(item.EnemyState == EnemyState.Idle)
-                    {
-                        return item as T;      
-                    }
+                    T temp = list[0] as T;
+                    list.RemoveAt(0);
+                    Debug.LogError(enemyMoveDictionary[type].Count);
+                    enemyMoveDictionary[type].Add(temp);
+                    return temp;
                 }
             }
             if (IdleEnemyParent == null)
@@ -134,18 +135,26 @@ namespace FTProject
                 enemy = go.AddComponent<T>();
                 enemy.transform.localPosition = new Vector3(0, 1f, 0);
             });
-            if (enemyDictionary.TryGetValue(EnemyType.NormalEnemy, out List<BaseEnemy> enemyList) == false)
+            if (enemyMoveDictionary.TryGetValue(EnemyType.NormalEnemy, out List<BaseEnemy> enemyList) == false)
             {
-                enemyDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
+                enemyMoveDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
             }
             enemy.EnemyStartMove();
-            enemyDictionary[EnemyType.NormalEnemy].Add(enemy);
+            enemyMoveDictionary[EnemyType.NormalEnemy].Add(enemy);
             return enemy;
         }
 
         public void RecycleEnemy(EnemyType type, BaseEnemy baseEnemy)
         {
-            baseEnemy.Reset();
+            //baseEnemy.Reset();
+            if(!enemyIdleDictionary.ContainsKey(type))                         
+            {
+                enemyIdleDictionary.Add(type, new List<BaseEnemy>());
+            }
+            if (enemyMoveDictionary[type].Remove(baseEnemy))
+            {
+                enemyIdleDictionary[type].Add(baseEnemy);
+            }
         }
     }
 }
