@@ -21,14 +21,16 @@ public sealed partial class EnemyList :  Bright.Config.BeanBase
         { if(!_json["id"].IsNumber) { throw new SerializationException(); }  Id = _json["id"]; }
         { var __json0 = _json["EnemyIndexs"]; if(!__json0.IsArray) { throw new SerializationException(); } EnemyIndexs = new System.Collections.Generic.List<int>(__json0.Count); foreach(JSONNode __e0 in __json0.Children) { int __v0;  { if(!__e0.IsNumber) { throw new SerializationException(); }  __v0 = __e0; }  EnemyIndexs.Add(__v0); }   }
         { if(!_json["interval"].IsNumber) { throw new SerializationException(); }  Interval = _json["interval"]; }
+        { if(!_json["enemyInterval"].IsNumber) { throw new SerializationException(); }  EnemyInterval = _json["enemyInterval"]; }
         PostInit();
     }
 
-    public EnemyList(int id, System.Collections.Generic.List<int> EnemyIndexs, int interval ) 
+    public EnemyList(int id, System.Collections.Generic.List<int> EnemyIndexs, int interval, float enemyInterval ) 
     {
         this.Id = id;
         this.EnemyIndexs = EnemyIndexs;
         this.Interval = interval;
+        this.EnemyInterval = enemyInterval;
         PostInit();
     }
 
@@ -46,6 +48,10 @@ public sealed partial class EnemyList :  Bright.Config.BeanBase
     /// 对应的出现时间间隔
     /// </summary>
     public int Interval { get; private set; }
+    /// <summary>
+    /// 这个波次每个敌人间出现的间隔
+    /// </summary>
+    public float EnemyInterval { get; private set; }
 
     public const int __ID__ = 953552934;
     public override int GetTypeId() => __ID__;
@@ -65,6 +71,7 @@ public sealed partial class EnemyList :  Bright.Config.BeanBase
         + "Id:" + Id + ","
         + "EnemyIndexs:" + Bright.Common.StringUtil.CollectionToString(EnemyIndexs) + ","
         + "Interval:" + Interval + ","
+        + "EnemyInterval:" + EnemyInterval + ","
         + "}";
     }
     

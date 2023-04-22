@@ -64,7 +64,7 @@ namespace FTProject
             _bulletResetTimerId = TimerManager.Instance.AddTimer(3, 1, () =>
             {
                 Reset();
-            }, false);
+            });
         }
 
         protected virtual void OnUpdate()

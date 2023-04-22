@@ -124,12 +124,25 @@ namespace FTProject
 
         public static void LogList(IList list, string extDesc = "")
         {
-            string result = extDesc + " \n ";
+            string result = extDesc + " ";
             for (int i = 0; i < list.Count; i++)
             {
-                result += list[i].ToString() + "  ";
+                if((list[i]) is IList) 
+                {
+                    string str = "";
+                    IList temp = list[i] as IList;
+                    for (int j = 0; j < temp.Count; j++)
+                    {
+                        str += temp[j].ToString() + "\n ";
+                    }
+                    Debug.Log(str);
+                }
+                else
+                {
+                    result += list[i].ToString() + "\n\r";
+                }
             }
-            //Debug.Log(result);
+            Debug.Log(result);
         }
 
         //public static JSONNode Reader(string name)

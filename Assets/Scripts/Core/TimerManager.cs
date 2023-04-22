@@ -10,7 +10,7 @@ namespace FTProject
         class TimerItem
         {
             public int id;
-            public float Interval 
+            public float Interval
             {
                 get { return _interval; }
                 set { _interval = value; }
@@ -57,7 +57,7 @@ namespace FTProject
                 isFree = loopTimes == 0;
             }
         }
-       
+
         private Dictionary<int, TimerItem> _timerDicti;
         public int actionIndex;
 
@@ -81,21 +81,21 @@ namespace FTProject
         /// <param name="obj"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public int AddTimer(float interval, int loopTimes, Action callback, bool isRun = true, Action<UnityEngine.Object> actionObject = null, Action<UnityEngine.Object, object[]> action = null, UnityEngine.Object obj = null, object[] args = null)
+        public int AddTimer(float interval, int loopTimes, Action callback, bool isRun = false, Action<UnityEngine.Object> actionObject = null, Action<UnityEngine.Object, object[]> action = null, UnityEngine.Object obj = null, object[] args = null)
         {
             TimerItem item = GetTimerItem(interval, loopTimes, callback, actionObject, action, obj, args);
             if (isRun)
             {
                 item.loopTimes--;
-                if(callback != null)
+                if (callback != null)
                 {
                     callback();
                 }
-                if(actionObject != null)
+                if (actionObject != null)
                 {
                     actionObject(item.callbackObject);
                 }
-                if(action != null)
+                if (action != null)
                 {
                     action(item.callbackObject, item.args);
                 }
@@ -103,40 +103,42 @@ namespace FTProject
             return item.id;
         }
 
-        
+
         public void Update(float intervalTime)
         {
             //CheckTimerItem();
-            for (int i = 0; i < _timerDicti.Count; i++)
+            if (_timerDicti.Count > 0)
             {
-                KeyValuePair<int, TimerItem> item = _timerDicti.ElementAt(i);
-
-                if (!item.Value.isStop)
+                for (int i = 0; i < _timerDicti.Count; i++)
                 {
-                    if (item.Value.isNotLimtied || item.Value.loopTimes > 0)
+                    KeyValuePair<int, TimerItem> item = _timerDicti.ElementAt(i);
+
+                    if (!item.Value.isStop)
                     {
-                        item.Value.Interval -= intervalTime;
-                        if (item.Value.Interval <= 0)
+                        if (item.Value.isNotLimtied || item.Value.loopTimes > 0)
                         {
-                            if (item.Value.callback != null)
+                            item.Value.Interval -= intervalTime;
+                            if (item.Value.Interval <= 0)
                             {
-                                item.Value.callback();
+                                if (item.Value.callback != null)
+                                {
+                                    item.Value.callback();
+                                }
+                                if (item.Value.callbackObjectEvent != null && item.Value.callbackObject != null)
+                                {
+                                    item.Value.callbackObjectEvent(item.Value.callbackObject);
+                                }
+                                if (item.Value.callbackObjAndArgs != null && item.Value.callbackObject != null && item.Value.args != null)
+                                {
+                                    item.Value.callbackObjAndArgs(item.Value.callbackObject, item.Value.args);
+                                }
+                                item.Value.Reset();
                             }
-                            if (item.Value.callbackObjectEvent != null && item.Value.callbackObject != null)
-                            {
-                                item.Value.callbackObjectEvent(item.Value.callbackObject);
-                            }
-                            if (item.Value.callbackObjAndArgs != null && item.Value.callbackObject != null && item.Value.args != null)
-                            {
-                                item.Value.callbackObjAndArgs(item.Value.callbackObject, item.Value.args);
-                            }
-                            item.Value.Reset();
                         }
                     }
                 }
             }
         }
-
         public void StopTimerById(int id, bool isStop = true)
         {
             if (_timerDicti.ContainsKey(id))
@@ -207,6 +209,11 @@ namespace FTProject
                     }
                 }
             }
+        }
+
+        public void ClearAll()
+        {
+            _timerDicti.Clear();
         }
     }
 }

@@ -15,8 +15,8 @@ namespace FTProject
 
         public Transform MoveEnemyParent;
 
-
-
+        
+        RoundInfoData _RoundInfo;
         /// <summary>
         /// 场次的序号
         /// </summary>
@@ -38,7 +38,7 @@ namespace FTProject
             //IdleEnemyParent = GameObject.Find("IdleEnemyParent").transform;
             //MoveEnemyParent = GameObject.Find("MoveEnemyParent").transform;
             EventDispatcher.AddEventListener(EventName.GenerateEnemyEvent, GenerateEnemy);
-        }
+        }    
 
         public override void OnDestroy()
         {
@@ -49,65 +49,133 @@ namespace FTProject
         public void GenerateEnemy()
         {
             BaseGameScene info = GameSceneManager.Instance.GetCurrentSceneInfo();
-            _roundIndex++;
+            
             if(_roundIndex >= info._SceneInfo.RoundList.Count)
             {
                 _roundIndex = 0;
             }
             int index = info._SceneInfo.RoundList[_roundIndex];
-            Debug.Log(string.Format("第{0}波敌人", _roundIndex));
-            GenerateEnemyByRoundInfo(index);
+            Debug.Log(string.Format("第{0}波敌人", index));
+            GenerateEnemyByRoundIndex(index);
+            _roundIndex++;
         }
-
-        public void GenerateEnemyByRoundInfo(int _currentIndex)
+        /// <summary>
+        /// 初始化每一个波次出现的敌人列表和间隔时间列表
+        /// </summary>
+        /// <param name="_currentIndex"></param>
+        public void GenerateEnemyByRoundIndex(int _currentIndex)
         {
             
-            if (_currentIndex >= Launcher.Instance.Tables.TBRoundData.DataList.Count - 1)
+            if (_currentIndex >= Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).EnemyIndexs.Count - 1)
             {
-                _currentIndex = 1;
+                _currentIndex = 0;
             }
             List<int> _roundIndexs = Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).EnemyIndexs;
             int interval = Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;
+
             FTProjectUtils.LogList(_roundIndexs, "敌人波次数据:______");
-            int index = 0;
+            List<float> enemyInterval = new List<float>();
+            _RoundInfo = new RoundInfoData();
             for (int i = 0; i < _roundIndexs.Count; i++)
             {
-                TimerManager.Instance.AddTimer(interval * i / 1000 + i * 1, 1, () =>
+                EnemyList list = Launcher.Instance.Tables.TBEnemyList.Get(_roundIndexs[i]);
+                _RoundInfo._EnemyList.Add(list);
+                if (list != null)
                 {
-                    GenerateEnemyByList(_roundIndexs[index]);
+                    enemyInterval.Clear();
+                    for (int j = 0; j < list.EnemyIndexs.Count; j++)
+                    {
+                        EnemyData enemy = Launcher.Instance.Tables.TBEnemyData.Get(list.EnemyIndexs[j]);
+                        float intervalTime = (j * list.EnemyInterval + enemy.Interval) / 1000;
+                        //Debug.LogError(intervalTime);
+                        enemyInterval.Add(intervalTime);
+                    }
+                    _RoundInfo._IntervalList.Add(enemyInterval);
+                }
+            }
+            FTProjectUtils.LogList(_RoundInfo._EnemyList, "敌人波次数据:______");
+            FTProjectUtils.LogList(_RoundInfo._IntervalList, "敌人波次数据:______");
+            Debug.LogError(_RoundInfo._EnemyList.Count);
+            GenerateEnemyByInfo(0);
+        }
+        /// <summary>
+        /// 根据数据，使用递归生成每一个列表内的敌人
+        /// </summary>
+        /// <param name="index"></param>
+        public void GenerateEnemyByInfo(int index = 0)
+        {
+
+            if (_RoundInfo != null)
+            {
+                float time = _RoundInfo._EnemyList[index].Interval / 1000;
+                TimerManager.Instance.AddTimer(time, 1, () =>
+                {
+                    EnemyList list = _RoundInfo._EnemyList[index];
                     index++;
-                }, false);
+                    if(index < _RoundInfo._IntervalList.Count)
+                    {
+                        RecycleGenerateEnemy(list, _RoundInfo._IntervalList[index], 0);
+                        GenerateEnemyByInfo(index);
+                    }
+                });
             }
         }
 
-        public void GenerateEnemyByList(int index)
+        public void RecycleGenerateEnemy(EnemyList list, List<float> times, int index = 0)
         {
-            List<int> list = Launcher.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
-            int interval = Launcher.Instance.Tables.TBEnemyList.Get(index).Interval;
-            FTProjectUtils.LogList(list, "敌人列表数据");
-            for (int i = 0; i < list.Count; i++)
-            {
-                EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(list[i]);
-                if (data != null)
-                {                                                                           
-                    switch (data.Type)
-                    {
-                        case 1:
-                            float timer = data.Interval / 100 + (i * 0.2f);
-                            TimerManager.Instance.AddTimer(timer, 1, () =>
-                                {
-                                    Debug.LogError(timer);
-                                    NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
-                                    normal.EnemyStartMove();
-                                }, false
-                             );
-                            break;
-                        default:
-                            break;
-                    }
+
+            float time = times[index];
+            TimerManager.Instance.AddTimer(time, 1, ()=> {
+                int EnemyIndex = list.EnemyIndexs[index];
+                index++;
+                if(index < times.Count)
+                {
+                    CreateEnemy(EnemyIndex);
+                    RecycleGenerateEnemy(list, times, index);
                 }
+            });
+        }
+
+        public void CreateEnemy(int enemyIndex)
+        {
+            EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(enemyIndex);
+            switch((EnemyType)data.Type)
+            {
+                case EnemyType.NormalEnemy:
+                    NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
+                    normal.EnemyStartMove();
+                    break;
             }
         }
+
+        //public void GenerateEnemyByList(int index)
+        //{
+        //    List<int> list = Launcher.Instance.Tables.TBEnemyList.Get(index).EnemyIndexs;
+        //    int interval = Launcher.Instance.Tables.TBEnemyList.Get(index).Interval;
+        //    FTProjectUtils.LogList(list, "敌人列表数据");
+        //    for (int i = 0; i < list.Count; i++)
+        //    {
+        //        EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(list[i]);
+        //        if (data != null)
+        //        {                                                                           
+        //            switch (data.Type)
+        //            {
+        //                case 1:
+        //                    float timer = data.Interval / 100 + (i * 0.2f);
+        //                    TimerManager.Instance.AddTimer(timer, 1, () =>
+        //                        {
+        //                            Debug.LogError(timer);
+        //                            NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
+        //                            normal.EnemyStartMove();
+        //                        }, false
+        //                     );
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //}
 
         public T CreateEnemy<T>(EnemyType type, string name) where T : BaseEnemy
         {
@@ -117,7 +185,6 @@ namespace FTProject
                 {
                     T temp = list[0] as T;
                     list.RemoveAt(0);
-                    Debug.LogError(enemyMoveDictionary[type].Count);
                     enemyMoveDictionary[type].Add(temp);
                     return temp;
                 }
