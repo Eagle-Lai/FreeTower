@@ -1,9 +1,13 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - FTProject.PopMain
+    - FTProject.CameraController
+    - FTProject.GameSceneLauncher
+    - FTProject.Launcher
     - FTProject.SelectViewItem
     - FTProject.TowerPosition
+    - Reporter
+    - ReporterMessageReceiver
     - SuperScrollView.LoopListView2
     - SuperScrollView.LoopListViewItem2
     DOTween.dll:
@@ -14,9 +18,12 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.IK.IKEditorManager
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
+    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
+    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
@@ -32,7 +39,6 @@ ScriptsOnlyBuild:
     Unity.TextMeshPro.dll:
     - TMPro.TMP_ColorGradient
     - TMPro.TMP_FontAsset
-    - TMPro.TMP_InputField
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
@@ -47,16 +53,13 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
-    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
-    - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
-    - UnityEngine.UI.RectMask2D
     - UnityEngine.UI.ScrollRect
-    - UnityEngine.UI.Slider
   serializedClasses:
     Assembly-CSharp:
+    - Images
     - SuperScrollView.ItemPrefabConfData
     DOTween:
     - DG.Tweening.Core.DOTweenSettings/ModulesSetup
@@ -71,11 +74,6 @@ ScriptsOnlyBuild:
     - TMPro.TMP_GlyphAdjustmentRecord
     - TMPro.TMP_GlyphPairAdjustmentRecord
     - TMPro.TMP_GlyphValueRecord
-    - TMPro.TMP_InputField/OnChangeEvent
-    - TMPro.TMP_InputField/SelectionEvent
-    - TMPro.TMP_InputField/SubmitEvent
-    - TMPro.TMP_InputField/TextSelectionEvent
-    - TMPro.TMP_InputField/TouchScreenKeyboardEvent
     - TMPro.TMP_Sprite
     - TMPro.TMP_SpriteCharacter
     - TMPro.TMP_SpriteGlyph
@@ -83,6 +81,9 @@ ScriptsOnlyBuild:
     - TMPro.VertexGradient
     UnityEngine.CoreModule:
     - UnityEngine.Events.PersistentCallGroup
+    UnityEngine.IMGUIModule:
+    - UnityEngine.GUISettings
+    - UnityEngine.GUIStyle
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
@@ -95,11 +96,10 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
     - UnityEngine.UI.ScrollRect/ScrollRectEvent
-    - UnityEngine.UI.Slider/SliderEvent
     - UnityEngine.UI.SpriteState
   methodsToPreserve: []
   sceneClasses:
-    Assets/Scenes/test.unity:
+    Assets/Scenes/Launcher.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -133,58 +133,60 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: -598}
+    - Class: 114
+      Script: {instanceID: 690}
+    - Class: 114
+      Script: {instanceID: 694}
+    - Class: 114
       Script: {instanceID: 1582}
     - Class: 114
-      Script: {instanceID: 1822}
+      Script: {instanceID: 1584}
     - Class: 114
-      Script: {instanceID: 1962}
+      Script: {instanceID: 2060}
     - Class: 114
-      Script: {instanceID: 2024}
+      Script: {instanceID: 2562}
     - Class: 114
-      Script: {instanceID: 2174}
+      Script: {instanceID: 2704}
     - Class: 114
-      Script: {instanceID: 2600}
+      Script: {instanceID: 2826}
     - Class: 114
-      Script: {instanceID: 2676}
+      Script: {instanceID: 3088}
     - Class: 114
-      Script: {instanceID: 2818}
+      Script: {instanceID: 3280}
     - Class: 114
-      Script: {instanceID: 3202}
+      Script: {instanceID: 3342}
     - Class: 114
-      Script: {instanceID: 3394}
+      Script: {instanceID: 3592}
     - Class: 114
-      Script: {instanceID: 3456}
+      Script: {instanceID: 3612}
     - Class: 114
-      Script: {instanceID: 3706}
+      Script: {instanceID: 3748}
     - Class: 114
-      Script: {instanceID: 3726}
+      Script: {instanceID: 3930}
     - Class: 114
-      Script: {instanceID: 4042}
+      Script: {instanceID: 4116}
     - Class: 114
-      Script: {instanceID: 4228}
+      Script: {instanceID: 4666}
     - Class: 114
-      Script: {instanceID: 4500}
+      Script: {instanceID: 4814}
     - Class: 114
-      Script: {instanceID: 4778}
+      Script: {instanceID: 5390}
     - Class: 114
-      Script: {instanceID: 4926}
+      Script: {instanceID: 5626}
     - Class: 114
-      Script: {instanceID: 5502}
+      Script: {instanceID: 5754}
     - Class: 114
-      Script: {instanceID: 5738}
+      Script: {instanceID: 5806}
     - Class: 114
-      Script: {instanceID: 5762}
+      Script: {instanceID: 5950}
     - Class: 114
-      Script: {instanceID: 5868}
+      Script: {instanceID: 6044}
     - Class: 114
-      Script: {instanceID: 5888}
-    - Class: 114
-      Script: {instanceID: 5920}
-    - Class: 114
-      Script: {instanceID: 6158}
-    - Class: 114
-      Script: {instanceID: 6384}
+      Script: {instanceID: 6270}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 120
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -206,7 +208,85 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
+    - Class: 156049354
+      Script: {instanceID: 0}
+    - Class: 483693784
+      Script: {instanceID: 0}
+    - Class: 1839735485
+      Script: {instanceID: 0}
+    Assets/Scenes/Main.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 690}
+    - Class: 114
+      Script: {instanceID: 1588}
+    - Class: 114
+      Script: {instanceID: 2826}
+    - Class: 114
+      Script: {instanceID: 3726}
+    - Class: 114
+      Script: {instanceID: 3748}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 120
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    Assets/Scenes/Start.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: 040dd48e3a027d5424519a5fa2009df4
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: ScrollRect
   - hash:
       serializedVersion: 2
       Hash: a6e561615949734e9f12f9b61661f43e
@@ -323,7 +403,7 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 018c82a5995b1887f2337051b9ff249f
+      Hash: 7977e82b5995509d5d7160c432cf3814
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: BaseEnemy
@@ -351,6 +431,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: WarpTextExample
+  - hash:
+      serializedVersion: 2
+      Hash: 41f3954f07323005d096e2a454447cff
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: FTProject
+    className: TestTileMap
   - hash:
       serializedVersion: 2
       Hash: e78765d93b37fe61ed100bbbc2be3ac6
@@ -467,7 +553,7 @@ ScriptsOnlyBuild:
     className: LoopListView2
   - hash:
       serializedVersion: 2
-      Hash: 018c82a5995b1887f2337051b9ff249f
+      Hash: 7977e82b5995509d5d7160c432cf3814
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: NormalEnemy
@@ -509,7 +595,7 @@ ScriptsOnlyBuild:
     className: Benchmark02
   - hash:
       serializedVersion: 2
-      Hash: d422f14dd1ae84f1c3ed9092b83f61c2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: StartPoint
@@ -599,7 +685,7 @@ ScriptsOnlyBuild:
     className: TMP_TextSelector_A
   - hash:
       serializedVersion: 2
-      Hash: d422f14dd1ae84f1c3ed9092b83f61c2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: NormalPoint
@@ -689,16 +775,22 @@ ScriptsOnlyBuild:
     className: LimbSolver2D
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.TestRunner.dll
-    namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
-    className: TestResultRendererCallback
+      Hash: 41723c09053ba8da4fda5defc01ed5fe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: FTProject
+    className: GameSceneLauncher
   - hash:
       serializedVersion: 2
       Hash: e2f6e62db7562f5ecc40a3449730d21a
     assemblyName: Assembly-CSharp.dll
     namespaceName: SuperScrollView
     className: GridViewDeleteItemDemoScript
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: UnityEngine.TestRunner.dll
+    namespaceName: UnityEngine.TestTools.TestRunner.Callbacks
+    className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
       Hash: 6663435805926faf16934aed992cd26b
@@ -971,12 +1063,6 @@ ScriptsOnlyBuild:
     className: TextMeshProFloatingText
   - hash:
       serializedVersion: 2
-      Hash: 0f92a8601c0c85bd1372631d3eba114e
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: FTProject
-    className: AStarManager
-  - hash:
-      serializedVersion: 2
       Hash: cb618a1e3145dbc085c57d6478a9547b
     assemblyName: Assembly-CSharp.dll
     namespaceName: SuperScrollView
@@ -1061,7 +1147,7 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
-      Hash: d422f14dd1ae84f1c3ed9092b83f61c2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: BasePoint
@@ -1229,12 +1315,6 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 040dd48e3a027d5424519a5fa2009df4
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: ScrollRect
-  - hash:
-      serializedVersion: 2
       Hash: 18c222bef9ae745ce69ddde9b74337ca
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -1271,7 +1351,7 @@ ScriptsOnlyBuild:
     className: CameraController
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: da87aff3e94e658f8b48c2e30a46c5a7
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: Launcher
@@ -1325,7 +1405,7 @@ ScriptsOnlyBuild:
     className: ResManager
   - hash:
       serializedVersion: 2
-      Hash: d422f14dd1ae84f1c3ed9092b83f61c2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: BaseObstacle
@@ -1415,6 +1495,12 @@ ScriptsOnlyBuild:
     className: ObjectSpin
   - hash:
       serializedVersion: 2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: FTProject
+    className: EmptyPoint
+  - hash:
+      serializedVersion: 2
       Hash: c64450ac3325c075f1e9f0f10b45eb38
     assemblyName: Assembly-CSharp.dll
     namespaceName: SuperScrollView
@@ -1425,12 +1511,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: BufferManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: FTProject
-    className: BaseRoundCount
   - hash:
       serializedVersion: 2
       Hash: 47ca5bb8b141d94a61b3c846b706da3c
@@ -1463,7 +1543,7 @@ ScriptsOnlyBuild:
     className: ChatMsgListViewDemoScript
   - hash:
       serializedVersion: 2
-      Hash: d422f14dd1ae84f1c3ed9092b83f61c2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: EndPoint
@@ -1529,11 +1609,19 @@ ScriptsOnlyBuild:
     className: NavMeshLink
   - hash:
       serializedVersion: 2
-      Hash: d422f14dd1ae84f1c3ed9092b83f61c2
+      Hash: bafcae54d5c43fe0a63d99e9dee273cc
     assemblyName: Assembly-CSharp.dll
     namespaceName: FTProject
     className: NormalObstacle
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: cfg
+    className: DataTables
   platform: 13
   scenePathNames:
-  - Assets/Scenes/test.unity
+  - Assets/Scenes/Launcher.unity
+  - Assets/Scenes/Start.unity
+  - Assets/Scenes/Main.unity
   playerPath: D:/FreedomTower/tips.apk

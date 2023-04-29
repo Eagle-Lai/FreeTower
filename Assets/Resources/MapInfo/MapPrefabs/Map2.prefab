@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6249850932790854549}
   - component: {fileID: 6249850932790854551}
   - component: {fileID: 6249850932790854550}
-  - component: {fileID: 2618883281112096415}
   m_Layer: 0
   m_Name: Map2
   m_TagString: Untagged
@@ -1167,18 +1166,3 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &2618883281112096415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6249850932790854548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d9d3be58e48ff4ebced4065b11b101, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grid: {fileID: 0}
-  tilemap: {fileID: 6249850932790854551}
-  MaxNum: 0

@@ -11,19 +11,26 @@ namespace FTProject
 
         public RoundInfoData()
         {
-            _IntervalList = new List<List<float>>();
-            _EnemyList = new List<EnemyList>();
         }
-
-        
-        /// <summary>
-        /// 时间间隔列表
-        /// </summary>
-        public List<List<float>> _IntervalList;
-
-        /// <summary>
-        /// 敌人列表
-        /// </summary>
-        public List<EnemyList> _EnemyList;
     }
+
+    public class EnemyListData
+    {
+        public EnemyListData()
+        {
+            _IntervalList = new List<float>();
+        }
+        /// <summary>
+        /// 开始出现敌人的时间
+        /// </summary>
+        public float interval;
+
+        /// <summary>
+        ///两个敌人之间出现的间隔的时间列表
+        /// </summary>
+        public List<float> _IntervalList;
+
+        public EnemyList EnemyList;
+    }
+        
 }

@@ -15,8 +15,6 @@ namespace FTProject
 
         public Transform MoveEnemyParent;
 
-        
-        RoundInfoData _RoundInfo;
         /// <summary>
         /// 场次的序号
         /// </summary>
@@ -74,52 +72,30 @@ namespace FTProject
             int interval = Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;
 
             FTProjectUtils.LogList(_roundIndexs, "敌人波次数据:______");
-            List<float> enemyInterval = new List<float>();
-            _RoundInfo = new RoundInfoData();
             for (int i = 0; i < _roundIndexs.Count; i++)
             {
-                EnemyList list = Launcher.Instance.Tables.TBEnemyList.Get(_roundIndexs[i]);
-                _RoundInfo._EnemyList.Add(list);
+                EnemyList list = Launcher.Instance.Tables.TBEnemyList.Get(_roundIndexs[i]);               
                 if (list != null)
                 {
-                    enemyInterval.Clear();
-                    for (int j = 0; j < list.EnemyIndexs.Count; j++)
+                    TimerManager.Instance.AddTimer(list.Interval / 1000, 1, () => 
                     {
-                        EnemyData enemy = Launcher.Instance.Tables.TBEnemyData.Get(list.EnemyIndexs[j]);
-                        float intervalTime = (j * list.EnemyInterval + enemy.Interval) / 1000;
-                        //Debug.LogError(intervalTime);
-                        enemyInterval.Add(intervalTime);
-                    }
-                    _RoundInfo._IntervalList.Add(enemyInterval);
+                        //Debug.LogError("the enemyList generate time :" + list.Interval + "=================================================== ");
+                        for (int j = 0; j < list.EnemyIndexs.Count; j++)
+                        {
+                            EnemyData enemy = Launcher.Instance.Tables.TBEnemyData.Get(list.EnemyIndexs[j]);
+                            float intervalTime = (j * list.EnemyInterval + enemy.Interval + list.Interval) / 1000;
+                            TimerManager.Instance.AddTimer(intervalTime, 1, () => 
+                            {
+                                //Debug.LogError("the enemy generate time :" + intervalTime);
+                                CreateEnemy(enemy.Type);
+                            });
+                        }
+                    });
                 }
             }
-            FTProjectUtils.LogList(_RoundInfo._EnemyList, "敌人波次数据:______");
-            FTProjectUtils.LogList(_RoundInfo._IntervalList, "敌人波次数据:______");
-            Debug.LogError(_RoundInfo._EnemyList.Count);
-            GenerateEnemyByInfo(0);
         }
-        /// <summary>
-        /// 根据数据，使用递归生成每一个列表内的敌人
-        /// </summary>
-        /// <param name="index"></param>
-        public void GenerateEnemyByInfo(int index = 0)
-        {
 
-            if (_RoundInfo != null)
-            {
-                float time = _RoundInfo._EnemyList[index].Interval / 1000;
-                TimerManager.Instance.AddTimer(time, 1, () =>
-                {
-                    EnemyList list = _RoundInfo._EnemyList[index];
-                    index++;
-                    if(index < _RoundInfo._IntervalList.Count)
-                    {
-                        RecycleGenerateEnemy(list, _RoundInfo._IntervalList[index], 0);
-                        GenerateEnemyByInfo(index);
-                    }
-                });
-            }
-        }
+
 
         public void RecycleGenerateEnemy(EnemyList list, List<float> times, int index = 0)
         {

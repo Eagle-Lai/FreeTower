@@ -24,6 +24,8 @@ namespace FTProject
 
         private TextMeshProUGUI _GoldCoinTxt;
 
+        private Button BtnHideMap;
+
         private int _hp;
 
         private int _count;
@@ -31,6 +33,8 @@ namespace FTProject
         private int _TotalCount;
 
         private int _GoldCoin;
+
+        public bool isShowMap = false;
 
         public override void OnInit()
         {
@@ -55,8 +59,12 @@ namespace FTProject
             generateEnemyBtn = _gameObject.transform.Find("GenerateEnemyBtn").GetComponent<Button>();
 
             BtnReturn = _transform.Find("BtnReturn").GetComponent<Button>();
+            BtnHideMap = _transform.Find("BtnHideMap").GetComponent<Button>();
 
             generateEnemyBtn.onClick.AddListener(OnClickGenerateEnemyBtn);
+            BtnHideMap.onClick.AddListener(OnClickHideMapBtn);
+
+
 
             BtnReturn.onClick.AddListener(OnClickBtnReturn);
 
@@ -85,6 +93,11 @@ namespace FTProject
             //EventDispatcher.RemoveEventListener<int>(EventName.PlayerHpChangeEvent, PlayerHpChange);
         }
 
+        private void OnClickHideMapBtn()
+        {
+            EventDispatcher.TriggerEvent(EventName.SetMapActiveState, isShowMap);
+            isShowMap = !isShowMap;
+        }
         private void OnClickBtnReturn()
         {
             CloseSelf();

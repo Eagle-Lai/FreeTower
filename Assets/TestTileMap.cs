@@ -71,7 +71,7 @@ namespace FTProject
             //result = result.Replace("\r", "");
             Debug.Log(result);
             File.WriteAllText(Application.streamingAssetsPath + "/Map/" + gameObject.name + ".txt", result);
-            AssetDatabase.Refresh();
+            //AssetDatabase.Refresh();
         }
 
         // Update is called once per frame

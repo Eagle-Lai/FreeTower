@@ -25,7 +25,8 @@ namespace FTProject
           new AStarManager(),
         };
 
-        public Tables Tables;
+
+        public DataTables Tables;
 
         public static Launcher Instance;
 
@@ -39,10 +40,17 @@ namespace FTProject
             {
                 managerList[i].OnInit();
             }
-
+                                                                        
             TimerManager.Instance.Update(Time.fixedDeltaTime);
-            Tables = new Tables(Reader);
-            Debug.Log(Tables.TBEnemyData.Get(1).Name);
+            InitDataTables();
+            //Tables = new Tables(Reader);
+            //Debug.Log(Tables.TBEnemyData.Get(1).Name);
+        }
+
+        public void InitDataTables()
+        {
+            GameObject go = new GameObject("DataTables");
+            Tables = go.AddComponent<DataTables>();
         }
 
         private void InitGameInfo()
@@ -54,21 +62,15 @@ namespace FTProject
             Screen.autorotateToLandscapeRight = true;
             
         }
-
-        private JSONNode Reader(string fileName)
-        {
-            string path = Application.streamingAssetsPath + "/json/" + fileName + ".json";
-            return JSON.Parse(File.ReadAllText(path));
-        }
         private void Start()
         {
             //UIManager.Instance.OpenView<MainView>("MainView");
             Debug.Log("========");
-            SceneManager.LoadScene("Start");
+            //SceneManager.LoadScene("Start");
             UIManager.Instance.OpenView<StartView>("StartView");
         }
 
-        private void Update()
+        private void Update()                                                         
         {
             TimerManager.Instance.Update(Time.deltaTime);
             EventDispatcher.TriggerEvent(EventName.UpdateEvent);

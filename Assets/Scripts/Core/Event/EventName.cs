@@ -70,5 +70,10 @@ namespace FTProject
         /// 地图创建完成事件
         /// </summary>
         public const string MapInitFinish = "MapInitFinish";
+
+        /// <summary>
+        /// 隐藏地图事件
+        /// </summary>
+        public const string SetMapActiveState = "SetMapActiveState";
     }
 }

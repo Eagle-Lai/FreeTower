@@ -125,7 +125,7 @@ namespace FTProject
 
         public void ResetBulletScale()
         {
-            this.transform.localScale = Vector3.one * 0.1f;
+            this.transform.localScale = Vector3.one;
         }
 
         public void BulletAttack()

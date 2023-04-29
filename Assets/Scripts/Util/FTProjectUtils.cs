@@ -21,7 +21,7 @@ namespace FTProject
 #elif UNITY_STANDLONE_WIN || UNITY_EDITOR
               return  "file://" + Application.streamingAssetsPath;
 #else
-        string.Empty;
+        return string.Empty;
 #endif
             }
         }
@@ -44,7 +44,7 @@ namespace FTProject
 #elif UNITY_STANDLONE_WIN || UNITY_EDITOR
                 path = "file://" + Application.persistentDataPath;
 #else
-        string.Empty;
+        return string.Empty;
 #endif
 #if UNITY_EDITOR
                 return Path.Combine(Application.persistentDataPath, "MyJson/");

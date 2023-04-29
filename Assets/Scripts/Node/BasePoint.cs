@@ -21,6 +21,8 @@ namespace FTProject
 
         public int column, row;
 
+        public GameObject Cube;
+
         /// <summary>
         /// ��ײ����
         /// </summary>
@@ -35,8 +37,10 @@ namespace FTProject
         {
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.AddEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
-            meshRenderer = transform.GetComponent<MeshRenderer>();
+            Cube = transform.Find("Cube").gameObject;
+            meshRenderer = Cube.GetComponent<MeshRenderer>();
             EventDispatcher.AddEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
+            EventDispatcher.AddEventListener<bool>(EventName.SetMapActiveState, SetPointActive);
         }
 
         public virtual void OnDestroy()
@@ -44,6 +48,11 @@ namespace FTProject
             EventDispatcher.RemoveEventListener(EventName.UpdateEvent, MyUpdate);
             EventDispatcher.RemoveEventListener<List<BasePoint>>(EventName.BuildNormalTower, BuildFail);
             EventDispatcher.RemoveEventListener<BaseTower>(EventName.DestroyTower, DestroyTower);
+        }
+
+        public void SetPointActive(bool isActive) 
+        {
+            Cube.gameObject.SetActive(isActive);
         }
 
         public void DestroyTower(BaseTower baseTower)

@@ -445,6 +445,7 @@
 "Assets/Scripts/Core/UI/UIManager.cs"
 "Assets/Scripts/Core/UIEventListener.cs"
 "Assets/Scripts/Data/AssetData.cs"
+"Assets/Scripts/Data/DataTables.cs"
 "Assets/Scripts/Enemy/BaseEnemy.cs"
 "Assets/Scripts/Enemy/EnemyManager.cs"
 "Assets/Scripts/Enemy/NormalEnemy.cs"

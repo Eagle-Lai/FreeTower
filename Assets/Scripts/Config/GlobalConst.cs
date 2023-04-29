@@ -22,7 +22,7 @@ namespace FTProject
         /// <summary>
         /// 子弹速度
         /// </summary>
-        public const float BulletSpeed = 25f;                                                                
+        public const float BulletSpeed = 15f;                                                                
         /// <summary>
         /// 敌人行走速度
         /// </summary>
@@ -38,7 +38,7 @@ namespace FTProject
         /// <summary>
         /// 子弹缩放
         /// </summary>
-        public const float BulletScale = 0.2f;
+        public const float BulletScale = 1f;
         
         /// <summary>
         /// 敌人缩放

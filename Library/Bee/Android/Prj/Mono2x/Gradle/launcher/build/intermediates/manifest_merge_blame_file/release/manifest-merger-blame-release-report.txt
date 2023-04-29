@@ -68,11 +68,11 @@
 39        android:label="@string/app_name" >
 39-->D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:4:16-48
 40        <meta-data
-40-->D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:5-65
+40-->D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:5-72
 41            android:name="unity.builder"
 41-->D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:16-44
-42            android:value="\" />
-42-->D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:45-62
+42            android:value="\3411061" />
+42-->D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:45-69
 43
 44        <activity
 44-->[:unityLibrary] D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:31:9-51:20

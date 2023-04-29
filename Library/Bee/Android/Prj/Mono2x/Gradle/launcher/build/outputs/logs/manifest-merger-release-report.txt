@@ -49,9 +49,9 @@ MERGED from [:unityLibrary] D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradl
 	android:icon
 		ADDED from D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:4:49-80
 meta-data#unity.builder
-ADDED from D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:5-65
+ADDED from D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:5-72
 	android:value
-		ADDED from D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:45-62
+		ADDED from D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:45-69
 	android:name
 		ADDED from D:\FreedomTower\Library\Bee\Android\Prj\Mono2x\Gradle\launcher\src\main\AndroidManifest.xml:5:16-44
 uses-permission#android.permission.ACCESS_NETWORK_STATE
