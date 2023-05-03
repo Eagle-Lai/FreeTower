@@ -36,6 +36,8 @@ namespace FTProject
 
         BaseGameScene _BaseGameScene;
 
+        private List<GameObject> mapArrowPathList = new List<GameObject>();
+
         public override void OnInit()
         {
             base.OnInit();
@@ -120,19 +122,59 @@ namespace FTProject
         private void DrawLine()
         {
             vector3Path = GetPathPosition();
+            ResetMapArrowPath();
             if (vector3Path.Length > 0)
             {
                 if (vector3Path.Length > 0)
                 {
-                    if(_LineRenderer == null)
+                    if(mapArrowPathList.Count < vector3Path.Length)
                     {
-                        GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("LineRender", startPoint.transform);
-                        _LineRenderer = go.GetComponent<LineRenderer>();
-                        _LineRenderer.transform.localPosition = Vector3.zero;
+                        FillPathList();
                     }
-                    _LineRenderer.positionCount = vector3Path.Length;
-                    _LineRenderer.SetPositions(vector3Path);
+                    for (int i = 0; i < vector3Path.Length; i++)
+                    {
+                        mapArrowPathList[i].transform.position = vector3Path[i];
+                        mapArrowPathList[i].ShowObject();
+                        mapArrowPathList[i].transform.SetParent(startPoint.transform);
+                        //mapArrowPathList[i].transform.localScale = Vector3.one;
+                        if(mapArrowPathList[i + 1] != null)
+                        {
+                            float dot = Vector3.Dot(mapArrowPathList[i].transform.forward, mapArrowPathList[i + 1].transform.up);
+                            //弧度转角度
+                            float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+                            //叉乘求法线
+                            Vector3 dir = Vector3.Cross(mapArrowPathList[i].transform.forward, mapArrowPathList[i + 1].transform.up);
+
+                            angle = (Vector3.Dot(mapArrowPathList[i + 1].transform.forward, dir) < 0 ? -1 : 1) * angle;
+                            mapArrowPathList[i].transform.localEulerAngles = new Vector3(90, 0, angle);
+                        }
+                    }
                 }
+            }
+        }
+
+        private void ResetMapArrowPath()
+        {
+            if(mapArrowPathList.Count > 0)
+            {
+                for (int i = 0; i < mapArrowPathList.Count; i++)
+                {
+                    mapArrowPathList[i].HideObject();
+                    mapArrowPathList[i].transform.SetParent(null);
+                    mapArrowPathList[i].transform.localScale = Vector3.one;
+                }
+            }
+        }
+
+        private void FillPathList()
+        {
+            int index = mapArrowPathList.Count;
+            for (int i = index; i < vector3Path.Length; i++)
+            {
+                GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("MapArrow");
+                go.HideObject();
+                go.transform.localEulerAngles = new Vector3(90, 0, 0);
+                mapArrowPathList.Add(go);
             }
         }
 

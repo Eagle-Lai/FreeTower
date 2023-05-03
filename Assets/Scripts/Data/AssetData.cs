@@ -41,6 +41,7 @@ namespace FTProject
             {"MapModel1", new AssetItemData(){name = "MapModel1", path = "MapModel/MapModel1"} },
             {"MapModel2", new AssetItemData(){name = "MapModel2", path = "MapModel/MapModel2"} },
             {"LineRender", new AssetItemData(){name = "LineRender", path = "LineRender/LineRender"} },
+            {"MapArrow", new AssetItemData(){name = "MapArrow", path = "MapModel/MapGameObjects/MapArrow"} },
         };
     }
 }

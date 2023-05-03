@@ -45,7 +45,7 @@ public sealed partial class EnemyList :  Bright.Config.BeanBase
     /// </summary>
     public System.Collections.Generic.List<int> EnemyIndexs { get; private set; }
     /// <summary>
-    /// 对应的出现时间间隔
+    /// 游戏开始X毫秒后这列敌人开始出现
     /// </summary>
     public int Interval { get; private set; }
     /// <summary>

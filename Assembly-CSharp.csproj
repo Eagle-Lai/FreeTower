@@ -102,6 +102,7 @@
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ListItem3.cs" />
     <Compile Include="Assets\Gen\item\EQuality.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\PullToLoadMoreDemoScript.cs" />
+    <Compile Include="Assets\Scripts\Data\DataTables.cs" />
     <Compile Include="Assets\Scripts\UI\StartView.cs" />
     <Compile Include="Assets\Scripts\Core\Enum\EnumFile.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -242,15 +243,12 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\ListItem12.cs" />
     <Compile Include="Assets\Scripts\Obstacle\NormalObstacle.cs" />
-    <Compile Include="Assets\Scripts\Data\DataTables.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\StreamingAssets\Map\Map3.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\StreamingAssets\Map\Map1.txt" />
-    <None Include="Assets\StreamingAssets\Map\Map5.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -260,7 +258,6 @@
     <None Include="Assets\Demigiant\DemiLib\Core\DemiLib.dll" />
     <None Include="Assets\LubanLib\SimpleJSON\Changelog.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\StreamingAssets\Map\Map4.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

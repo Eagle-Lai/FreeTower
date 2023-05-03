@@ -15,7 +15,7 @@ namespace FTProject
         public int MaxNum;
         
         // Start is called before the first frame update
-        void Start()
+        public void Start()
         {
             int temp = MaxNum;
             if(tilemap == null)

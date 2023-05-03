@@ -22,7 +22,7 @@ namespace FTProject
         /// <summary>
         /// 子弹速度
         /// </summary>
-        public const float BulletSpeed = 15f;                                                                
+        public const float BulletSpeed = 25f;                                                                
         /// <summary>
         /// 敌人行走速度
         /// </summary>
@@ -94,5 +94,10 @@ namespace FTProject
         /// 玩家的金币
         /// </summary>
         public const int GoldCoin = 100;
+
+        /// <summary>
+        /// 建造防御塔的时候的间隔
+        /// </summary>
+        public const float BuildDistance = 1.0f;
     }
 }

@@ -30,7 +30,6 @@ namespace FTProject
 
         protected virtual void Awake()
         {
-           
 
         }
         protected virtual void Start()
@@ -78,11 +77,11 @@ namespace FTProject
                     ChangeColor(Color.red);
                     return;
                 }
-                if (distance >= 0.6f)
+                if (distance >= GlobalConst.BuildDistance)
                 {
                     ChangeColor(Color.red);
                 }
-                if (Mathf.Max(0.1f, distance) < 0.6f)
+                if (Mathf.Max(0.1f, distance) < GlobalConst.BuildDistance)
                 {
                     ChangeColor(Color.green);
                 }
