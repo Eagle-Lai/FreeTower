@@ -36,6 +36,10 @@ namespace FTProject
 
         BaseGameScene _BaseGameScene;
 
+        public float xscale = 1f;//缩放比例
+        public float yscale = 1f;
+
+
         private List<GameObject> mapArrowPathList = new List<GameObject>();
 
         public override void OnInit()
@@ -123,36 +127,66 @@ namespace FTProject
         {
             vector3Path = GetPathPosition();
             ResetMapArrowPath();
+
             if (vector3Path.Length > 0)
             {
-                if (vector3Path.Length > 0)
+                if (mapArrowPathList.Count < vector3Path.Length)
                 {
-                    if(mapArrowPathList.Count < vector3Path.Length)
+                    FillPathList();
+                }
+                for (int i = 0; i < vector3Path.Length; i++)
+                {
+                    mapArrowPathList[i].transform.position = vector3Path[i];
+                    mapArrowPathList[i].ShowObject();
+                    mapArrowPathList[i].transform.SetParent(startPoint.transform);
+                    //mapArrowPathList[i].transform.localScale = Vector3.one;
+                    if (i < vector3Path.Length - 1)
                     {
-                        FillPathList();
-                    }
-                    for (int i = 0; i < vector3Path.Length; i++)
-                    {
-                        mapArrowPathList[i].transform.position = vector3Path[i];
-                        mapArrowPathList[i].ShowObject();
-                        mapArrowPathList[i].transform.SetParent(startPoint.transform);
-                        //mapArrowPathList[i].transform.localScale = Vector3.one;
-                        if(mapArrowPathList[i + 1] != null)
-                        {
-                            float dot = Vector3.Dot(mapArrowPathList[i].transform.forward, mapArrowPathList[i + 1].transform.up);
-                            //弧度转角度
-                            float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
-                            //叉乘求法线
-                            Vector3 dir = Vector3.Cross(mapArrowPathList[i].transform.forward, mapArrowPathList[i + 1].transform.up);
+                        //Quaternion rot = FTProjectUtils.GetRotate(vector3Path[i + 1], vector3Path[i]);
+                        //Debug.Log(rot.eulerAngles);
+                        //Vector3 pos = vector3Path[i] - vector3Path[i + 1];
 
-                            angle = (Vector3.Dot(mapArrowPathList[i + 1].transform.forward, dir) < 0 ? -1 : 1) * angle;
-                            mapArrowPathList[i].transform.localEulerAngles = new Vector3(90, 0, angle);
-                        }
+                        ////mapArrowPathList[i].transform.rotation.SetLookRotation(rot.eulerAngles);
+                        //Quaternion rotation = Quaternion.LookRotation(pos, Vector3.back);
+                        //mapArrowPathList[i].transform.rotation = rotation;
+                        mapArrowPathList[i].transform.LookAt(vector3Path[i + 1]);
+                        mapArrowPathList[i].transform.Rotate(90, 0, -90);
                     }
                 }
+                //if (_LineRenderer == null)
+                //{
+                //    GameObject go = ResourcesManager.Instance.LoadAndInitGameObject("LineRender", startPoint.transform);
+                //    _LineRenderer = go.GetComponent<LineRenderer>();
+                //    _LineRenderer.transform.localPosition = Vector3.zero;
+                //}
+                //_LineRenderer.positionCount = vector3Path.Length;
+                //_LineRenderer.SetPositions(vector3Path);
             }
         }
+        //private void DrawLine(Vector3 start, Vector3 end, int index)
+        //{
+        //    MeshRenderer mr;
+        //    if (index >= lines.Count)
+        //    {
+        //        mr = Instantiate(meshRenderer);
+        //        lines.Add(mr);
+        //    }
+        //    else
+        //    {
+        //        mr = lines[index];
+        //    }
 
+        //    var tran = mr.transform;
+        //    var length = Vector3.Distance(start, end);
+        //    tran.localScale = new Vector3(xscale, length, 1);
+        //    tran.position = (start + end) / 2;
+        //    //指向
+        //    tran.LookAt(start);
+        //    //旋转偏移
+        //    tran.Rotate(90, 0, 0);
+        //    mr.material.mainTextureScale = new Vector2(1, length * yscale);
+        //    mr.gameObject.SetActive(true);
+        //}
         private void ResetMapArrowPath()
         {
             if(mapArrowPathList.Count > 0)
@@ -338,6 +372,8 @@ namespace FTProject
         {
             map[x, y].gameObject.GetComponent<Renderer>().material.color = c;
         }
+
+      
 
 //#if UNITY_EDITOR
 //        void OnDrawGizmos()
