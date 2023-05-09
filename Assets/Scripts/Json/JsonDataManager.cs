@@ -25,10 +25,10 @@ namespace FTProject
         public string Write(string name, object data)
         {
             string path = FTProjectUtils.PersistentDataPathJsonPath;
-            Debug.LogError(path);
+            
             bool isExit = !Directory.Exists(path);
             if (isExit)
-            {
+            {                                                                                                                        
                 Directory.CreateDirectory(path);
             }
             string array = JsonMapper.ToJson(data);

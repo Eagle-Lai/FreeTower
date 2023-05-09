@@ -23,6 +23,9 @@ namespace FTProject
 
         protected Targetter _targetter;
 
+        public bool isCanBuild = false;
+
+
         protected float _searchRate;
         public float SearchRate
         {
@@ -53,6 +56,10 @@ namespace FTProject
 
         public TowerJsonData TowerJsonData;
 
+        public MeshRenderer[] _towerMesh;
+
+        public Transform _Cylinder;
+
         private void Awake()
         {
             this.OnAwake();
@@ -75,12 +82,16 @@ namespace FTProject
             TowerPosition = transform.GetComponentInChildren<TowerPosition>();
 
             _targetter = transform.Find("Targetter").GetComponent<Targetter>();
+            _towerMesh = transform.GetComponentsInChildren<MeshRenderer>();
+            _Cylinder = transform.Find("Cylinder/Cylinder").transform;
         }
 
 
         protected virtual void OnStart()
         {
             EventDispatcher.AddEventListener(EventName.UpdateEvent, MyUpdate);
+           
+            
             this._searchRate = GlobalConst.SearchRate;
             _head = transform.Find("Head");
             _bulletPoint = transform.Find("Head/BulletPoint");
@@ -95,6 +106,7 @@ namespace FTProject
 
         protected virtual void OnUpdate()
         {
+            RefreshTowerColor();
             currentTargetGameObject = _targetter.GetNearsetTarget();
             _searchTimer -= Time.deltaTime;
             if (currentTargetGameObject != null && _searchTimer <= 0)
@@ -109,7 +121,7 @@ namespace FTProject
                 _fireTimer = FireInterval;
                 TowerAttack();
             }
-           
+            
         }
 
         protected virtual bool IsCanFire()
@@ -138,13 +150,21 @@ namespace FTProject
         {
             if(TowerJsonData != null)
             {
-                Debug.LogError("##########################");
+                
             }
+        }
+
+        public void SetBuildSuccessWithJson()
+        {
+            TowerPosition.SetBuildSuccess();
+            SetTowerColor(Color.white);
+            _Cylinder.gameObject.SetActive(false);
         }
 
         public void SetBuildSuccess()
         {
-            TowerPosition.SetBuildSuccess();
+            SetTowerColor(Color.white);
+            _Cylinder.gameObject.SetActive(false);
         }
 
         public void DestroyTower()
@@ -172,5 +192,33 @@ namespace FTProject
             transform.SetParent(parent);
             transform.localPosition = new Vector3(0, 6.5f, 0);
         }
+
+        public void RefreshTowerColor()
+        {
+            if (!TowerPosition.isBuild)
+            {
+                if (isCanBuild)
+                {
+                    SetTowerColor(Color.green);
+                }
+                else
+                {
+                    SetTowerColor(Color.red);
+                }
+            }
+        }
+
+        public void SetTowerColor(Color color)
+        {
+            if (_towerMesh.Length > 0)
+            {
+                for (int i = 0; i < _towerMesh.Length; i++)
+                {
+                    _towerMesh[i].material.color = color;
+                }
+            }
+        }
+
+
     }
 }

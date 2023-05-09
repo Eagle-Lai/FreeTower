@@ -100,7 +100,7 @@ namespace FTProject
         }
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.name.Contains("TowerBase"))
+            if (other.gameObject.name.Contains("Tower"))
             {
                 currentTriggerObj = other.gameObject;
             }
@@ -113,6 +113,14 @@ namespace FTProject
             {
                 ChangeColor(Color.black);
                 Point.IsWall = false;
+            }
+        }
+
+        protected virtual void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.name.Contains("Tower"))
+            {
+                currentTriggerObj = other.gameObject;
             }
         }
         public virtual void ChangeColor(Color color)
@@ -187,7 +195,7 @@ namespace FTProject
                                 default:
                                     break;
                             }
-                            BaseTower.SetBuildSuccess();
+                            BaseTower.SetBuildSuccessWithJson();
                             BaseTower.TowerType = towerType;
                             string TowerName = "";
                             if (data["TowerName"]!= null)

@@ -70,6 +70,24 @@ namespace FTProject
                 curMousePos = Camera.main.ScreenToWorldPoint(curMousePos);
                 parent.transform.position = new Vector3(curMousePos.x, GlobalConst.UnbuildYPosition, curMousePos.z);
             }
+
+            if(enterNodeList.Count > 0)
+            {
+                for (int i = 0; i < enterNodeList.Count; i++)
+                {
+                    Color color = enterNodeList[i].GetNodeColor();
+                    if(color == Color.green)
+                    {
+                        _ParentTower.isCanBuild = true;
+                        break;
+                    }
+                    else
+                    {
+                        _ParentTower.isCanBuild = false;
+                    }
+                }
+            }
+
             if ((Input.GetMouseButtonUp(0)) && isBuild == false && BuildTower())
             {
                 SetBuildSuccess();
@@ -90,6 +108,7 @@ namespace FTProject
                     _ParentTower = parent.GetComponent<BaseTower>();
                 }
                 _ParentTower.ResetTowerScale(_BasePoint.transform);
+                _ParentTower.SetBuildSuccess();
             }
             EventDispatcher.TriggerEvent(EventName.RefreshPathEvent);
             EventDispatcher.TriggerEvent(EventName.BuildTowerSuccess);
@@ -172,11 +191,17 @@ namespace FTProject
 
         private void OnTriggerExit(Collider other)
         {
+            _ParentTower.SetTowerColor(Color.white);
             BasePoint node = other.transform.GetComponent<BasePoint>();
             if (node != null)
             {
                 enterNodeList.Remove(node);
             }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            
         }
 
     }
