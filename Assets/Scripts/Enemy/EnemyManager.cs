@@ -115,12 +115,21 @@ namespace FTProject
         public void CreateEnemy(int enemyIndex)
         {
             EnemyData data = Launcher.Instance.Tables.TBEnemyData.Get(enemyIndex);
-            switch((EnemyType)data.Type)
+            BaseEnemy baseEnemy = null;
+            switch ((EnemyType)data.Type)
             {
                 case EnemyType.NormalEnemy:
-                    NormalEnemy normal = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name);
-                    normal.EnemyStartMove();
+                    baseEnemy = CreateEnemy<NormalEnemy>(EnemyType.NormalEnemy, data.Name, data);
                     break;
+                case EnemyType.QuickEnemy:
+                    baseEnemy = CreateEnemy<QuickEnemy>(EnemyType.QuickEnemy, data.Name, data);
+                    break;
+                default:
+                    break;
+            }
+            if (baseEnemy != null)
+            {
+                baseEnemy.EnemyAwake();
             }
         }
 
@@ -153,7 +162,7 @@ namespace FTProject
         //    }
         //}
 
-        public T CreateEnemy<T>(EnemyType type, string name) where T : BaseEnemy
+        public T CreateEnemy<T>(EnemyType type, string name, EnemyData data = null) where T : BaseEnemy
         {
             if (enemyIdleDictionary.TryGetValue(type, out List<BaseEnemy> list))
             {
@@ -183,6 +192,7 @@ namespace FTProject
                 enemyMoveDictionary.Add(EnemyType.NormalEnemy, new List<BaseEnemy>());
             }
             enemy.EnemyStartMove();
+            enemy.InitEnemyDataItem(data);
             enemyMoveDictionary[EnemyType.NormalEnemy].Add(enemy);
             return enemy;
         }

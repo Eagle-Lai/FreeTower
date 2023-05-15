@@ -12,6 +12,10 @@ namespace FTProject
         /// 普通敌人
         /// </summary>
         NormalEnemy,
+        /// <summary>
+        /// 快速移动的敌人
+        /// </summary>
+        QuickEnemy,
     }
     public enum PointType
     {

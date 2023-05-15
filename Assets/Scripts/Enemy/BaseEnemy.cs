@@ -5,6 +5,7 @@ using DG.Tweening;
 using System;
 using AStar;
 using TMPro;
+using cfg;
 
 namespace FTProject {
     public class BaseEnemy : MonoBehaviour
@@ -44,6 +45,8 @@ namespace FTProject {
         public bool isRestart = false;
 
         public EnemyType _EnemyType;
+
+        public EnemyDataItem _EnemyDataItem;
 
         private void Awake()
         {
@@ -91,6 +94,7 @@ namespace FTProject {
             _HpTxt.gameObject.SetActive(false);
             _rigidbody = transform.GetComponent<Rigidbody>();
             _rigidbody.useGravity = false;
+            _speed = _EnemyDataItem.EnemyStaticData.Speed;
         }
 
 
@@ -234,6 +238,20 @@ namespace FTProject {
         {
             _HpTxt.transform.localPosition = new Vector3(0, 1, 0);
             _HpTxt.gameObject.SetActive(false);
+        }
+
+        public void InitEnemyDataItem(EnemyData data)
+        {
+            if(_EnemyDataItem == null)
+            {
+                _EnemyDataItem = new EnemyDataItem(data);
+                OnStart();
+            }
+        }
+
+        public virtual void EnemyAwake()
+        {
+
         }
     }
 } 
