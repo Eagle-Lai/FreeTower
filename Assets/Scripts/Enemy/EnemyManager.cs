@@ -89,7 +89,7 @@ namespace FTProject
                             EnemyData enemy = Launcher.Instance.Tables.TBEnemyData.Get(list.EnemyIndexs[j]);
                             float intervalTime = (j * list.EnemyInterval + enemy.Interval + list.Interval) / 1000;
                             Debug.LogError(intervalTime + "   " + j);
-                            TimerManager.Instance.AddTimer(intervalTime, 1, () => 
+                            TimerManager.Instance.AddTimer(temp + intervalTime, 1, () => 
                             {
                                 //Debug.LogError("the enemy generate time :" + intervalTime);
                                 CreateEnemy(enemy.Type);
