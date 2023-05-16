@@ -77,13 +77,18 @@ namespace FTProject
                 EnemyList list = Launcher.Instance.Tables.TBEnemyList.Get(_roundIndexs[i]);               
                 if (list != null)
                 {
-                    TimerManager.Instance.AddTimer(list.Interval / 1000, 1, () => 
+                    Debug.LogError(list.Interval);
+                    float temp = (i * list.Interval + list.Interval) / 100;
+                    TimerManager.Instance.AddTimer(temp, 1, () => 
                     {
                         //Debug.LogError("the enemyList generate time :" + list.Interval + "=================================================== ");
+                        FTProjectUtils.LogList(list.EnemyIndexs, "敌人列表数据");
                         for (int j = 0; j < list.EnemyIndexs.Count; j++)
                         {
+                            
                             EnemyData enemy = Launcher.Instance.Tables.TBEnemyData.Get(list.EnemyIndexs[j]);
                             float intervalTime = (j * list.EnemyInterval + enemy.Interval + list.Interval) / 1000;
+                            Debug.LogError(intervalTime + "   " + j);
                             TimerManager.Instance.AddTimer(intervalTime, 1, () => 
                             {
                                 //Debug.LogError("the enemy generate time :" + intervalTime);

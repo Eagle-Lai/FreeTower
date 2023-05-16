@@ -104,6 +104,7 @@
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\DragChangSizeScript.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenAnimation.cs" />
+    <Compile Include="Assets\Scripts\Enemy\StrongEnemy.cs" />
     <Compile Include="Assets\Demigiant\DOTweenPro\DOTweenTk2d.cs" />
     <Compile Include="Assets\SuperScrollView\Demo\Scripts\LeftToRightDemoScript.cs" />
     <Compile Include="Assets\SuperScrollView\Scripts\ClickEventListener.cs" />
@@ -245,7 +246,6 @@
     <Compile Include="Assets\Scripts\Core\BaseDisplayObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Core\ResourcesManager.cs" />
-    <Compile Include="Assets\Scripts\Enemy\StrongEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

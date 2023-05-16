@@ -24,11 +24,10 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
         { if(!_json["name"].IsString) { throw new SerializationException(); }  Name = _json["name"]; }
         { if(!_json["type"].IsNumber) { throw new SerializationException(); }  Type = _json["type"]; }
         { if(!_json["interval"].IsNumber) { throw new SerializationException(); }  Interval = _json["interval"]; }
-        { if(!_json["intervalType"].IsNumber) { throw new SerializationException(); }  IntervalType = _json["intervalType"]; }
         PostInit();
     }
 
-    public EnemyData(int id, float speed, float hp, string name, int type, int interval, int intervalType ) 
+    public EnemyData(int id, float speed, float hp, string name, int type, int interval ) 
     {
         this.Id = id;
         this.Speed = speed;
@@ -36,7 +35,6 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
         this.Name = name;
         this.Type = type;
         this.Interval = interval;
-        this.IntervalType = intervalType;
         PostInit();
     }
 
@@ -66,10 +64,6 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
     /// 出现间隔
     /// </summary>
     public int Interval { get; private set; }
-    /// <summary>
-    /// 生成间隔类型
-    /// </summary>
-    public int IntervalType { get; private set; }
 
     public const int __ID__ = 953306930;
     public override int GetTypeId() => __ID__;
@@ -92,7 +86,6 @@ public sealed partial class EnemyData :  Bright.Config.BeanBase
         + "Name:" + Name + ","
         + "Type:" + Type + ","
         + "Interval:" + Interval + ","
-        + "IntervalType:" + IntervalType + ","
         + "}";
     }
     
