@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavMeshSurfaceEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavigationWindow.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\ObsoleteNavigationWindowMenuEntry.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavMeshSurfaceEditor.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavigationPreferences.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavMeshModifierVolumeEditor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\ObsoleteNavigationWindowMenuEntry.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavigationOverlay.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavMeshAssetManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.ai.navigation@1.1.1\Editor\NavMeshModifierEditor.cs" />

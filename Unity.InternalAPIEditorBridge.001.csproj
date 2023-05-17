@@ -56,10 +56,10 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\TexturePlatformSettings\TexturePlatformSettings_Before_2021_3_9f1.cs" />
-    <Compile Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\InternalEditorBridge.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\TexturePlatformSettings\TexturePlatformSettings.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\TexturePlatformSettings\TexturePlatformSettings_Before_2021_3_9f1.cs" />
+    <Compile Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\InternalEditorBridge.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.2d.common@6.0.6\Editor\InternalBridge\InternalBridgeDef.asmdef" />

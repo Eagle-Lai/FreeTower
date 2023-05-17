@@ -39,7 +39,7 @@ public sealed partial class RoundData :  Bright.Config.BeanBase
 
     public int Id { get; private set; }
     /// <summary>
-    /// 这一场出现的敌人序号
+    /// 这一场出现敌人列表序号
     /// </summary>
     public System.Collections.Generic.List<int> EnemyIndexs { get; private set; }
     /// <summary>

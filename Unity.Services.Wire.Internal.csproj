@@ -56,22 +56,22 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Utils\Logger.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\WireServiceProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\WireMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Utils\BackoffStrategy.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\WebSocket.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\CommandManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\WireErrorCode.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\Subscription.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\ConcurrentDictSubscriptionRepository.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\CentrifugeCloseCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Utils\Logger.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\WireMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\CentrifugeErrorCode.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\Client.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\ConcurrentDictSubscriptionRepository.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Exceptions\WireExceptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Configuration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\CentrifugeCloseCode.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Centrifuge\Messages.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.services.wire@1.1.1\Runtime\Unity.Services.Wire.Internal.asmdef" />

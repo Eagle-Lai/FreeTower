@@ -15,6 +15,8 @@ namespace FTProject
 
         public Transform MoveEnemyParent;
 
+        public List<EnemyListData> _EnemyListData = new List<EnemyListData>();
+
         /// <summary>
         /// 场次的序号
         /// </summary>
@@ -72,31 +74,14 @@ namespace FTProject
             int interval = Launcher.Instance.Tables.TBRoundData.Get(_currentIndex).Interval;
 
             FTProjectUtils.LogList(_roundIndexs, "敌人波次数据:______");
+            _EnemyListData.Clear();
             for (int i = 0; i < _roundIndexs.Count; i++)
             {
-                EnemyList list = Launcher.Instance.Tables.TBEnemyList.Get(_roundIndexs[i]);               
-                if (list != null)
-                {
-                    Debug.LogError(list.Interval);
-                    float temp = (i * list.Interval + list.Interval) / 100;
-                    TimerManager.Instance.AddTimer(temp, 1, () => 
-                    {
-                        //Debug.LogError("the enemyList generate time :" + list.Interval + "=================================================== ");
-                        FTProjectUtils.LogList(list.EnemyIndexs, "敌人列表数据");
-                        for (int j = 0; j < list.EnemyIndexs.Count; j++)
-                        {
-                            
-                            EnemyData enemy = Launcher.Instance.Tables.TBEnemyData.Get(list.EnemyIndexs[j]);
-                            float intervalTime = (j * list.EnemyInterval + enemy.Interval + list.Interval) / 1000;
-                            Debug.LogError(intervalTime + "   " + j);
-                            TimerManager.Instance.AddTimer(temp + intervalTime, 1, () => 
-                            {
-                                //Debug.LogError("the enemy generate time :" + intervalTime);
-                                CreateEnemy(enemy.Type);
-                            });
-                        }
-                    });
-                }
+                int index = _roundIndexs[i];
+                EnemyListData enemyListData = new EnemyListData();
+                _EnemyListData.Add(enemyListData);
+                EnemyList list = Launcher.Instance.Tables.TBEnemyList.Get(index);
+                enemyListData.SetEnemyListData(list);
             }
         }
 

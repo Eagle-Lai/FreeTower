@@ -56,35 +56,35 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderOptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderCustomSettingsElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IAuthenticationAdminClient.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AuthenticationAdminClient.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\UpdateIdProviderRequest.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\GetIdDomainResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\GenesisTokenProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderElement.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\IdProviderNames.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\AuthenticationIdentifier.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AuthenticationEditorService.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AuthenticationAdminClientManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\OpenIDConfig.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\IdProviderResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\TokenExchangeResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\TokenExchangeRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Analytics\AuthenticationEditorAnalytics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\AuthenticationTopMenu.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\CreateIdProviderRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderCustomSettingsElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\IdProviderNames.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\OpenIDConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\IdProviderResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\ListIdProviderResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderRegistry.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\IAuthenticationAdminNetworkClient.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\IGenesisTokenProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Analytics\AuthenticationEditorAnalytics.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\AuthenticationAdminNetworkClient.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\AuthenticationTopMenu.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\CreateIdProviderRequest.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\TokenExchangeErrorResponse.cs" />
   </ItemGroup>
   <ItemGroup>
